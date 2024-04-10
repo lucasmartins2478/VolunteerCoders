@@ -1,0 +1,576 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    padding-top: 8vh;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #bbb5b5;
+}
+
+.container {
+    display: flex;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.212);
+    border-radius: 16px;
+    width: 70vw;
+    height: 80vh;
+}
+
+.form-image {
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: auto;
+    background-color: #1166ca;
+    padding: 5rem 5rem;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    line-height: 1.2;
+}
+
+.form-image h2 {
+    font-size: 35px;
+    margin-bottom: 0;
+    color: #fff;
+    align-items: center;
+}
+
+.form-image h3 {
+    font-size: 25px;
+    font-weight: 500;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+}
+
+.form-image img {
+    margin-top: 80px;
+    max-width: 100%;
+}
+
+.form {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    height: auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 2rem;
+}
+
+.title {
+    padding-top: 2rem;
+}
+
+.title h2 {
+    text-align: center;
+    display: block;
+    font-size: 40px;
+    margin-bottom: 150px;
+    font-weight: 800;
+}
+
+.form-header {
+    margin-top: -100px;
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-button {
+    display: flex;
+    align-items: center;
+}
+
+.login-button button {
+    border: none;
+    background-color: #1166ca;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-button button:hover {
+    background-color: #1a62b4;
+}
+
+.login-button button a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.form-header h1::after {
+    content: "";
+    display: block;
+    width: 5rem;
+    height: 0.3rem;
+    background-color: #1166ca;
+    margin: 0 auto;
+    position: absolute;
+    border-radius: 10px;
+}
+
+.input-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.1rem;
+}
+
+.input-box input {
+    margin: 0.6rem 0;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px #0000001c;
+    font-size: 1rem;
+    width: 13rem;
+}
+
+.input-box input:hover {
+    background-color: #eeeeee75;
+}
+
+.input-box input:focus-visible {
+    outline: 1px solid #6c63ff;
+}
+
+.input-box input::placeholder {
+    color: #000000be;
+}
+
+.select-user {
+    position: relative;
+    margin-top: 10px;
+    width: 260px;
+    height: 50px;
+}
+
+.select {
+    display: flex;
+    margin-left: 10px;
+}
+
+.select select {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #e8e8f1;
+    box-shadow: 1px 1px 10px #0200001c;
+    font-size: 1rem;
+    color: #444852;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.select select :focus-visible {
+    outline: 1px solid #6c63ff;
+}
+
+.continue-button {
+    padding-bottom: 3rem;
+}
+
+.continue-button button {
+    width: 100%;
+    margin-top: 2.5rem;
+    border: none;
+    background-color: #1166ca;
+    padding: 0.62rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.continue-button button:hover {
+    background-color: #1a62b4;
+}
+
+.continue-button button a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #fff;
+}
+
+.continue-bnt {
+    width: 100%;
+    height: 100%;
+}
+
+.tipo-inputs {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.62rem;
+    padding: 0 0.5rem;
+}
+
+.title-tipo {
+    font-size: 25px;
+    padding-bottom: 20px;
+    padding-right: 2rem;
+}
+
+.tipo-input {
+    display: flex;
+    align-items: center;
+}
+
+.tipo-input input {
+    margin-right: 0.35rem;
+}
+
+input:focus-visible {
+    outline: 1px solid #6c63ff;
+}
+
+textarea:focus-visible {
+    outline: 1px solid #6c63ff;
+}
+
+@media screen and (max-width: 1330px) {
+    .form-image {
+        display: none;
+    }
+
+    .container {
+        width: 50%;
+    }
+
+    .form {
+        width: 100%;
+        border-radius: 16px;
+    }
+}
+
+@media screen and (max-width: 1064px) {
+    body {
+        width: 100%;
+        height: 100%;
+        padding: 0 0 0 0;
+        margin: 0%;
+    }
+    .title h2{
+        font-size: 4rem;
+    }
+    .container {
+        width: 100%;
+        height: 100vh;
+        padding: 1rem 1rem;
+        border-radius: 0px;
+    }
+    .form {
+        width: 100%;
+        border-radius: 0px;
+        font-size: 1rem;
+    }
+
+    .input-group {
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        z-index: 5;
+        padding-right: 5rem;
+        padding-left: 1rem;
+        max-height: 30rem;
+        overflow-y: scroll;
+        flex-wrap: nowrap;
+    }
+    .input-box input{
+        width: 20rem;
+    }
+    .input-box input::placeholder{
+        font-size: 1.3rem;
+    }
+    @media screen and (max-width: 800px) {
+        .container {
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0%;
+            margin: 0;
+            padding: 0%;
+            display:flex ;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .form{
+            margin: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding: 0%;
+        }
+        .title h2{
+            font-size: 2.6rem;
+        }
+        .select-user select{
+            height: 3rem;
+        }
+        .input-box input{
+            margin: 0.1 0 ;
+            width: 16rem;
+        }
+    }
+    
+
+}
+
+/* /--- login ----/ */
+.login-card {
+    border-radius: 16px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;
+    align-items: center;
+    background-color: #fff;
+}
+
+.title-login {
+    margin-top: -100px;
+    padding-bottom: 100px;
+    font-size: 20px;
+}
+
+.login-card h2 {
+    font-size: 35px;
+    padding-bottom: 2rem;
+}
+
+.login-card h2::after {
+    content: "";
+    display: block;
+    width: 5rem;
+    height: 0.3rem;
+    background-color: #1166ca;
+    margin: 0 auto;
+    position: absolute;
+    border-radius: 10px;
+}
+
+.menu-bar {
+    width: 100%;
+    height: 85px;
+    background-color: #1166ca;
+}
+
+.cadastro {
+    align-items: center;
+    text-align: center;
+}
+
+/* ----- cadastro de problema -----*/
+
+#body-problema {
+    padding-top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6c63ff;
+    font-size: 1rem;
+}
+
+.container-problema {
+    border-radius: 15px;
+    width: 65%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 2%;
+}
+
+h2 {
+    color: #1166ca;
+}
+
+.container-problema__conteudo {
+    width: 90%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.titulo {
+    display: flex;
+    flex-direction: column;
+}
+
+.imagem-infos {
+    display: flex;
+    flex-direction: row;
+}
+
+.imagem,
+.infos {
+    display: flex;
+    flex-direction: column;
+}
+
+.imagem {
+    width: 45%;
+}
+
+.infos {
+    width: 55%;
+    justify-content: space-between;
+}
+
+.descricao {
+    display: flex;
+    flex-direction: column;
+}
+
+.botao {
+    display: flex;
+    justify-content: center;
+}
+
+.causas,
+.telefone,
+.responsavel {
+    display: flex;
+    flex-direction: column;
+}
+
+#imagem {
+    border: 1px solid #d6d8db;
+
+    /* Largura e altura do campo de entrada */
+    height: 90%;
+    width: 80%;
+    /*  Iimagem de placeholder como plano de fundo */
+    background-image: url("./imagens/placeholder-image.png");
+    background-size: cover;
+    background-position: center;
+}
+
+#titulo,
+#causas-da-ong,
+#responsavel,
+#telefone {
+    border-radius: 10px;
+    height: 40px;
+    font-size: 1rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid #e8e8f1;
+    box-shadow: 1px 1px 10px #0200001c;
+}
+
+label {
+    margin-bottom: 6px;
+    font-size: 1rem;
+    color: #444852;
+}
+
+textarea {
+    border-radius: 10px;
+    height: 100px;
+    font-size: 1rem;
+    padding: 12px;
+    display: flex;
+    border: none;
+    border: 1px solid #e8e8f1;
+    box-shadow: 1px 1px 10px #0200001c;
+    padding: 0.8rem 1.2rem;
+}
+
+.container-botao {
+    display: flex;
+    justify-content: center;
+}
+
+#causas-da-ong,
+#telefone {
+    margin-bottom: 10px;
+}
+
+.btn-cadastrar-problema {
+    border: none;
+    width: 270px;
+    height: 40px;
+    font-size: 1.2rem;
+    border-radius: 15px;
+    color: #fff;
+    background-color: #1166ca;
+    margin-top: 10px;
+}
+
+.btn-cadastrar-problema:hover {
+    cursor: pointer;
+    background-color: #1255a1;
+}
+
+/* sweetAlert */
+#body-problema,
+.swal2-height-auto {
+    height: 100vh !important;
+}
+
+.swal2-input,
+.minha-classe-personalizada {
+    font-size: medium;
+}
+
+.swal2-title {
+    font-size: 1.3rem;
+}
+
+div:where(.swal2-container) div:where(.swal2-popup) {
+    border-radius: 15px;
+}
+
+/* botoes */
+div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm {
+    background-color: #1166ca;
+    border-radius: 0.8rem;
+}
+
+div:where(.swal2-container) button:where(.swal2-styled).swal2-cancel {
+    border-radius: 0.8rem;
+    background-color: #6e7881;
+}
+
+@media screen and (max-width: 800px) {
+    .container-problema {
+        width: 100%;
+        height: 100%;
+        border-radius: 0%;
+    }
+}
