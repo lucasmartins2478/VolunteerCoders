@@ -16,11 +16,25 @@ body {
 }
 
 .container {
+    margin-top: 4rem;
     display: flex;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.212);
     border-radius: 16px;
     width: 70vw;
-    height: 80vh;
+    height: 88vh;
+}
+
+.form {
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    height: auto;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 2rem;
 }
 
 .form-image {
@@ -42,9 +56,25 @@ body {
 
 .form-image h2 {
     font-size: 35px;
+    margin-top: 10px;
     margin-bottom: 0;
     color: #fff;
-    align-items: center;
+    text-align: center;
+}
+
+#conectando {
+    display: inline-block;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+}
+
+.center {
+    display: block;
+    margin: auto;
 }
 
 .form-image h3 {
@@ -56,23 +86,10 @@ body {
 }
 
 .form-image img {
-    margin-top: 80px;
+    margin-top: 10px;
     max-width: 100%;
+    margin-bottom: 20px;
 }
-
-.form {
-    border-top-right-radius: 16px;
-    border-bottom-right-radius: 16px;
-    height: auto;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    padding: 2rem;
-}
-
 .title {
     padding-top: 2rem;
 }
@@ -573,4 +590,108 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-cancel {
         height: 100%;
         border-radius: 0%;
     }
+}
+
+/* Tela inicial ONG */
+
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container-tela-ong{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+.side-bar{
+    background-color: #1166ca;
+    width: 20vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.conteudo-tela{
+    background-color: #fff;
+    height: 100vh;
+    width: 80vw;
+
+}
+.card-problema{
+    margin-top : 3rem;
+    width: 80vw;
+    height: 15rem;
+    display: flex;
+    box-shadow: 1px 1px 6px #0000001c;
+}
+.nav-bar{
+    background-color: #fff;
+    height: 10vh;
+    width: 80vw;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button-cadastro-problema {
+    width: 20rem;
+    margin-right: 3rem;
+}
+
+.button-cadastro-problema button {
+    width: 20vw;
+    border: none;
+    background-color: #1166ca;
+    padding: 0.62rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-cadastro-problema button:hover {
+    background-color: #1a62b4;
+}
+
+.button-cadastro-problema button a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #fff;
+}
+.card {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    width: 10rem;
+    height: 7rem;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #666666;
+}
+
+.card a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.card a:hover {
+    text-decoration: underline;
 }

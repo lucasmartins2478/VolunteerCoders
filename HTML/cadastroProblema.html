@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Cadastro do Problema</title>
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <link rel="stylesheet" href="../CSS/styles.css" />
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro do Problema</title>
 
-    <body id="body-problema">
-        <div class="container-problema">
-            <h2 class="container-problema__h2">Cadastre seu problema</h2>
-            <div class="container-problema__conteudo">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="../CSS/styles.css" />
+</head>
+
+<body id="body-problema">
+    <div class="container-problema">
+        <h2 class="container-problema__h2">Cadastre seu problema</h2>
+        <div class="container-problema__conteudo">
+            <div id="form-problema">
                 <div class="titulo">
                     <label for="titulo">Título do problema*</label>
                     <input type="text" id="titulo" name="titulo" />
@@ -20,12 +22,7 @@
                 <div class="imagem-infos">
                     <div class="imagem">
                         <label for="imagem">Imagem ilustrativa</label>
-                        <input
-                            type="file"
-                            name="imagem"
-                            id="imagem"
-                            accept="image/*"
-                        />
+                        <input type="file" name="imagem" id="imagem" accept="image/*" />
                     </div>
                     <div class="infos">
                         <div class="causas">
@@ -37,7 +34,7 @@
                                 <option value="fome">Fome</option>
                                 <option value="clima">Clima</option>
                                 <option value="natureza">Natureza</option>
-                                <option value="eduacacao">Eduacação</option>
+                                <option value="eduacacao">Educação</option>
                                 <option value="pobreza">Pobreza</option>
                             </select>
                         </div>
@@ -47,28 +44,21 @@
                         </div>
                         <div class="responsavel">
                             <label for="responsavel">Responsável*</label>
-                            <input
-                                type="text"
-                                id="responsavel"
-                                name="responsavel"
-                            />
+                            <input type="text" id="responsavel" name="responsavel" />
                         </div>
                     </div>
                 </div>
                 <div class="descricao">
                     <label for="descricao">Descrição*</label>
-                    <textarea
-                        type="text"
-                        id="descricao"
-                        name="descricao"
-                    ></textarea>
+                    <textarea type="text" id="descricao" name="descricao"></textarea>
                 </div>
                 <div class="botao">
                     <button class="btn-cadastrar-problema">Cadastrar</button>
                 </div>
             </div>
         </div>
-        <script src="../JAVASCRIPT/main.js">    
-        </script>
-    </body>
+    </div>
+    <script src="../JAVASCRIPT/main.js"></script>
+</body>
+
 </html>
