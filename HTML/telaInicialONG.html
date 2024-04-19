@@ -9,44 +9,45 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <div class="container-tela-ong">
-        <div class="side-bar">
-            <div id="content-items">
-                <div class="user">
-                    <img src="../CSS/imagens/do-utilizador (1).png" alt="Avatar" width="50rem" height="50rem">
-                </div>
-                <ul class="side-items">
-                    <li class="side-item">
-                        <a href="#">
-                            <i id="open-icon" class="fa-solid fa-gear"></i>
-                            <span class="item-description">
-                                Configurações
-                            </span>
-                        </a>
-                    </li>
-
-                </ul>
-                <button class="btn-open-side-bar">
-                    <i class="fa-solid fa-chevron-right"></i>   
-                </button>
-            </div>
-            <div id="logout">
-                <button id="logout-btn">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span class="item-description">
-                        Sair
-                    </span>
+        <div class="nav-bar">
+            <div class="button-cadastro-problema">
+                <button>
+                    <a href="../HTML/cadastroProblema.html">Cadastrar Problema</a>
                 </button>
             </div>
         </div>
         <div class="conteudo-tela">
-            <div class="nav-bar">
-                <div class="button-cadastro-problema">
-                    <button>
-                        <a href="../HTML/cadastroProblema.html">Cadastrar Problema</a>
+            <div id="side-bar">
+                <div id="content-items">
+                    <div class="user">
+                        <img src="../CSS/imagens/usuario-de-perfil.png" alt="Avatar">
+                    </div>
+                    <ul class="side-items">
+                        <li class="side-item">
+                            <a href="#">
+                                <i id="open-icon" class="fa-solid fa-gear"></i>
+                                <span class="item-description">
+                                    Configurações
+                                </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <button id="btn-open-side-bar">
+                        <i id="open-btn-icon" class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div id="logout">
+                    <button id="logout-btn" onclick="logout(event)">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span class="item-description">
+                            Sair
+                        </span>
                     </button>
                 </div>
             </div>
@@ -56,6 +57,31 @@
         </div>
     </div>
     <script>
+        document.getElementById('btn-open-side-bar').addEventListener('click', function () {
+            document.getElementById('side-bar').classList.toggle('open-sidebar');
+        });
+
+        function logout(event) {
+            event.preventDefault()
+
+            Swal.fire({
+                icon: "warning",
+                title: "Atenção!",
+                text: "Quer mesmo sair do Sistema!?",
+                showCancelButton: true,
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não",
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+
+                        window.location.href = 'telaInicialONG.html';
+                    }
+                });
+
+
+        }
+
         document.addEventListener("DOMContentLoaded", function () {
             const problemContainer = document.getElementById('card-problema');
 
