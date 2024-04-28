@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const problemas = JSON.parse(localStorage.getItem('problemas')) || [];
         problemas.push(novoProblema);
         localStorage.setItem('problemas', JSON.stringify(problemas));
-        //problemas.splice(0, 1);
+        // problemas.splice(0, 1);
+        // problemas.splice(2, 1);
+        // problemas.splice(3, 1);
        
 
         localStorage.setItem('problemas', JSON.stringify(problemas));

@@ -51,23 +51,26 @@
                     </button>
                 </div>
             </div>
+            <div class="conteudo">
+                <div class="problemas-cadastrados">
+                    <h3 class="title-problema">Problemas Cadastrados</h3>
+                    <div class="card-problema" id="card-problema">
 
-            <div class="problemas-cadastrados">
-                <h3 class="title-problema">Problemas Cadastrados</h3>
-                <div class="card-problema" id="card-problema">
-
+                    </div>
                 </div>
-            </div>
 
-            <div class="projetos-andamento">
-                <h3 class="title-projeto"></h3>
-                <div class="card-projeto" id="card-projeto">
-
+                <div class="projetos-andamento">
+                    <h3 class="title-projeto">Projetos em Andamento</h3>
+                    <div class="card-projeto" id="card-projeto">
+                    
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
+      
         document.getElementById('btn-open-side-bar').addEventListener('click', function () {
             document.getElementById('side-bar').classList.toggle('open-sidebar');
         });
@@ -92,6 +95,18 @@
 
 
         }
+        function excluirCard(event){
+            event.preventDefault()
+            Swal.fire({
+                icon: "warning",
+                title: "Atenção!",
+                text: "Quer mesmo escluir esse problema?",
+                showCancelButton: true,
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não",
+            })
+            problemas.splice(0, 1)
+        }
 
         document.addEventListener("DOMContentLoaded", function () {
             const problemContainer = document.getElementById('card-problema');
@@ -104,9 +119,16 @@
                 const newCard = document.createElement('div');
                 newCard.classList.add('card');
                 newCard.innerHTML = `
-                    <h3>${problema.titulo}</h3>
-                    <p>Segmento: ${problema.segmento}</p>
-                    <a href="detalhes_problema.html?titulo=${encodeURIComponent(problema.titulo)}&segmento=${encodeURIComponent(problema.segmento)}">Detalhes</a>
+                <div>
+                    <div class="titulo-card">
+                    <h4>${problema.titulo}</h4>
+                    <button onclick='excluirCard(event)'><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                    <p><b>Segmento:</b> ${problema.segmento}</p>
+                    <p><b>Descrição</b>:</p>
+                    <p>${problema.descricao}</p> 
+                </div>
+                    <button class="btn-detalhes"><a href="detalhes_problema.html?titulo=${encodeURIComponent(problema.titulo)}&segmento=${encodeURIComponent(problema.segmento)}">Detalhes</a></button>
                 `;
                 problemContainer.appendChild(newCard);
             });
