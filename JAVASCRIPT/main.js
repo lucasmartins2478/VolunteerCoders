@@ -1,3 +1,8 @@
+
+var nome = localStorage.getItem('nome')
+document.querySelector('#responsavel').value = nome
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const btnCadastrarProblema = document.querySelector('.btn-cadastrar-problema');
 
@@ -7,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const segmento = document.getElementById("causas-da-ong").value;
         const responsavel = document.getElementById("responsavel").value;
         const telefone = document.getElementById("telefone").value;
+
 
         if (!titulo || !descricao || !segmento || !responsavel || !telefone) {
             Swal.fire({
