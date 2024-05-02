@@ -352,7 +352,7 @@
                         });
                         document.getElementById("nome-equipe").value = "";
                         document.getElementById("lider").value = "";
-                        listaPessoas.forEach(item => item.remove()); 
+                        listaPessoas.forEach(item => item.remove());
                     } else {
                         Swal.fire({
                             icon: "error",
@@ -362,6 +362,7 @@
                     }
                 }
             })
+
             adicionarNomeEquipe(nomeEquipe);
             console.log(nomesEquipesCadastradas);
             return true;
