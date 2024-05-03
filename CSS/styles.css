@@ -150,8 +150,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
-    
 }
 
 .input-box {
@@ -299,7 +297,7 @@ textarea:focus-visible {
         padding: 0 0 0 0;
         margin: 0%;
     }
-    .title h2{
+    .title h2 {
         font-size: 4rem;
     }
     .container {
@@ -325,10 +323,10 @@ textarea:focus-visible {
         overflow-y: scroll;
         flex-wrap: nowrap;
     }
-    .input-box input{
+    .input-box input {
         width: 20rem;
     }
-    .input-box input::placeholder{
+    .input-box input::placeholder {
         font-size: 1.3rem;
     }
     @media screen and (max-width: 800px) {
@@ -338,30 +336,28 @@ textarea:focus-visible {
             border-radius: 0%;
             margin: 0;
             padding: 0%;
-            display:flex ;
+            display: flex;
             flex-direction: row;
             justify-content: center;
         }
-        .form{
+        .form {
             margin: none;
             display: flex;
             flex-direction: row;
             justify-content: center;
             padding: 0%;
         }
-        .title h2{
+        .title h2 {
             font-size: 2.6rem;
         }
-        .select-user select{
+        .select-user select {
             height: 3rem;
         }
-        .input-box input{
-            margin: 0.1 0 ;
+        .input-box input {
+            margin: 0.1 0;
             width: 16rem;
         }
     }
-    
-
 }
 
 /* /--- login ----/ */
@@ -371,7 +367,7 @@ textarea:focus-visible {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center ;
+    justify-content: center;
     align-items: center;
     background-color: #fff;
 }
@@ -408,7 +404,6 @@ textarea:focus-visible {
     align-items: center;
     text-align: center;
 }
-
 
 /* Cadastro de ONG */
 
@@ -457,7 +452,7 @@ input[type="number"] {
     margin-left: 40px;
 }
 .imagem-ong input[type="file"] {
-    width: 97%;
+    width: 94%;
     height: 58%;
 }
 
@@ -509,12 +504,12 @@ input[type="number"] {
 }
 
 .nomes-ong #nome-ong {
-    width: 80%;
+    width: 82.5%;
     margin-right: 10px;
 }
 
 .nomes-ong #nome-responsavel {
-    width: 74%;
+    width: 76%;
     margin-right: 10px;
     background-color: rgb(239, 239, 239);
 }
@@ -562,13 +557,15 @@ input[type="number"] {
     margin-top: 10px;
     height: 40px;
 }
-    
+
 .endereco-ong #telefone-ong {
     width: 140px;
+    margin-bottom: 30px;
 }
 
 .endereco-ong #url-ong {
     width: 130px;
+    margin-bottom: 30px;
 }
 
 .endereco-ong #endereco {
@@ -603,20 +600,21 @@ input[type="number"] {
     background-color: rgb(239, 239, 239);
 }
 
-.sobre{
+.sobre {
     width: 100%;
 }
 
 .sobre textarea {
     width: 179%;
     height: 100px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     margin-left: 10px;
 }
 
 .sobre label {
     margin-top: 40px;
     text-align: center;
+    margin-left: 220px;
 }
 
 .botao-cadastro {
@@ -642,10 +640,9 @@ input[type="number"] {
         height: 100%;
         border-radius: 0%;
     }
-    .nomes-ong #nome-responsavel{
+    .nomes-ong #nome-responsavel {
         width: 80%;
     }
-    
 }
 
 /* ----- cadastro de problema -----*/
@@ -657,14 +654,14 @@ input[type="number"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #bbb5b5;
+    background-color: #4e81b4;
     font-size: 1rem;
 }
 
 .container-problema {
     border-radius: 15px;
     width: 65%;
-    height: 85%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -755,6 +752,10 @@ h2 {
     box-shadow: 1px 1px 10px #0200001c;
 }
 
+.responsavel input {
+    background-color: rgb(239, 239, 239);
+}
+
 label {
     margin-bottom: 6px;
     font-size: 1rem;
@@ -800,7 +801,8 @@ textarea {
 }
 
 /* sweetAlert */
-#body-problema,#body-cadastro,
+#body-problema,
+#body-cadastro,
 .swal2-height-auto {
     height: 100vh !important;
 }
@@ -839,40 +841,39 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-cancel {
 
 /* Tela inicial ONG */
 
-body{
+body {
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
-.container-tela-ong{
+.container-tela-ong {
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
-#side-bar{
+#side-bar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: #fff;
-    height: 90vh;
+    height: 92vh;
     border-radius: 0px 18px 18px 0px;
     position: relative;
-    transition: all .5s;
+    transition: all 0.5s;
     min-width: 82px;
     z-index: 2;
 }
-.user{
+.user {
     display: flex;
     padding-top: 1rem;
     justify-content: center;
 }
-.user img{
+.user img {
     width: 3rem;
     height: 3rem;
-
 }
 .side-items {
     display: flex;
@@ -948,7 +949,7 @@ body{
 }
 
 #open-btn-icon {
-    transition: transform .3s ease;
+    transition: transform 0.3s ease;
 }
 
 .open-sidebar #open-btn-icon {
@@ -961,7 +962,7 @@ body{
     white-space: nowrap;
     text-overflow: ellipsis;
     font-size: 14px;
-    transition: width .6s;
+    transition: width 0.6s;
     height: 0px;
 }
 
@@ -979,28 +980,25 @@ body{
     gap: 14px;
 }
 
-.conteudo-tela{
+.conteudo-tela {
     display: flex;
     background-color: #efe7e7;
     height: auto;
     width: 100vw;
-
 }
-.conteudo{
+.conteudo {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     padding-top: 1rem;
     padding-left: 2rem;
-    
 }
-.card-problema{
-    margin-top : 3rem;
+.card-problema {
+    margin-top: 1rem;
     width: 91vw;
     height: 15rem;
     display: flex;
     justify-self: center;
     gap: 2rem;
-
 }
 .card {
     background-color: #ffffff;
@@ -1015,25 +1013,24 @@ body{
     justify-content: space-between;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.titulo-card{
+.titulo-card {
     display: flex;
     justify-content: space-between;
 }
-.titulo-card button{
+.titulo-card button {
     border: none;
     background-color: #fff;
 }
-.titulo-card button:hover{
+.titulo-card button:hover {
     color: #444852;
 }
 .card h4 {
     font-size: 18px;
-
 }
 
 .card p {
     margin-top: 3px;
-    font-size: 14px; 
+    font-size: 14px;
 }
 
 .card a {
@@ -1044,19 +1041,23 @@ body{
 .card a:hover {
     text-decoration: underline;
 }
-.card-projeto{
-    margin-top : 3rem;
+.card-projeto {
+    margin-top: 1rem;
     width: 100%;
     height: 15rem;
     display: flex;
     justify-self: center;
     box-shadow: 1px 1px 6px #0000001c;
 }
-.problemas-cadastrados h3{
+.problemas-cadastrados h3 {
     margin-top: 1rem;
-
 }
-.nav-bar{
+
+.projetos-andamento h3 {
+    margin-top: 1rem;
+}
+
+.nav-bar {
     background-color: #fff;
     height: 10vh;
     width: 100vw;
@@ -1093,7 +1094,7 @@ body{
     font-weight: 500;
     color: #fff;
 }
-.btn-detalhes{
+.btn-detalhes {
     width: 100%;
     border: none;
     background-color: #1166ca;
@@ -1102,13 +1103,12 @@ body{
     cursor: pointer;
     justify-self: end;
 }
-.btn-detalhes a{
+.btn-detalhes a {
     display: block;
     width: 100%;
     height: 100%;
     text-decoration: none;
     font-size: 1.2rem;
     font-weight: 500;
-    color: #fff;   
-    
+    color: #fff;
 }

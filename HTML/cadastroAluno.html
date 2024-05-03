@@ -72,6 +72,7 @@
                 margin-left: 10px;
                 width: 750px;
                 height: 40px;
+                background-color: rgb(239, 239, 239);
             }
 
             .cidade {
@@ -119,6 +120,7 @@
                 margin-left: 10px;
                 width: 335px;
                 height: 40px;
+                background-color: rgb(239, 239, 239);
             }
 
             .telefone-aluno {
@@ -259,7 +261,12 @@
             <div class="container-problema__conteudo">
                 <div class="nome-aluno">
                     <label for="nome-aluno">Nome*</label>
-                    <input type="text" id="nome-aluno" name="nome-aluno" readonly/>
+                    <input
+                        type="text"
+                        id="nome-aluno"
+                        name="nome-aluno"
+                        readonly
+                    />
                 </div>
                 <div class="cidade">
                     <label for="cidade-aluno">Cidade*</label>
@@ -324,12 +331,11 @@
             </div>
         </div>
         <script>
+            var email = localStorage.getItem("email");
+            var nome = localStorage.getItem("nome");
 
-            var email = localStorage.getItem('email')
-            var nome = localStorage.getItem('nome')
-
-            document.querySelector('#nome-aluno').value = nome
-            document.querySelector('#email-aluno').value = email
+            document.querySelector("#nome-aluno").value = nome;
+            document.querySelector("#email-aluno").value = email;
 
             document.addEventListener("DOMContentLoaded", function () {
                 const campos = document.querySelectorAll(
@@ -420,7 +426,7 @@
                                                 showConfirmButton: false,
                                             }).then(() => {
                                                 window.location.href =
-                                                    "telaInicialAluno.html";
+                                                    "antes-telaInicialAluno.html";
                                             });
                                         }
                                     });

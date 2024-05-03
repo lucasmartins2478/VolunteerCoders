@@ -1,139 +1,308 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tela Inicial</title>
+        <link rel="stylesheet" href="../CSS/styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+            integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <style>
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(
+                    0,
+                    0,
+                    0,
+                    0.5
+                ); /* Cor de fundo semi-transparente */
+                z-index: 999; /* Garante que a sobreposição fique acima de todos os outros elementos */
+                pointer-events: none; /* Permite que eventos de clique passem através da sobreposição */
+                display: none; /* Inicialmente oculta */
+            }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Inicial</title>
-    <link rel="stylesheet" href="../CSS/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
+            .detalhes-open .overlay {
+                pointer-events: auto; /* Ativa eventos de clique na sobreposição quando o container de detalhes estiver aberto */
+                display: block; /* Exibe a sobreposição quando o container de detalhes está aberto */
+            }
 
-<body>
-    <div class="container-tela-ong">
-        <div class="nav-bar">
-            <div class="button-cadastro-problema">
-                <button>
-                    <a href="../HTML/cadastroProblema.html">Cadastrar Problema</a>
-                </button>
-            </div>
-        </div>
-        <div class="conteudo-tela">
-            <div id="side-bar">
-                <div id="content-items">
-                    <div class="user">
-                        <img src="../CSS/imagens/usuario-de-perfil.png" alt="Avatar">
-                    </div>
-                    <ul class="side-items">
-                        <li class="side-item">
-                            <a href="#">
-                                <i id="open-icon" class="fa-solid fa-gear"></i>
-                                <span class="item-description">
-                                    Configurações
-                                </span>
-                            </a>
-                        </li>
+            .detalhes {
+                text-align: center;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #fff;
+                border-radius: 16px;
+                padding: 20px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+                max-width: 600px;
+                max-height: 700px;
+                word-wrap: break-word;
+                padding: 30px 30px 30px 30px;
+            }
 
-                    </ul>
-                    <button id="btn-open-side-bar">
-                        <i id="open-btn-icon" class="fa-solid fa-chevron-right"></i>
+            .btn-detalhes {
+                color: #fff;
+                font-size: 17px;
+            }
+
+            .detalhes .button-detalhe {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 50px;
+            }
+
+            .detalhes .button-detalhe button {
+                background-color: #1166ca;
+                width: 100px;
+                height: 30px;
+                border-radius: 16px;
+                border: solid 0px;
+                font-size: 18px;
+                color: #fff;
+            }
+
+            .card {
+                word-wrap: break-word;
+            }
+
+            .card p {
+                margin-top: 3px;
+                font-size: 14px;
+                display: -webkit-box;
+                -webkit-line-clamp: 3; /* Número de linhas que deseja mostrar */
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-tela-ong">
+            <div class="nav-bar">
+                <div class="button-cadastro-problema">
+                    <button>
+                        <a href="../HTML/cadastroProblema.html"
+                            >Cadastrar Problema</a
+                        >
                     </button>
                 </div>
-                <div id="logout">
-                    <button id="logout-btn" onclick="logout(event)">
-                        <i class="fa-solid fa-right-from-bracket"></i>
-                        <span class="item-description">
-                            Sair
-                        </span>
-                    </button>
-                </div>
             </div>
-            <div class="conteudo">
-                <div class="problemas-cadastrados">
-                    <h3 class="title-problema">Problemas Cadastrados</h3>
-                    <div class="card-problema" id="card-problema">
-
-                    </div>
-                </div>
-
-                <div class="projetos-andamento">
-                    <h3 class="title-projeto">Projetos em Andamento</h3>
-                    <div class="card-projeto" id="card-projeto">
-                    
+            <div class="conteudo-tela">
+                <div id="side-bar">
+                    <div id="content-items">
+                        <div class="user">
+                            <img
+                                src="../CSS/imagens/usuario-de-perfil.png"
+                                alt="Avatar"
+                            />
                         </div>
+                        <ul class="side-items">
+                            <li class="side-item">
+                                <a href="#">
+                                    <i
+                                        id="open-icon"
+                                        class="fa-solid fa-gear"
+                                    ></i>
+                                    <span class="item-description"
+                                        >Configurações</span
+                                    >
+                                </a>
+                            </li>
+                        </ul>
+                        <button id="btn-open-side-bar">
+                            <i
+                                id="open-btn-icon"
+                                class="fa-solid fa-chevron-right"
+                            ></i>
+                        </button>
+                    </div>
+                    <div id="logout">
+                        <button id="logout-btn" onclick="logout(event)">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            <span class="item-description">Sair</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="conteudo">
+                    <div class="problemas-cadastrados">
+                        <h3 class="title-problema">Problemas Cadastrados</h3>
+                        <div class="card-problema" id="card-problema"></div>
+                    </div>
+
+                    <div class="projetos-andamento">
+                        <h3 class="title-projeto">Projetos em Andamento</h3>
+                        <div class="card-projeto" id="card-projeto"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-      
-        document.getElementById('btn-open-side-bar').addEventListener('click', function () {
-            document.getElementById('side-bar').classList.toggle('open-sidebar');
-        });
-
-        function logout(event) {
-            event.preventDefault()
-
-            Swal.fire({
-                icon: "warning",
-                title: "Atenção!",
-                text: "Quer mesmo sair do Sistema!?",
-                showCancelButton: true,
-                confirmButtonText: "Sim",
-                cancelButtonText: "Não",
-            })
-                .then((result) => {
-                    if (result.isConfirmed) {
-
-                        window.location.href = 'telaInicialONG.html';
-                    }
+        <div class="overlay"></div>
+        <!-- Sobreposição para o efeito de desfoque -->
+        <div id="detalhes-container" class="detalhes-container"></div>
+        <script>
+            document
+                .getElementById("btn-open-side-bar")
+                .addEventListener("click", function () {
+                    document
+                        .getElementById("side-bar")
+                        .classList.toggle("open-sidebar");
                 });
 
+            function logout(event) {
+                event.preventDefault();
 
-        }
-        function excluirCard(event){
-            event.preventDefault()
-            Swal.fire({
-                icon: "warning",
-                title: "Atenção!",
-                text: "Quer mesmo escluir esse problema?",
-                showCancelButton: true,
-                confirmButtonText: "Sim",
-                cancelButtonText: "Não",
-            })
-            problemas.splice(0, 1)
-        }
+                Swal.fire({
+                    icon: "warning",
+                    title: "Atenção!",
+                    text: "Quer mesmo sair do Sistema!?",
+                    showCancelButton: true,
+                    confirmButtonText: "Sim",
+                    cancelButtonText: "Não",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "apresentacao.html";
+                    }
+                });
+            }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const problemContainer = document.getElementById('card-problema');
+            function excluirCard(event, titulo) {
+                event.preventDefault();
 
-            // Recuperar todos os problemas cadastrados
-            const problemas = JSON.parse(localStorage.getItem('problemas')) || [];
+                Swal.fire({
+                    icon: "warning",
+                    title: "Atenção!",
+                    text: "Quer mesmo excluir esse problema?",
+                    showCancelButton: true,
+                    confirmButtonText: "Sim",
+                    cancelButtonText: "Não",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Remover o card do problema da tela
+                        const card = event.target.closest(".card");
+                        card.remove();
 
-            // Para cada problema, criar e adicionar um card ao container de problemas
-            problemas.forEach(function (problema) {
-                const newCard = document.createElement('div');
-                newCard.classList.add('card');
-                newCard.innerHTML = `
-                <div>
-                    <div class="titulo-card">
-                    <h4>${problema.titulo}</h4>
-                    <button onclick='excluirCard(event)'><i class="fa-solid fa-trash"></i></button>
+                        // Recuperar todos os problemas cadastrados
+                        let problemas =
+                            JSON.parse(localStorage.getItem("problemas")) || [];
+
+                        // Marcar o problema como excluído
+                        problemas.forEach((problema) => {
+                            if (problema.titulo === titulo) {
+                                problema.excluido = true;
+                            }
+                        });
+
+                        // Atualizar o armazenamento local
+                        localStorage.setItem(
+                            "problemas",
+                            JSON.stringify(problemas)
+                        );
+                    }
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const problemContainer =
+                    document.getElementById("card-problema");
+
+                // Recuperar todos os problemas cadastrados
+                let problemas =
+                    JSON.parse(localStorage.getItem("problemas")) || [];
+
+                // Para cada problema, criar e adicionar um card ao container de problemas
+                problemas.forEach(function (problema) {
+                    // Verificar se o problema não está excluído antes de criar o card
+                    if (!problema.excluido) {
+                        const newCard = document.createElement("div");
+                        newCard.classList.add("card");
+                        newCard.innerHTML = `
+                    <div>
+                        <div class="titulo-card">
+                            <h4>${problema.titulo}</h4>
+                            <button onclick='excluirCard(event, "${problema.titulo}")'>
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                        <p><b>Segmento:</b> ${problema.segmento}</p>
+                        <p><b>Descrição</b>:</p>
+                        <p>${problema.descricao}</p>
                     </div>
-                    <p><b>Segmento:</b> ${problema.segmento}</p>
-                    <p><b>Descrição</b>:</p>
-                    <p>${problema.descricao}</p> 
-                </div>
-                    <button class="btn-detalhes"><a href="detalhes_problema.html?titulo=${encodeURIComponent(problema.titulo)}&segmento=${encodeURIComponent(problema.segmento)}">Detalhes</a></button>
+                    <button class="btn-detalhes"onclick='mostrarDetalhes("${problema.titulo}", "${problema.segmento}", "${problema.descricao}")'>
+                        Detalhes
+                    </button>
                 `;
-                problemContainer.appendChild(newCard);
+                        problemContainer.appendChild(newCard);
+                    }
+                });
             });
-        });
-    </script>
-</body>
 
+            function mostrarDetalhes(titulo, segmento, descricaoProblema) {
+                const dadosONG = JSON.parse(localStorage.getItem("dadosONG"));
+
+                // Verificar se os dados da ONG existem antes de passá-los para a função
+                if (dadosONG) {
+                    const { nome, sobre, cidade, telefone, email, url } =
+                        dadosONG;
+
+                    // Adicionar classe 'detalhes-open' ao corpo do documento
+                    document.body.classList.add("detalhes-open");
+
+                    // Criar um container HTML para os detalhes
+                    const detalhesContainer =
+                        document.getElementById("detalhes-container");
+                    detalhesContainer.innerHTML = `
+                    <div class="detalhes">
+                        <h2>Detalhes do Problema</h2>
+                        <p><b>Título:</b> ${titulo}</p>
+                        <p><b>Segmento:</b> ${segmento}</p>
+                        <p><b>Descrição:</b> ${descricaoProblema}</p>
+                        
+                        <br>
+                        <h2>Detalhes da ONG</h2>
+                        <p><b>Nome:</b> ${nome}</p>
+                        <p><b>Descrição:</b> ${sobre}</p>
+                        <p><b>Endereço:</b> ${cidade}</p>
+                        <br>
+                        <p>Entre em contato:</p>
+                        <p><b>Telefone:</b> ${telefone}</p>
+                        <p><b>E-mail:</b> ${email}</p>
+                        <p><b>Site:</b> ${url}</p>
+                    
+                        <div class="button-detalhe">
+                            <button onclick="fecharDetalhes()">Fechar</button>
+                        </div>
+                    </div> 
+                `;
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erro",
+                        text: "Os dados da ONG não foram encontrados.",
+                    });
+                }
+            }
+
+            function fecharDetalhes() {
+                // Limpar o conteúdo do container de detalhes
+                document.getElementById("detalhes-container").innerHTML = "";
+
+                // Remover classe 'detalhes-open' do corpo do documento
+                document.body.classList.remove("detalhes-open");
+            }
+        </script>
+    </body>
 </html>
