@@ -20,20 +20,15 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba(
-                    0,
-                    0,
-                    0,
-                    0.5
-                ); /* Cor de fundo semi-transparente */
-                z-index: 999; /* Garante que a sobreposição fique acima de todos os outros elementos */
-                pointer-events: none; /* Permite que eventos de clique passem através da sobreposição */
-                display: none; /* Inicialmente oculta */
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                pointer-events: none;
+                display: none;
             }
 
             .detalhes-open .overlay {
-                pointer-events: auto; /* Ativa eventos de clique na sobreposição quando o container de detalhes estiver aberto */
-                display: block; /* Exibe a sobreposição quando o container de detalhes está aberto */
+                pointer-events: auto;
+                display: block;
             }
 
             .detalhes {
@@ -83,7 +78,7 @@
                 margin-top: 3px;
                 font-size: 14px;
                 display: -webkit-box;
-                -webkit-line-clamp: 3; /* Número de linhas que deseja mostrar */
+                -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -151,7 +146,6 @@
             </div>
         </div>
         <div class="overlay"></div>
-        <!-- Sobreposição para o efeito de desfoque -->
         <div id="detalhes-container" class="detalhes-container"></div>
         <script>
             document
@@ -206,7 +200,6 @@
                             }
                         });
 
-                        // Atualizar o armazenamento local
                         localStorage.setItem(
                             "problemas",
                             JSON.stringify(problemas)
@@ -258,10 +251,8 @@
                     const { nome, sobre, cidade, telefone, email, url } =
                         dadosONG;
 
-                    // Adicionar classe 'detalhes-open' ao corpo do documento
                     document.body.classList.add("detalhes-open");
 
-                    // Criar um container HTML para os detalhes
                     const detalhesContainer =
                         document.getElementById("detalhes-container");
                     detalhesContainer.innerHTML = `
@@ -297,10 +288,8 @@
             }
 
             function fecharDetalhes() {
-                // Limpar o conteúdo do container de detalhes
                 document.getElementById("detalhes-container").innerHTML = "";
 
-                // Remover classe 'detalhes-open' do corpo do documento
                 document.body.classList.remove("detalhes-open");
             }
         </script>
