@@ -33,7 +33,7 @@
             }
 
             .minha-equipe {
-                margin-top: 5px;
+                /* margin-top: 5px; */
                 margin-bottom: 1px;
                 color: #1166ca;
                 width: 60%;
@@ -208,6 +208,34 @@
                 margin-bottom: 5px;
                 text-align: center;
             }
+            .equipe-info .x {
+                background-color: #fff;
+                border: #fff;
+                width: 30px;
+                margin-top: 30px;
+                margin-left: 510px;
+                font-size: 25px;
+                margin-bottom: 0px;
+                border-radius: 50px;
+                padding: 5px;
+                cursor: pointer;
+                position: absolute;
+                top: 100px;
+                right: 170px;
+            }
+
+            .equipe-info .x:hover {
+                background-color: #eaf4ff;
+            }
+
+            .texto-explicacao {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: row;
+                font-size: 20px;
+                font-weight: 500;
+            }
         </style>
     </head>
 
@@ -234,12 +262,34 @@
 
                         <ul class="side-items" id="side-items-aluno">
                             <li class="side-item" id="side-item-aluno">
-                                <a href="#">
+                                <a href="../HTML/homeAluno.html">
                                     <i
                                         id="open-icon"
                                         class="fa-solid fa-home"
+                                        onclick="redirecionarParaHome()"
                                     ></i>
-                                    <span class="item-description"> Home </span>
+                                    <span
+                                        class="item-description"
+                                        onclick="redirecionarParaHome()"
+                                    >
+                                        Home
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="side-item" id="side-item-aluno">
+                                <a href="../HTML/telaInicialEquipe.html">
+                                    <i
+                                        id="open-icon"
+                                        class="fa-solid fa-users"
+                                        onclick="redirecionarParaMinhaEquipe()"
+                                    ></i>
+                                    <span
+                                        class="item-description"
+                                        onclick="redirecionarParaMinhaEquipe()"
+                                    >
+                                        Minha Equipe
+                                    </span>
                                 </a>
                             </li>
 
@@ -281,6 +331,9 @@
                 </div>
 
                 <div class="equipes-cadastradas">
+                    <div class="texto-explicacao">
+                        Clique no X e explore os problemas das ONG's
+                    </div>
                     <div class="card-equipe" id="card-equipe">
                         <div class="card-conteudo">
                             <div class="img-etc">
@@ -299,6 +352,9 @@
                             </div>
 
                             <div class="equipe-info">
+                                <button class="x" onclick="fecharEquipe()">
+                                    X
+                                </button>
                                 <div class="equipe-info-conteudo">
                                     <h2 class="minha-equipe">Minha Equipe</h2>
 
@@ -403,7 +459,6 @@
                 </div>
             </div>
         </div>
-
         <script>
             document
                 .getElementById("btn-open-side-bar")
@@ -428,6 +483,21 @@
                         window.location.href = "apresentacao.html";
                     }
                 });
+            }
+
+            function fecharEquipe() {
+                var equipeCadastrada = document.querySelector(
+                    ".equipes-cadastradas"
+                );
+                equipeCadastrada.style.display = "none";
+                window.location.href = "../HTML/homeAluno.html";
+            }
+
+            function redirecionarParaMinhaEquipe() {
+                window.location.href = "../HTML/telaInicialEquipe.html";
+            }
+            function redirecionarParaHome() {
+                window.location.href = "../HTML/homeAluno.html";
             }
         </script>
     </body>

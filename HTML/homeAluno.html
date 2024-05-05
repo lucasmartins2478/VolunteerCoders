@@ -116,53 +116,110 @@
                 height: 100px;
             }
 
-            .user img {
-                margin-top: 20px;
-                width: 3rem;
-                height: 3rem;
-            }
-            .side-items {
+            #user-aluno {
+                margin-bottom: 10px;
+                margin-top: 1.3rem;
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
-                list-style: none;
-                margin-top: 45px;
+                justify-content: space-between;
+                align-items: center;
             }
+
+            .side-item {
+                height: 60px;
+                display: flex;
+                justify-content: center;
+            }
+
+            #user-aluno img {
+                margin-bottom: 30px;
+            }
+
+            #nome-aluno,
+            #faculdade-aluno {
+                margin-bottom: 10px;
+            }
+
+            .detalhe-aluno {
+                display: none;
+            }
+
+            .open-sidebar .detalhe-aluno {
+                display: block;
+                background-color: #eaf4ff;
+                height: 35px;
+                display: flex;
+                width: 170px;
+                border-radius: 15px;
+                justify-content: center;
+                align-items: center;
+            }
+            /* .nav-bar {
+                background-color: #fff;
+                height: 10vh;
+                width: 100vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-bar .nome-pagina {
+                margin-left: -500px;
+                font-family: Impact, Haettenschweiler, "Arial Narrow Bold",
+                    sans-serif;
+            } */
         </style>
     </head>
     <body>
         <div class="container-tela-ong">
             <div class="nav-bar">
-                <div class="button-cadastro-problema">
-                    <button>
-                        <a href="../HTML/cadastroProblema.html"
-                            >Cadastrar Problema</a
-                        >
-                    </button>
-                </div>
+                <!-- <div class="nome-pagina">home</div> -->
             </div>
             <div class="conteudo-tela">
                 <div id="side-bar">
                     <div id="content-items">
-                        <div class="user">
+                        <div class="user" id="user-aluno">
                             <img
                                 src="../CSS/imagens/usuario-de-perfil.png"
                                 alt="Avatar"
                             />
+                            <span id="nome-aluno" class="detalhe-aluno"
+                                >Aluno</span
+                            >
+                            <span id="faculdade-aluno" class="detalhe-aluno"
+                                >Faculdade do Aluno</span
+                            >
                         </div>
                         <ul class="side-items">
                             <li class="side-item" id="side-item-aluno">
-                                <a href="../HTML/telaInicialONG.html">
+                                <a href="../HTML/homeAluno.html">
                                     <i
                                         id="open-icon"
                                         class="fa-solid fa-home"
-                                        onclick="redirecionarParaInicialONG()"
+                                        onclick="redirecionarParaHome()"
                                     ></i>
                                     <span
                                         class="item-description"
-                                        onclick="redirecionarParaInicialONG()"
+                                        onclick="redirecionarParaHome()"
                                     >
                                         Home
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="side-item" id="side-item-aluno">
+                                <a href="../HTML/telaInicialEquipe.html">
+                                    <i
+                                        id="open-icon"
+                                        class="fa-solid fa-users"
+                                        onclick="redirecionarParaMinhaEquipe()"
+                                    ></i>
+                                    <span
+                                        class="item-description"
+                                        onclick="redirecionarParaMinhaEquipe()"
+                                    >
+                                        Minha Equipe
                                     </span>
                                 </a>
                             </li>
@@ -175,6 +232,15 @@
                                     <span class="item-description"
                                         >Configurações</span
                                     >
+                                </a>
+                            </li>
+                            <li class="side-item" id="side-item-aluno">
+                                <a href="#">
+                                    <i
+                                        id="open-icon"
+                                        class="fa-solid fa-circle-question"
+                                    ></i>
+                                    <span class="item-description"> Info </span>
                                 </a>
                             </li>
                         </ul>
@@ -194,7 +260,9 @@
                 </div>
                 <div class="conteudo">
                     <div class="problemas-cadastrados">
-                        <h3 class="title-problema">Problemas Cadastrados</h3>
+                        <h3 class="title-problema">
+                            Veja os problemas disponiveis:
+                        </h3>
                         <div class="scrollable">
                             <div class="card-problema" id="card-problema"></div>
                         </div>
@@ -240,41 +308,6 @@
                 });
             }
 
-            function excluirCard(event, titulo) {
-                event.preventDefault();
-
-                Swal.fire({
-                    icon: "warning",
-                    title: "Atenção!",
-                    text: "Quer mesmo excluir esse problema?",
-                    showCancelButton: true,
-                    confirmButtonText: "Sim",
-                    cancelButtonText: "Não",
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // Remover o card do problema da tela
-                        const card = event.target.closest(".card");
-                        card.remove();
-
-                        // Recuperar todos os problemas cadastrados
-                        let problemas =
-                            JSON.parse(localStorage.getItem("problemas")) || [];
-
-                        // Marcar o problema como excluído
-                        problemas.forEach((problema) => {
-                            if (problema.titulo === titulo) {
-                                problema.excluido = true;
-                            }
-                        });
-
-                        localStorage.setItem(
-                            "problemas",
-                            JSON.stringify(problemas)
-                        );
-                    }
-                });
-            }
-
             document.addEventListener("DOMContentLoaded", function () {
                 const problemContainer =
                     document.getElementById("card-problema");
@@ -293,9 +326,7 @@
                     <div>
                         <div class="titulo-card">
                             <h4>${problema.titulo}</h4>
-                            <button onclick='excluirCard(event, "${problema.titulo}")'>
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+                            
                         </div>
                         <p><b>Segmento:</b> ${problema.segmento}</p>
                         <p><b>Descrição</b>:</p>
@@ -309,6 +340,7 @@
                     }
                 });
 
+                // Monitorar a posição do conteúdo e ajustar dinamicamente a posição do botão de fechar
                 const detalhesContainer =
                     document.getElementById("detalhes-container");
                 detalhesContainer.addEventListener("scroll", function () {
@@ -323,7 +355,7 @@
                     if (distanceToBottom <= 10) {
                         closeButton.style.bottom = 10 - distanceToBottom + "px";
                     } else {
-                        closeButton.style.bottom = "20px";
+                        closeButton.style.bottom = "20px"; // Posição padrão
                     }
                 });
                 if (
@@ -367,7 +399,7 @@
                         <p><b>Site:</b> ${url}</p>
                     
                     <div class="button-detalhe">
-                        <button onclick="fecharDetalhes()">Fechar</button>
+                        <button onclick="fecharDetalhes()">Selecionar</button>
                     </div>
                 </div>
             `;
@@ -383,9 +415,6 @@
             function fecharDetalhes() {
                 document.getElementById("detalhes-container").innerHTML = "";
                 document.body.classList.remove("detalhes-open");
-            }
-            function redirecionarParaInicialONG() {
-                window.location.href = "../HTML/telaInicialONG.html";
             }
         </script>
     </body>
