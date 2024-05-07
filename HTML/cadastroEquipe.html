@@ -252,6 +252,32 @@
         cursor: pointer;
     }
 
+    .botoes {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .btn-cancelar {
+        border: none;
+        width: 200px;
+        height: 40px;
+        font-size: 1.2rem;
+        border: 2px solid #1166ca;
+        border-radius: 15px;
+        color: #1166ca;
+        background-color: white;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .btn-cancelar:hover {
+        border: 2px solid #1255a1;
+        color: #1255a1;
+    }
+
     @media screen and (max-width: 880px) {
         .container-equipe {
             width: 80%;
@@ -332,19 +358,32 @@
 
             <div class="lider">
                 <label for="lider">Líder da equipe*</label>
-                <input type="text" id="lider" name="lider" />
+                <input type="text" id="lider" name="lider" readonly />
             </div>
         </div>
 
-        <div class="botao">
-            <button id="btn-criar-equipe" class="btn-criar-equipe" onclick="validarFormulario()">
-                Criar equipe
-            </button>
+        <div class="botoes">
+            <div class="botao-cancelar">
+                <button id="btn-cancelar" class="btn-cancelar" onclick="cancelar(event)">
+                    Cancelar
+                </button>
+            </div>
+            <div class="botao">
+                <button id="btn-criar-equipe" class="btn-criar-equipe" onclick="validarFormulario()">
+                    Criar equipe
+                </button>
+            </div>
         </div>
+
     </div>
 
     <script>
+
         let nomesEquipesCadastradas = [];
+        let emailsPorEquipe = [];
+
+        var nomeLider = localStorage.getItem("nome");
+        document.querySelector("#lider").value = nomeLider;
 
         function validarNomeEquipe(nomeEquipe) {
             return nomesEquipesCadastradas.includes(nomeEquipe);
@@ -369,27 +408,33 @@
             return dominiosValidos.includes(dominio);
         }
 
-        // Função para adicionar pessoa à equipe
-        function adicionar(event) {
+        function adicionar(event, nomeEquipe) {
             event.preventDefault();
             let email = document.querySelector('#equipe').value.trim();
 
             if (validarEmail(email)) {
+                emailsPorEquipe.push(email);
+
                 let pessoa = document.createElement('li');
                 pessoa.textContent = email;
-                let lista = document.querySelector('li');
-
                 let imagem = document.createElement('img');
-                imagem.src = '../CSS/imagens/marca-retangular-x.png'
+                imagem.src = '../CSS/imagens/marca-retangular-x.png';
                 imagem.className = 'btn-apagar-pessoa';
+
                 imagem.addEventListener('click', function () {
                     pessoa.remove();
+
+                    let index = emailsPorEquipe.indexOf(email);
+                    if (index !== -1) {
+                        emailsPorEquipe.splice(index, 1);
+                    }
                 });
-                let listaEquipe = document.querySelector('#listaPessoas');
 
                 pessoa.appendChild(imagem);
+                let listaEquipe = document.querySelector('#listaPessoas');
                 listaEquipe.appendChild(pessoa);
-                
+
+                localStorage.setItem(nomeEquipe, JSON.stringify(emailsPorEquipe));
 
                 document.querySelector('#equipe').value = '';
             } else {
@@ -401,7 +446,23 @@
             }
         }
 
-        adicionar();
+        function cancelar(event) {
+            event.preventDefault()
+
+            Swal.fire({
+                icon: "warning",
+                title: "Atenção!",
+                text: "Quer mesmo cancelar a criação de equipe?",
+                showCancelButton: true,
+                confirmButtonText: "Sim",
+                cancelButtonText: "Não",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'telaInicialAluno.html';
+                }
+            });
+
+        }
 
         function validarFormulario() {
 
@@ -415,9 +476,10 @@
                 });
                 return false;
             }
+            // console.log(nomeEquipe)
 
             const listaPessoas = document.querySelectorAll('ul#listaPessoas li');
-            const nomeLider = document.getElementById("lider").value.trim();
+            nomeLider = document.getElementById("lider").value.trim();
 
             if (listaPessoas.length === 0) {
                 Swal.fire({
@@ -463,6 +525,7 @@
                         listaPessoas.forEach(function (item) {
                             pessoas.push(item.textContent);
                         });
+                        pessoas.push("Líder: " + nomeLider);
                         const equipe = pessoas.join(', ');
                         var lider =
                             document.getElementById(
@@ -479,22 +542,35 @@
                             cancelButtonText: "Cancelar",
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Equipe criada!",
-                                    text: "Sua equipe foi criada com sucesso",
-                                    timer: 1500,
-                                    showConfirmButton: false,
-                                })
-                                    .then(() => {
-                                        window.location.href =
-                                            "telaInicialAluno.html";
-                                    });
+                                Swal.fire(
+                                    "success",
+                                    "Equipe criada!",
+                                    "Sua equipe foi criada com sucesso",
+                                    1500,
+                                    false,
+                                ).then(() => {
+                                    localStorage.setItem("equipeRecente", JSON.stringify({
+                                        nomeEquipe: nomeEquipe,
+                                        nomeLider: nomeLider,
+                                        emails: emailsPorEquipe
+
+                                    }));
+                                    console.log("Dados da equipe armazenados:", localStorage.getItem("equipeRecente"));
+                                    window.location.href =
+                                        "telaInicialEquipe.html";
+                                });
                             }
                         });
                         document.getElementById("nome-equipe").value = "";
                         document.getElementById("lider").value = "";
                         listaPessoas.forEach(item => item.remove());
+
+                        let imagem = document.createElement('img');
+                        imagem.src = '../CSS/imagens/marca-retangular-x.png'
+                        imagem.className = 'btn-apagar-pessoa';
+                        imagem.addEventListener('click', function () {
+                            pessoa.remove();
+                        });
                     } else {
                         Swal.fire({
                             icon: "error",
@@ -508,8 +584,6 @@
             console.log(nomesEquipesCadastradas);
             return true;
         }
-
-        validarFormulario();
 
         function apagar(event) {
             event.preventDefault();

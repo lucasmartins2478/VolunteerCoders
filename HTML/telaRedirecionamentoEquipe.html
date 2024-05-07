@@ -236,7 +236,7 @@
             <div class="button-cadastro-problema"></div>
         </div>
         <div class="conteudo-tela">
-        <div id="side-bar" class="side-bar-aluno">
+            <div id="side-bar" class="side-bar-aluno">
                 <div id="content-items">
                     <div class="user" id="user-aluno">
                         <img src="../CSS/imagens/usuario-de-perfil.png" alt="Avatar" />
@@ -291,48 +291,42 @@
                 </div>
             </div>
 
-        <div class="equipes-cadastradas">
-            <div class="texto-explicacao">
-                Clique no X e explore os problemas das ONG's
-            </div>
-            <div class="card-equipe" id="card-equipe">
-                <div class="card-conteudo">
-                    <div class="img-etc">
-                        <div class="congrats">
-                            <p>Parabéns! Agora você tem um time.</p>
-                            <p>
-                                Comece a explorar as possibilidades e
-                                ajude uma ONG.
-                            </p>
+            <div class="equipes-cadastradas">
+                <div class="card-equipe" id="card-equipe">
+                    <div class="card-conteudo">
+                        <div class="img-etc">
+                            <div class="congrats">
+                                <p>Parabéns! Agora você tem um time.</p>
+                                <p>
+                                    Comece a explorar as possibilidades e
+                                    ajude uma ONG.
+                                </p>
+                            </div>
+                            <img class="group" src="../CSS/imagens/Group discussion.gif" alt="" />
                         </div>
-                        <img class="group" src="../CSS/imagens/Group discussion.gif" alt="" />
-                    </div>
 
-                    <div class="equipe-info">
-                        <button class="x" onclick="fecharEquipe()">
-                            X
-                        </button>
-                        <div class="equipe-info-conteudo">
-                            <h2 class="minha-equipe">Minha Equipe</h2>
+                        <div class="equipe-info">
+                            <div class="equipe-info-conteudo">
+                                <h2 class="minha-equipe">Minha Equipe</h2>
 
-                            <div class="nome-equipe">
-                                <span id="nome-equipe">Nome da Equipe:</span>
-                                <p> </p>
-                            </div>
+                                <div class="nome-equipe">
+                                    <span id="nome-equipe">Nome da Equipe:</span>
+                                    <p> </p>
+                                </div>
 
-                            <div class="nome-lider">
-                                <span id="nome-lider">Líder da Equipe:</span>
-                                <p></p>
-                            </div>
+                                <div class="nome-lider">
+                                    <span id="nome-lider">Líder da Equipe:</span>
+                                    <p></p>
+                                </div>
 
-                            <div class="tudo-de-membros">
+                                <div class="tudo-de-membros">
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
     <script>
@@ -375,7 +369,6 @@
             if (equipeRecente) {
                 document.querySelector(".nome-equipe p").textContent = equipeRecente.nomeEquipe;
                 document.querySelector(".nome-lider p").value = nomeLider;
-                console.log(nomeLider)
 
                 let tudoDeMembros = document.querySelector('.tudo-de-membros');
 
@@ -400,8 +393,6 @@
                     ];
 
                     let indiceAleatorio = Math.floor(Math.random() * imagens.length);
-
-                    // Obtendo o link da imagem correspondente ao índice aleatório
                     let src = imagens[indiceAleatorio];
 
                     imagens.forEach(function (src) {
@@ -437,15 +428,8 @@
             }
         });
 
-        function fecharEquipe() {
-            var equipeCadastrada = document.querySelector(
-                ".equipes-cadastradas"
-            );
-            equipeCadastrada.style.display = "none";
-            window.location.href = "../HTML/homeAluno.html";
-        }
         function redirecionarParaMinhaEquipe() {
-            window.location.href = "../HTML/telaInicialEquipe.html";
+            window.location.href = "../HTML/telaRedirecionamentoEquipe.html";
         }
         function redirecionarParaHome() {
             window.location.href = "../HTML/homeAluno.html";
