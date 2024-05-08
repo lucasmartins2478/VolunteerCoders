@@ -182,6 +182,7 @@
         .membro-img img {
             max-width: 100%;
             border-radius: 20px;
+            padding: 3px;
         }
 
         .membro-infos {
@@ -226,7 +227,6 @@
         .equipe-info .x:hover {
             background-color: #eaf4ff;
         }
-
     </style>
 </head>
 
@@ -369,6 +369,7 @@
             if (equipeRecente) {
                 document.querySelector(".nome-equipe p").textContent = equipeRecente.nomeEquipe;
                 document.querySelector(".nome-lider p").value = nomeLider;
+                console.log(nomeLider)
 
                 let tudoDeMembros = document.querySelector('.tudo-de-membros');
 
@@ -378,36 +379,35 @@
                 let equipeInfoDiv = document.querySelector('.membros');
                 // equipeInfoDiv.innerHTML = '';
 
+                let span = document.createElement('span');
+                span.classList.add('participantes');
+                span.textContent = "Participantes:";
+                membrosDiv.appendChild(span);
+
+                let imagens = [
+                    '../CSS/imagens/menina.png',
+                    '../CSS/imagens/homem.png',
+                    '../CSS/imagens/menina2.png',
+                    '../CSS/imagens/homem2.png'
+                ];
+
+                let indiceAleatorio = Math.floor(Math.random() * imagens.length);
+                let src = imagens[indiceAleatorio];
+
+                imagens.forEach(function (src) {
+                    let membroImg = document.createElement('div');
+                    membroImg.classList.add('membro-img');
+
+                    let img = document.createElement('img');
+                    img.classList.add('membro-img');
+                    img.setAttribute('src', src);
+
+                    membroImg.appendChild(img);
+                    membrosDiv.appendChild(membroImg);
+
+                });
+
                 equipeRecente.emails.forEach(function (email) {
-                    let span = document.createElement('span');
-                    span.classList.add('participantes');
-                    span.textContent = "Participantes:";
-
-                    membrosDiv.appendChild(span);
-
-                    let imagens = [
-                        '../CSS/imagens/menina.png',
-                        '../CSS/imagens/homem.png',
-                        '../CSS/imagens/menina2.png',
-                        '../CSS/imagens/homem2.png'
-                    ];
-
-                    let indiceAleatorio = Math.floor(Math.random() * imagens.length);
-                    let src = imagens[indiceAleatorio];
-
-                    imagens.forEach(function (src) {
-                        let membroImg = document.createElement('div');
-                        membroImg.classList.add('membro-img');
-                        let img = document.createElement('img');
-                        img.classList.add('membro-img');
-                        img.setAttribute('src', src);
-
-                        membroImg.appendChild(img);
-
-                        membrosDiv.appendChild(membroImg);
-
-                    });
-
                     let membroEquipe = document.createElement('div');
                     membroEquipe.classList.add('membro');
 
@@ -416,7 +416,6 @@
 
                     let membroEmailP = document.createElement('p');
                     membroEmailP.className = 'membro-infos-p';
-
                     membroEmailP.textContent = email;
 
                     membroInfosDiv.appendChild(membroEmailP);
