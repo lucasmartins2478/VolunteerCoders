@@ -337,7 +337,7 @@
     </div>
     <script>
         var nomeLider = localStorage.getItem("nome");
-        document.querySelector(".nome-lider p").value = nomeLider;
+        // document.querySelector(".nome-lider p").value = nomeLider;
         console.log(nomeLider)
 
         document
@@ -374,7 +374,7 @@
 
             if (equipeRecente) {
                 document.querySelector(".nome-equipe p").textContent = equipeRecente.nomeEquipe;
-                document.querySelector(".nome-lider p").value = nomeLider;
+                document.querySelector(".nome-lider p").textContent = nomeLider;
                 console.log(nomeLider)
 
                 let tudoDeMembros = document.querySelector('.tudo-de-membros');
