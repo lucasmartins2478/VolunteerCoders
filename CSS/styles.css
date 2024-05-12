@@ -601,7 +601,7 @@ input[type="number"] {
 }
 
 .sobre {
-    width: 100%;
+    width: 99%;
 }
 
 .sobre textarea {
@@ -650,7 +650,7 @@ input[type="number"] {
 #body-problema {
     padding-top: 0;
     width: 100%;
-    height: 120vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -798,7 +798,7 @@ textarea {
     border-radius: 15px;
     color: #fff;
     background-color: #1166ca;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .btn-cadastrar-problema:hover {

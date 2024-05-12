@@ -33,6 +33,63 @@
             box-shadow: 1px 1px 10px #0200001c;
             width: 100%;
         }
+
+        .imagem {
+            width: 330px;
+            margin-left: 40px;
+            border-radius: 16px;
+        }
+        .imagem #imagem {
+            position: relative;
+            height: 58%;
+            width: 94%;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+            margin-right: -40px;
+        }
+
+        .imagem img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #preview-imagem {
+            display: none;
+            position: relative;
+            margin-top: -267px;
+            height: 58%;
+            width: 94%;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-right: 2px;
+        }
+
+        .btn-trocar-imagem {
+            width: 100px;
+            margin-left: 210px;
+            margin-top: -26px;
+            margin-bottom: 3px;
+            background-color: #4e81b4;
+            border-radius: 16px;
+            color: white;
+            border: #4e81b4;
+            padding: 2px;
+        }
+
+        .imagem-infos {
+            display: flex;
+            flex-direction: row;
+            margin-top: 1rem;
+        }
+
+        #labelImagem {
+            margin-top: -10px;
+            margin-left: 20px;
+        }
     </style>
 
     <body id="body-cadastro">
@@ -71,7 +128,7 @@
                                     <option value="Clima">Clima</option>
                                     <option value="Animais">Animais</option>
                                     <option value="natureza">Natureza</option>
-                                    <option value="eduacacao">Eduacação</option>
+                                    <option value="eduacacao">Educação</option>
                                     <option value="pobreza">Pobreza</option>
                                 </select>
                             </div>
@@ -156,17 +213,28 @@
                             <textarea id="sobre" name="sobre"></textarea>
                         </div>
                     </div>
-                    <div class="imagem-ong">
-                        <label for="imagem-ong">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Imagem
-                            ilustrativa</label
-                        >
-                        <input
-                            type="file"
-                            name="imagem-ong"
-                            id="imagem-ong"
-                            accept="image/*"
-                        />
+                    <div class="imagem-infos">
+                        <div class="imagem">
+                            <label id="labelImagem" for="imagem"
+                                >Imagem ilustrativa</label
+                            >
+                            <button class="btn-trocar-imagem">
+                                Trocar Imagem
+                            </button>
+                            <input
+                                type="file"
+                                name="imagem"
+                                id="imagem"
+                                accept="image/*"
+                                onchange="exibirPreviewImagem(event)"
+                            />
+                            <img
+                                id="preview-imagem"
+                                src="#"
+                                alt="Imagem ilustrativa"
+                                style="display: none"
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -446,6 +514,32 @@
                     });
                 });
             });
+
+            function exibirPreviewImagem(event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function (event) {
+                    const imageData = event.target.result;
+                    localStorage.setItem("imagem64", imageData);
+                    document.getElementById("preview-imagem").src =
+                        event.target.result;
+                    document.getElementById("preview-imagem").style.display =
+                        "block";
+                };
+
+                reader.readAsDataURL(file);
+            }
+
+            document
+                .querySelector(".btn-trocar-imagem")
+                .addEventListener("click", function () {
+                    document.getElementById("imagem").value = "";
+                    document.getElementById("preview-imagem").src = "#";
+                    document.getElementById("preview-imagem").style.display =
+                        "none";
+                    localStorage.removeItem("imagem64");
+                });
         </script>
     </body>
 </html>

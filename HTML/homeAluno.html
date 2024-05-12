@@ -328,19 +328,19 @@
                         const newCard = document.createElement("div");
                         newCard.classList.add("card");
                         newCard.innerHTML = `
-                    <div>
-                        <div class="titulo-card">
-                            <h4>${problema.titulo}</h4>
-                            
+                        <div>
+                            <div class="titulo-card">
+                                <h4>${problema.titulo}</h4>
+
+                            </div>
+                            <p><b>Segmento:</b> ${problema.segmento}</p>
+                            <p><b>Descrição</b>:</p>
+                            <p>${problema.descricao}</p>
                         </div>
-                        <p><b>Segmento:</b> ${problema.segmento}</p>
-                        <p><b>Descrição</b>:</p>
-                        <p>${problema.descricao}</p>
-                    </div>
-                    <button class="btn-detalhes"onclick='mostrarDetalhes("${problema.titulo}", "${problema.segmento}", "${problema.descricao}")'>
-                        Detalhes
-                    </button>
-                `;
+                        <button class="btn-detalhes"onclick='mostrarDetalhes("${problema.titulo}", "${problema.segmento}", "${problema.descricao}")'>
+                            Detalhes
+                        </button>
+                    `;
                         problemContainer.appendChild(newCard);
                     }
                 });
@@ -395,33 +395,37 @@
                         document.getElementById("detalhes-container");
 
                     const imagemBase64 = localStorage.getItem("imagem");
+                    const imagem64 = localStorage.getItem("imagem");
 
                     detalhesContainer.innerHTML = `
-            <div class="detalhes">
-                <h2>Detalhes do Problema</h2>
-                <p><b>Título:</b> ${titulo}</p>
-                <p><b>Segmento:</b> ${segmento}</p>
-                <p><b>Descrição:</b> <p>
-                <p class="descricao">${descricaoProblema}</p>
-                <br>
-                <div class="imagem">
-                    <img src="${imagemBase64}" alt="Imagem ilustrativa">
+                <div class="detalhes">
+                    <h2>Detalhes do Problema</h2>
+                    <p><b>Título:</b> ${titulo}</p>
+                    <p><b>Segmento:</b> ${segmento}</p>
+                    <p><b>Descrição:</b> <p>
+                    <p class="descricao">${descricaoProblema}</p>
+                    <br>
+                    <div class="imagem">
+                        <img src="${imagemBase64}" alt="Imagem ilustrativa">
+                    </div>
+                    <br>
+                    <h2>Detalhes da ONG</h2>
+                    <div class="imagem">
+                        <img src="${imagem64}" alt="Imagem ilustrativa">
+                    </div>
+                    <p><b>Nome:</b> ${nome}</p>
+                    <p><b>Descrição:</b> ${sobre}</p>
+                    <p><b>Endereço:</b> ${cidade}</p>
+                    <br>
+                    <p>Contato:</p>
+                    <p><b>Telefone:</b> ${telefone}</p>
+                    <p><b>E-mail:</b> ${email}</p>
+                    <p><b>Site:</b> ${url}</p>
+                    <div class="button-detalhe">
+                        <button onclick="fecharDetalhes()">Selecionar</button>
+                    </div>
                 </div>
-                <br>
-                <h2>Detalhes da ONG</h2>
-                <p><b>Nome:</b> ${nome}</p>
-                <p><b>Descrição:</b> ${sobre}</p>
-                <p><b>Endereço:</b> ${cidade}</p>
-                <br>
-                <p>Contato:</p>
-                <p><b>Telefone:</b> ${telefone}</p>
-                <p><b>E-mail:</b> ${email}</p>
-                <p><b>Site:</b> ${url}</p>
-                <div class="button-detalhe">
-                    <button onclick="fecharDetalhes()">Selecionar</button>
-                </div>
-            </div>
-        `;
+            `;
                 } else {
                     Swal.fire({
                         icon: "error",
