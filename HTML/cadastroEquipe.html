@@ -546,13 +546,13 @@
                             cancelButtonText: "Cancelar",
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                Swal.fire(
-                                    "success",
-                                    "Equipe criada!",
-                                    "Sua equipe foi criada com sucesso",
-                                    1500,
-                                    false,
-                                ).then(() => {
+                                Swal.fire({
+                                    icon:"success",
+                                    title: "Equipe criada!",
+                                    text: "Sua equipe foi criada com sucesso",
+                                    delay: 1500,
+                                    showCancelButton : false,
+                                }).then(() => {
                                     localStorage.setItem("equipeRecente", JSON.stringify({
                                         nomeEquipe: nomeEquipe,
                                         nomeLider: nomeLider,
