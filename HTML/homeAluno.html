@@ -62,6 +62,12 @@
                 position: static;
                 top: 590px;
             }
+            .btn-fechar {
+                color: #fff;
+                font-size: 17px;
+                position: static;
+                top: 590px;
+            }
 
             .detalhes .button-detalhe {
                 display: flex;
@@ -69,8 +75,30 @@
                 justify-content: center;
                 position: absolute;
                 bottom: 20px;
-                left: 50%;
+                left: 40%;
                 transform: translateX(-50%);
+            }
+
+            .detalhes .button-fechar {
+                display: flex;
+                align-items: end;
+                justify-content: center;
+                position: absolute;
+                bottom: 20px;
+                left: 40%;
+                transform: translateX(-50%);
+            }
+
+            .detalhes .button-fechar button {
+                background-color: #1166ca;
+                width: 100px;
+                height: 30px;
+                border-radius: 16px;
+                border: solid 0px;
+                font-size: 18px;
+                color: #fff;
+                margin-top: -150px;
+                margin-left: 300px;
             }
 
             .detalhes .button-detalhe button {
@@ -155,22 +183,6 @@
                 align-items: center;
             }
 
-            /* .nav-bar {
-                    background-color: #fff;
-                    height: 10vh;
-                    width: 100vw;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                }
-
-                .nav-bar .nome-pagina {
-                    margin-left: -500px;
-                    font-family: Impact, Haettenschweiler, "Arial Narrow Bold",
-                        sans-serif;
-                } */
-
             .detalhes img {
                 max-width: 100px;
                 max-height: 100px;
@@ -178,6 +190,58 @@
                 height: 100px;
                 margin: 0 auto;
                 display: block;
+            }
+            .projetos-andamento {
+                margin-top: 2rem;
+            }
+
+            .card-replicado .titulo-card {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .card-replicado h4 {
+                font-size: 18px;
+                margin-top: 20px;
+                margin-left: 40%;
+            }
+
+            .card-replicado p {
+                margin-top: 20px;
+                font-size: 14px;
+                margin-left: 38%;
+            }
+
+            .card-replicado {
+                background-color: #fff;
+                border-radius: 5px;
+                margin-top: 1rem;
+                width: 400px;
+                height: 13rem;
+                display: flex;
+                justify-self: center;
+                padding: 19px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .card-replicado .btn-detalhes {
+                height: 40px;
+                width: 360px;
+                margin-top: 8rem;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                margin-left: -390px;
+            }
+
+            .card-replicado div {
+                display: flex;
+                flex-direction: column;
+                width: 400px;
+            }
+            .card-replicado .btn-detalhes::before {
+                visibility: 0%;
             }
         </style>
     </head>
@@ -283,7 +347,10 @@
 
                     <div class="projetos-andamento">
                         <h3 class="title-projeto">Projetos em Andamento</h3>
-                        <div class="card-projeto" id="card-projeto"></div>
+                        <div
+                            class="card-projeto"
+                            id="card-projeto-container"
+                        ></div>
                     </div>
                 </div>
             </div>
@@ -336,7 +403,7 @@
                             <p><b>Segmento:</b> ${problema.segmento}</p>
                             <p><b>Descrição</b>:</p>
                             <p>${problema.descricao}</p>
-                        </div>
+                            </div>
                         <button class="btn-detalhes"onclick='mostrarDetalhes("${problema.titulo}", "${problema.segmento}", "${problema.descricao}")'>
                             Detalhes
                         </button>
@@ -398,34 +465,37 @@
                     const imagem64 = localStorage.getItem("imagem");
 
                     detalhesContainer.innerHTML = `
-                <div class="detalhes">
-                    <h2>Detalhes do Problema</h2>
-                    <p><b>Título:</b> ${titulo}</p>
-                    <p><b>Segmento:</b> ${segmento}</p>
-                    <p><b>Descrição:</b> <p>
-                    <p class="descricao">${descricaoProblema}</p>
-                    <br>
-                    <div class="imagem">
-                        <img src="${imagemBase64}" alt="Imagem ilustrativa">
+                    <div class="detalhes">
+                        <h2>Detalhes do Problema</h2>
+                        <p><b>Título:</b> ${titulo}</p>
+                        <p><b>Segmento:</b> ${segmento}</p>
+                        <p><b>Descrição:</b> <p>
+                        <p class="descricao">${descricaoProblema}</p>
+                        <br>
+                        <div class="imagem">
+                            <img src="${imagemBase64}" alt="Imagem ilustrativa">
+                        </div>
+                        <br>
+                        <h2>Detalhes da ONG</h2>
+                        <div class="imagem">
+                            <img src="${imagem64}" alt="Imagem ilustrativa">
+                        </div>
+                        <p><b>Nome:</b> ${nome}</p>
+                        <p><b>Descrição:</b> ${sobre}</p>
+                        <p><b>Endereço:</b> ${cidade}</p>
+                        <br>
+                        <p>Contato:</p>
+                        <p><b>Telefone:</b> ${telefone}</p>
+                        <p><b>E-mail:</b> ${email}</p>
+                        <p><b>Site:</b> ${url}</p>
+                        <div class="button-detalhe">
+                        <button onclick="selecionarProblema('${titulo}', '${nome}')">Selecionar</button>
                     </div>
-                    <br>
-                    <h2>Detalhes da ONG</h2>
-                    <div class="imagem">
-                        <img src="${imagem64}" alt="Imagem ilustrativa">
+                        <div class="button-fechar">
+                            <button onclick="fecharDetalhes()">Fechar</button>
+                        </div>
                     </div>
-                    <p><b>Nome:</b> ${nome}</p>
-                    <p><b>Descrição:</b> ${sobre}</p>
-                    <p><b>Endereço:</b> ${cidade}</p>
-                    <br>
-                    <p>Contato:</p>
-                    <p><b>Telefone:</b> ${telefone}</p>
-                    <p><b>E-mail:</b> ${email}</p>
-                    <p><b>Site:</b> ${url}</p>
-                    <div class="button-detalhe">
-                        <button onclick="fecharDetalhes()">Selecionar</button>
-                    </div>
-                </div>
-            `;
+                `;
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -440,25 +510,47 @@
             });
 
             function fecharDetalhes() {
+                let problemaSelecionado = false;
+
+                if (problemaSelecionado) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Atenção!",
+                        text: "Você já selecionou um problema",
+                        showCancelButton: true,
+                        cancelButtonText: "Não",
+                    });
+                }
                 document.getElementById("detalhes-container").innerHTML = "";
                 document.body.classList.remove("detalhes-open");
+                document.querySelector(".overlay").style.display = "none";
             }
 
-            // function verificarEquipe() {
-            //     let equipeRecente = JSON.parse(
-            //         localStorage.getItem("equipeRecente")
-            //     );
-            //     return equipeRecente !== null && equipeRecente !== undefined;
-            // }
+            function selecionarProblema(tituloProblema, nomeONG) {
+                const detalhesProblema = document.querySelector(".detalhes");
+                const dadosONG = JSON.parse(localStorage.getItem("dadosONG"));
 
-            // function redirecionarParaHome() {
-            //     if (verificarEquipe()) {
-            //         window.location.href =
-            //             "../HTML/antes-telaInicialAluno.html"; // Redirecionar para a tela da equipe
-            //     } else {
-            //         window.location.href = "../HTML/cadastroEquipe.html"; // Redirecionar para a tela de aluno sem equipe
-            //     }
-            // }
+                const cardProjetoContainer = document.getElementById(
+                    "card-projeto-container"
+                );
+                const novoCardProjeto = document.createElement("div");
+                novoCardProjeto.classList.add("card-replicado");
+                document.querySelector(".overlay").style.display = "none";
+
+                novoCardProjeto.innerHTML = `
+                <div>
+                    <div class="titulo-card">
+                        <h4>${tituloProblema}</h4>
+                    </div>
+                    <p><b>ONG:</b> ${nomeONG}</p>
+                </div>
+                <button class="btn-detalhes" onclick="mostrarDetalhes('${tituloProblema}', '${nomeONG}')">Ver</button>
+            `;
+
+                cardProjetoContainer.appendChild(novoCardProjeto);
+
+                fecharDetalhes();
+            }
         </script>
     </body>
 </html>
