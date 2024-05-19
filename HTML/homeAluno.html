@@ -203,13 +203,13 @@
             .card-replicado h4 {
                 font-size: 18px;
                 margin-top: 20px;
-                margin-left: 40%;
+                text-align: center;
             }
 
             .card-replicado p {
                 margin-top: 20px;
                 font-size: 14px;
-                margin-left: 38%;
+                text-align: center;
             }
 
             .card-replicado {
@@ -225,32 +225,199 @@
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
 
-            .card-replicado .btn-detalhes {
+            .card-replicado .btn-pedir-aceite {
                 height: 40px;
                 width: 360px;
                 margin-top: 8rem;
                 align-items: center;
                 justify-content: center;
                 display: flex;
-                margin-left: -390px;
+                margin-left: -385px;
+            }
+
+            .btn-pedir-aceite {
+                color: #fff;
+                font-size: 17px;
+                position: static;
+                top: 590px;
+            }
+
+            .btn-pedir-aceite {
+                width: 100%;
+                border: none;
+                background-color: #1166ca;
+                padding: 0.62rem;
+                border-radius: 13px;
+                cursor: pointer;
+                justify-self: end;
             }
 
             .card-replicado div {
                 display: flex;
                 flex-direction: column;
                 width: 400px;
+                margin-left: -10px;
             }
             .card-replicado .btn-detalhes::before {
                 visibility: 0%;
+            }
+
+            .segundo-processo {
+                display: flex;
+            }
+
+            .aguardando-resposta,
+            .projetos-andamento {
+                flex: 1;
+                width: 50%;
+            }
+            .aguardando-resposta {
+                margin-top: 35px;
+            }
+
+            .projetos-andamento {
+                margin-top: 20px;
+            }
+
+            .card-replicado .status {
+                margin-left: 360px;
+                margin-top: -10px;
+                position: relative;
+            }
+
+            .card-replicado .status-message {
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: #fff;
+                padding: 5px;
+                border-radius: 5px;
+                bottom: calc(100% + 10px);
+                right: 0;
+                font-size: 14px;
+                white-space: nowrap;
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .btn-chat {
+                border: none;
+                background-color: #1166ca;
+                padding: 0.62rem;
+                border-radius: 13px;
+                cursor: pointer;
+                justify-self: end;
+                color: #fff;
+                font-size: 17px;
+                position: static;
+                top: 600px;
+                height: 40px;
+            }
+
+            .card-replicado .btn-chat {
+                height: 40px;
+                width: 90px;
+                margin-top: 8rem;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                margin-left: -220px;
+            }
+
+            .offcanvas-title {
+                position: relative;
+                text-align: center;
+                top: 8px;
+                font-size: 30px;
+                font-family: Impact, Haettenschweiler, "Arial Narrow Bold",
+                    sans-serif;
+                font-weight: 200;
+                margin-left: -10px;
+            }
+
+            .offcanvas-header {
+                width: 399px;
+                height: 50px;
+                background-color: #1166ca;
+                border-radius: 12px 12px 0 0;
+            }
+
+            .close-icon {
+                width: 40px;
+                height: 40px;
+                margin-top: -90px;
+                cursor: pointer;
+                position: relative;
+                top: 0;
+                margin-left: 20px;
+                fill: #c1dcfa;
+                margin-bottom: 3px;
+            }
+
+            .offcanvas-input {
+                background-color: #eaf4ff;
+                margin-top: 370px;
+                width: 340px;
+                height: 40px;
+                margin-left: 30px;
+                border: solid 1px #c1dcfa;
+                border-radius: 12px;
+                padding: 5px;
+                box-sizing: border-box;
+                padding-right: 40px;
+                background-repeat: no-repeat;
+                background-position: right 10px center;
+            }
+
+            .input-container {
+                display: flex;
+                align-items: center;
+            }
+
+            .header-title {
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                font-weight: bold;
+                position: relative;
+            }
+
+            .header-title::after {
+                content: "";
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="%23c1dcfa" class="bi bi-chat-square-text-fill" viewBox="0 0 16 16"><path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z"/></svg>');
+                background-repeat: no-repeat;
+                display: block;
+                width: 25%;
+                height: 25px;
+                margin-top: -75px;
+                margin-left: 190px;
+            }
+            .offcanvas {
+                position: fixed;
+                z-index: 1000;
+            }
+            .send-button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+
+            .bi-send-fill {
+                color: #1166ca;
+                transition: color 0.3s ease;
+                margin-left: 165px;
+                margin-bottom: 150px;
+                margin-top: -27px;
+            }
+
+            .send-button:hover .send-icon {
+                color: #004080;
             }
         </style>
     </head>
 
     <body>
         <div class="container-tela-ong">
-            <div class="nav-bar">
-                <!-- <div class="nome-pagina">home</div> -->
-            </div>
+            <div class="nav-bar"></div>
             <div class="conteudo-tela">
                 <div id="side-bar">
                     <div id="content-items">
@@ -344,19 +511,33 @@
                             <div class="card-problema" id="card-problema"></div>
                         </div>
                     </div>
-
-                    <div class="projetos-andamento">
-                        <h3 class="title-projeto">Projetos em Andamento</h3>
+                    <div class="segundo-processo">
                         <div
-                            class="card-projeto"
-                            id="card-projeto-container"
-                        ></div>
+                            class="aguardando-resposta"
+                            id="aguardando-resposta"
+                        >
+                            <h3 class="title-projeto">
+                                Aguardando resposta da ONG
+                            </h3>
+                            <div
+                                class="card-projeto"
+                                id="card-projeto-container"
+                            ></div>
+                        </div>
+                        <div class="projetos-andamento">
+                            <h3 class="title-projeto">Projeto em andamento</h3>
+                            <div
+                                class="card-projeto"
+                                id="card-projeto-container"
+                            ></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="overlay"></div>
         <div id="detalhes-container" class="detalhes-container"></div>
+
         <script>
             document
                 .getElementById("btn-open-side-bar")
@@ -493,7 +674,7 @@
                     </div>
                         <div class="button-fechar">
                             <button onclick="fecharDetalhes()">Fechar</button>
-                        </div>
+                         </div>
                     </div>
                 `;
                 } else {
@@ -510,17 +691,20 @@
             });
 
             function fecharDetalhes() {
-                let problemaSelecionado = false;
+                // let problemaSelecionado = true;
 
-                if (problemaSelecionado) {
-                    Swal.fire({
-                        icon: "warning",
-                        title: "Atenção!",
-                        text: "Você já selecionou um problema",
-                        showCancelButton: true,
-                        cancelButtonText: "Não",
-                    });
-                }
+                // if (problemaSelecionado) {
+                //     Swal.fire({
+                //         icon: "warning",
+                //         title: "Atenção!",
+                //         text: "Você já selecionou um problema",
+                //         showCancelButton: true,
+                //         cancelButtonText: "Não",
+
+                //     });
+
+                // }
+
                 document.getElementById("detalhes-container").innerHTML = "";
                 document.body.classList.remove("detalhes-open");
                 document.querySelector(".overlay").style.display = "none";
@@ -544,12 +728,254 @@
                     </div>
                     <p><b>ONG:</b> ${nomeONG}</p>
                 </div>
-                <button class="btn-detalhes" onclick="mostrarDetalhes('${tituloProblema}', '${nomeONG}')">Ver</button>
-            `;
+                <button class="btn-pedir-aceite">Enviar solicitação de aceite</button>`;
 
                 cardProjetoContainer.appendChild(novoCardProjeto);
 
                 fecharDetalhes();
+                const btnDetalhes = document.querySelector(".btn-detalhes");
+                btnDetalhes.disabled = true;
+                btnDetalhes.style.backgroundColor = "#808080";
+                btnDetalhes.style.color = "#ffffff";
+
+                const btnEnviarAceite =
+                    novoCardProjeto.querySelector(".btn-pedir-aceite");
+
+                btnEnviarAceite.addEventListener("click", function () {
+                    Swal.fire({
+                        title: "Digite a senha definida para equipe:",
+                        input: "password",
+                        inputAttributes: {
+                            autocapitalize: "off",
+                        },
+                        showCancelButton: true,
+                        confirmButtonText: "Confirmar",
+                        cancelButtonText: "Cancelar",
+                        showLoaderOnConfirm: true,
+                        preConfirm: (password) => {
+                            return new Promise((resolve) => {
+                                setTimeout(() => {
+                                    if (password === "s") {
+                                        resolve();
+                                    } else {
+                                        Swal.showValidationMessage(
+                                            "Senha incorreta!"
+                                        );
+                                    }
+                                }, 1000);
+                            });
+                        },
+                        allowOutsideClick: () => !Swal.isLoading(),
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const statusImage = document.createElement("img");
+                            statusImage.src = "../CSS/imagens/circulo.png";
+                            statusImage.alt = "amarelo";
+                            statusImage.classList.add("status");
+
+                            const statusMessage = document.createElement("div");
+                            statusMessage.classList.add("status-message");
+                            statusMessage.textContent = "aguardando resposta";
+                            statusMessage.style.visibility = "hidden";
+                            statusMessage.style.opacity = "0";
+
+                            novoCardProjeto
+                                .querySelector("div")
+                                .appendChild(statusImage);
+                            novoCardProjeto
+                                .querySelector("div")
+                                .appendChild(statusMessage);
+
+                            statusImage.addEventListener(
+                                "mouseout",
+                                function () {
+                                    this.nextElementSibling.style.visibility =
+                                        "hidden";
+                                    this.nextElementSibling.style.opacity = "0";
+                                }
+                            );
+
+                            statusImage.style.position = "absolute";
+                            statusImage.style.top = "400";
+                            statusImage.style.right = "500";
+                            statusImage.style.width = "20px";
+
+                            btnEnviarAceite.classList.add(
+                                "solicitacao-enviada"
+                            );
+                            btnEnviarAceite.disabled = true;
+                            btnEnviarAceite.style.backgroundColor = "#808080";
+                            btnEnviarAceite.style.color = "#ffffff";
+                            btnEnviarAceite.style.width = "230px";
+                            btnEnviarAceite.style.position = "relative";
+                            btnEnviarAceite.style.left = "120px";
+                            btnEnviarAceite.style.top = "0";
+
+                            const btnChat = document.createElement("button");
+                            btnChat.textContent = "Chat";
+                            btnChat.classList.add("btn-chat");
+                            btnChat.addEventListener("click", function () {
+                                let overlay =
+                                    document.querySelector(".overlay");
+                                if (!overlay) {
+                                    overlay = document.createElement("div");
+                                    overlay.classList.add("overlay");
+                                    document.body.appendChild(overlay);
+                                }
+                                overlay.style.display = "block";
+                                const offcanvasDiv =
+                                    document.createElement("div");
+                                offcanvasDiv.classList.add(
+                                    "offcanvas",
+                                    "offcanvas-bottom"
+                                );
+                                offcanvasDiv.tabIndex = "-1";
+                                offcanvasDiv.id = "offcanvasBottom";
+
+                                offcanvasDiv.style.width = "400px";
+                                offcanvasDiv.style.height = "70%";
+                                offcanvasDiv.style.color = "white";
+                                offcanvasDiv.style.position = "fixed";
+                                offcanvasDiv.style.bottom = "10px";
+                                offcanvasDiv.style.right = "10px";
+                                offcanvasDiv.style.backgroundColor = "white";
+                                offcanvasDiv.style.borderRadius = "12px";
+                                offcanvasDiv.style.border = "solid 1px black";
+
+                                const offcanvasHeader =
+                                    document.createElement("div");
+                                offcanvasHeader.classList.add(
+                                    "offcanvas-header"
+                                );
+
+                                const headerTitle =
+                                    document.createElement("span");
+                                headerTitle.classList.add("header-title");
+                                headerTitle.textContent = "Chat";
+
+                                const offcanvasTitle =
+                                    document.createElement("h5");
+                                offcanvasTitle.classList.add("offcanvas-title");
+                                offcanvasTitle.textContent = "Chat";
+
+                                const closeButton =
+                                    document.createElement("button");
+                                closeButton.type = "button";
+                                closeButton.classList.add("btn-close");
+                                closeButton.dataset.bsDismiss = "offcanvas";
+                                closeButton.setAttribute("aria-label", "Close");
+
+                                offcanvasHeader.appendChild(offcanvasTitle);
+                                offcanvasHeader.appendChild(closeButton);
+
+                                const offcanvasBody =
+                                    document.createElement("div");
+                                offcanvasBody.classList.add(
+                                    "offcanvas-body",
+                                    "small"
+                                );
+                                const inputContainer =
+                                    document.createElement("div");
+                                inputContainer.classList.add("input-container");
+                                offcanvasBody.appendChild(inputContainer);
+
+                                const offcanvasInput =
+                                    document.createElement("input");
+                                offcanvasInput.type = "text";
+                                offcanvasInput.classList.add("offcanvas-input");
+                                offcanvasInput.placeholder =
+                                    "Digite uma mensagem";
+
+                                const sendButton =
+                                    document.createElement("button");
+                                sendButton.classList.add("send-button");
+
+                                const sendIcon = document.createElement("i");
+                                sendIcon.classList.add(
+                                    "bi",
+                                    "bi-send-fill",
+                                    "send-icon"
+                                );
+                                sendIcon.innerHTML = `
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+                                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                                </svg>`;
+                                sendButton.appendChild(sendIcon);
+
+                                sendButton.addEventListener(
+                                    "mouseover",
+                                    function () {
+                                        sendIcon.style.color = "#004080";
+                                    }
+                                );
+
+                                sendButton.addEventListener(
+                                    "mouseout",
+                                    function () {
+                                        sendIcon.style.color = "#1166ca";
+                                    }
+                                );
+
+                                const closeIcon = document.createElementNS(
+                                    "http://www.w3.org/2000/svg",
+                                    "svg"
+                                );
+                                closeIcon.setAttribute(
+                                    "xmlns",
+                                    "http://www.w3.org/2000/svg"
+                                );
+                                closeIcon.setAttribute("width", "16");
+                                closeIcon.setAttribute("height", "16");
+                                closeIcon.setAttribute("fill", "currentColor");
+                                closeIcon.setAttribute(
+                                    "class",
+                                    "bi bi-x close-icon"
+                                );
+                                closeIcon.setAttribute("viewBox", "0 0 16 16");
+                                closeIcon.innerHTML = `<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>`;
+                                closeIcon.addEventListener(
+                                    "click",
+                                    function () {
+                                        offcanvasDiv.remove();
+                                        overlay.style.display = "none";
+                                    }
+                                );
+
+                                offcanvasHeader.appendChild(closeIcon);
+                                offcanvasHeader.appendChild(headerTitle);
+                                offcanvasDiv.appendChild(offcanvasHeader);
+                                offcanvasBody.appendChild(offcanvasInput);
+                                offcanvasBody.appendChild(sendButton);
+                                const offcanvasFooter =
+                                    document.createElement("footer");
+                                offcanvasBody.classList.add("offcanvas-footer");
+
+                                offcanvasDiv.appendChild(offcanvasHeader);
+                                offcanvasDiv.appendChild(offcanvasBody);
+
+                                document.body.appendChild(offcanvasDiv);
+                            });
+
+                            btnEnviarAceite.parentNode.insertBefore(
+                                btnChat,
+                                btnEnviarAceite.nextSibling
+                            );
+
+                            Swal.fire({
+                                icon: "success",
+                                title: "Sucesso!",
+                                text: "Solicitação enviada para a ONG.",
+                            }).then(() => {
+                                const btnEnviarAceite =
+                                    novoCardProjeto.querySelector(
+                                        ".btn-pedir-aceite"
+                                    );
+                            });
+                        } else {
+                            processingIndicator.style.display = "none";
+                        }
+                    });
+                });
             }
         </script>
     </body>
