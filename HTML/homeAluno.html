@@ -505,7 +505,7 @@
                 <div class="conteudo">
                     <div class="problemas-cadastrados">
                         <h3 class="title-problema">
-                            Veja os problemas disponiveis:
+                            Veja os problemas disponíveis:
                         </h3>
                         <div class="scrollable">
                             <div class="card-problema" id="card-problema"></div>
@@ -691,20 +691,6 @@
             });
 
             function fecharDetalhes() {
-                // let problemaSelecionado = true;
-
-                // if (problemaSelecionado) {
-                //     Swal.fire({
-                //         icon: "warning",
-                //         title: "Atenção!",
-                //         text: "Você já selecionou um problema",
-                //         showCancelButton: true,
-                //         cancelButtonText: "Não",
-
-                //     });
-
-                // }
-
                 document.getElementById("detalhes-container").innerHTML = "";
                 document.body.classList.remove("detalhes-open");
                 document.querySelector(".overlay").style.display = "none";
@@ -731,12 +717,33 @@
                 <button class="btn-pedir-aceite">Enviar solicitação de aceite</button>`;
 
                 cardProjetoContainer.appendChild(novoCardProjeto);
-
                 fecharDetalhes();
-                const btnDetalhes = document.querySelector(".btn-detalhes");
-                btnDetalhes.disabled = true;
-                btnDetalhes.style.backgroundColor = "#808080";
-                btnDetalhes.style.color = "#ffffff";
+
+                document.querySelectorAll(".card").forEach((card) => {
+                    const btnDetalhes = card.querySelector(".btn-detalhes");
+                    let problemaSelecionado = false;
+
+                    btnDetalhes.addEventListener("click", function () {
+                        if (problemaSelecionado) {
+                            selecionarProblema();
+                            this.disabled = true;
+                            this.style.backgroundColor = "#808080";
+                            this.style.color = "#ffffff";
+                            problemaSelecionado = true;
+                        } else {
+                            Swal.fire({
+                                icon: "warning",
+                                title: "Atenção!",
+                                text: "Você já selecionou um problema",
+                                cancelButtonText: "OK",
+                            });
+                            this.style.backgroundColor = "#808080";
+                            this.style.color = "#ffffff";
+
+                            fecharDetalhes();
+                        }
+                    });
+                });
 
                 const btnEnviarAceite =
                     novoCardProjeto.querySelector(".btn-pedir-aceite");

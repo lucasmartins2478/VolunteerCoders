@@ -128,6 +128,292 @@
                 list-style: none;
                 margin-top: 45px;
             }
+
+            .segundo-processo {
+                display: flex;
+            }
+
+            .aguardando-resposta,
+            .projetos-andamento {
+                flex: 1;
+                width: 50%;
+            }
+            .aguardando-resposta {
+                margin-top: 35px;
+            }
+
+            .projetos-andamento {
+                margin-top: 20px;
+                border-left: solid 2px #bab8b2;
+                padding-left: 20px;
+            }
+
+            .card-replicado .titulo-card {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .card-replicado h4 {
+                font-size: 18px;
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .card-replicado p {
+                margin-top: 20px;
+                font-size: 14px;
+                text-align: center;
+            }
+
+            .card-replicado {
+                background-color: #fff;
+                border-radius: 5px;
+                margin-top: 1rem;
+                width: 400px;
+                height: 13rem;
+                display: flex;
+                justify-self: center;
+                padding: 19px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .card-replicado .btn-pedir-aceite {
+                height: 40px;
+                width: 360px;
+                margin-top: 8rem;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                margin-left: -385px;
+            }
+
+            .btn-pedir-aceite {
+                width: 100%;
+                border: none;
+                background-color: #1166ca;
+                padding: 0.62rem;
+                border-radius: 13px;
+                cursor: pointer;
+                justify-self: end;
+                color: #fff;
+                font-size: 17px;
+                position: static;
+                top: 590px;
+            }
+
+            .card-replicado div {
+                display: flex;
+                flex-direction: column;
+                width: 400px;
+                margin-left: -10px;
+            }
+            .card-replicado .btn-detalhes::before {
+                visibility: 0%;
+            }
+
+            .card-replicado .status {
+                margin-left: 360px;
+                margin-top: -10px;
+                position: relative;
+            }
+
+            .card-replicado .status-message {
+                position: absolute;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: #fff;
+                padding: 5px;
+                border-radius: 5px;
+                bottom: calc(100% + 10px);
+                right: 0;
+                font-size: 14px;
+                white-space: nowrap;
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            .btn-chat {
+                border: none;
+                background-color: #1166ca;
+                padding: 0.62rem;
+                border-radius: 13px;
+                cursor: pointer;
+                justify-self: end;
+                color: #fff;
+                font-size: 17px;
+                position: static;
+                top: 600px;
+                height: 40px;
+            }
+
+            .card-replicado .btn-chat {
+                height: 40px;
+                width: 120px;
+                margin-top: 8rem;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                margin-left: -240px;
+            }
+
+            .card-replicado .btn-aceite {
+                background-color: #ffffff;
+                max-width: 50px;
+                max-height: 50px;
+                border: #fff;
+                margin-top: 120px;
+                margin-left: -110px;
+            }
+
+            .card-replicado .btn-rejeite {
+                background-color: #fff;
+                border: #fff;
+                max-width: 50px;
+                max-height: 50px;
+                margin-top: 120px;
+                margin-left: -110px;
+            }
+
+            .offcanvas-title {
+                position: relative;
+                text-align: center;
+                top: 8px;
+                font-size: 30px;
+                font-family: Impact, Haettenschweiler, "Arial Narrow Bold",
+                    sans-serif;
+                font-weight: 200;
+                margin-left: -10px;
+            }
+
+            .offcanvas-header {
+                width: 399px;
+                height: 50px;
+                background-color: #1166ca;
+                border-radius: 12px 12px 0 0;
+            }
+
+            .close-icon {
+                width: 40px;
+                height: 40px;
+                margin-top: -90px;
+                cursor: pointer;
+                position: relative;
+                top: 0;
+                margin-left: 20px;
+                fill: #c1dcfa;
+                margin-bottom: 3px;
+            }
+
+            .offcanvas-input {
+                background-color: #eaf4ff;
+                margin-top: 370px;
+                width: 340px;
+                height: 40px;
+                margin-left: 30px;
+                border: solid 1px #c1dcfa;
+                border-radius: 12px;
+                padding: 5px;
+                box-sizing: border-box;
+                padding-right: 40px;
+                background-repeat: no-repeat;
+                background-position: right 10px center;
+            }
+
+            .input-container {
+                display: flex;
+                align-items: center;
+            }
+
+            .header-title {
+                display: flex;
+                align-items: center;
+                font-size: 18px;
+                font-weight: bold;
+                position: relative;
+            }
+
+            .header-title::after {
+                content: "";
+                background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="%23c1dcfa" class="bi bi-chat-square-text-fill" viewBox="0 0 16 16"><path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1z"/></svg>');
+                background-repeat: no-repeat;
+                display: block;
+                width: 25%;
+                height: 25px;
+                margin-top: -75px;
+                margin-left: 190px;
+            }
+            .offcanvas {
+                position: fixed;
+                z-index: 1000;
+            }
+            .send-button {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+            }
+
+            .bi-send-fill {
+                color: #1166ca;
+                transition: color 0.3s ease;
+                margin-left: 165px;
+                margin-bottom: 150px;
+                margin-top: -27px;
+            }
+
+            .send-button:hover .send-icon {
+                color: #004080;
+            }
+            .btn-chat {
+                border: none;
+                background-color: #1166ca;
+                padding: 0.62rem;
+                border-radius: 13px;
+                cursor: pointer;
+                justify-self: end;
+                color: #fff;
+                font-size: 17px;
+                position: static;
+                top: 600px;
+                height: 40px;
+            }
+
+            .btn-aceite {
+                width: 50px;
+                height: 50px;
+                background-image: url("../CSS/imagens/verifica.png");
+                background-repeat: no-repeat;
+                background-size: contain;
+                border: none;
+                cursor: pointer;
+            }
+
+            .btn-rejeite {
+                width: 50px;
+                height: 50px;
+                background-image: url("../CSS/imagens/cancelar.png");
+                background-repeat: no-repeat;
+                background-size: contain;
+                border: none;
+                cursor: pointer;
+            }
+
+            .btn-novo {
+                border: none;
+                background-color: #1166ca;
+                padding: 0.62rem;
+                border-radius: 13px;
+                cursor: pointer;
+                justify-self: end;
+                color: #fff;
+                font-size: 17px;
+                position: static;
+                margin-top: 128px;
+                height: 40px;
+                width: 250px;
+            }
+            .btn-novo button {
+                margin-left: 50px;
+            }
         </style>
     </head>
     <body>
@@ -198,16 +484,26 @@
                         <div class="scrollable">
                             <div class="card-problema" id="card-problema"></div>
                         </div>
-                        <!-- <img
-                            class="seta"
-                            src="../CSS/imagens/seta-direita.png"
-                            alt=""
-                        /> -->
                     </div>
 
-                    <div class="projetos-andamento">
-                        <h3 class="title-projeto">Projetos em Andamento</h3>
-                        <div class="card-projeto" id="card-projeto"></div>
+                    <div class="segundo-processo">
+                        <div
+                            class="aguardando-resposta"
+                            id="aguardando-resposta"
+                        >
+                            <h3 class="title-projeto">Aguardando aceite</h3>
+                            <div
+                                class="card-projeto"
+                                id="card-projeto-container"
+                            ></div>
+                        </div>
+                        <div class="projetos-andamento">
+                            <h3 class="title-projeto">Projetos em andamento</h3>
+                            <div
+                                class="card-projeto"
+                                id="card-projeto-container"
+                            ></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -252,15 +548,12 @@
                     cancelButtonText: "Não",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        // Remover o card do problema da tela
                         const card = event.target.closest(".card");
                         card.remove();
 
-                        // Recuperar todos os problemas cadastrados
                         let problemas =
                             JSON.parse(localStorage.getItem("problemas")) || [];
 
-                        // Marcar o problema como excluído
                         problemas.forEach((problema) => {
                             if (problema.titulo === titulo) {
                                 problema.excluido = true;
@@ -279,32 +572,29 @@
                 const problemContainer =
                     document.getElementById("card-problema");
 
-                // Recuperar todos os problemas cadastrados
                 let problemas =
                     JSON.parse(localStorage.getItem("problemas")) || [];
 
-                // Para cada problema, criar e adicionar um card ao container de problemas
                 problemas.forEach(function (problema) {
-                    // Verificar se o problema não está excluído antes de criar o card
                     if (!problema.excluido) {
                         const newCard = document.createElement("div");
                         newCard.classList.add("card");
                         newCard.innerHTML = `
-                    <div>
-                        <div class="titulo-card">
-                            <h4>${problema.titulo}</h4>
-                            <button onclick='excluirCard(event, "${problema.titulo}")'>
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                        <p><b>Segmento:</b> ${problema.segmento}</p>
-                        <p><b>Descrição</b>:</p>
-                        <p>${problema.descricao}</p>
-                    </div>
-                    <button class="btn-detalhes"onclick='mostrarDetalhes("${problema.titulo}", "${problema.segmento}", "${problema.descricao}")'>
-                        Detalhes
-                    </button>
-                `;
+                            <div>
+                                <div class="titulo-card">
+                                    <h4>${problema.titulo}</h4>
+                                    <button onclick='excluirCard(event, "${problema.titulo}")'>
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                                <p><b>Segmento:</b> ${problema.segmento}</p>
+                                <p><b>Descrição</b>:</p>
+                                <p>${problema.descricao}</p>
+                            </div>
+                            <button class="btn-detalhes"onclick='mostrarDetalhes("${problema.titulo}", "${problema.segmento}", "${problema.descricao}")'>
+                                Detalhes
+                            </but   
+                        `;
                         problemContainer.appendChild(newCard);
                     }
                 });
@@ -337,7 +627,6 @@
             function mostrarDetalhes(titulo, segmento, descricaoProblema) {
                 const dadosONG = JSON.parse(localStorage.getItem("dadosONG"));
 
-                // Verificar se os dados da ONG existem antes de passá-los para a função
                 if (dadosONG) {
                     const { nome, sobre, cidade, telefone, email, url } =
                         dadosONG;
@@ -347,30 +636,28 @@
                     const detalhesContainer =
                         document.getElementById("detalhes-container");
                     detalhesContainer.innerHTML = `
-                <div class="detalhes">
-                
-                        <h2>Detalhes do Problema</h2>
-                        <p><b>Título:</b> ${titulo}</p>
-                        <p><b>Segmento:</b> ${segmento}</p>
-                        <p><b>Descrição:</b> <p>
-                        <p class="descricao">${descricaoProblema}</p>
+                        <div class="detalhes">
+                                <h2>Detalhes do Problema</h2>
+                                <p><b>Título:</b> ${titulo}</p>
+                                <p><b>Segmento:</b> ${segmento}</p>
+                                <p><b>Descrição:</b> <p>
+                                <p class="descricao">${descricaoProblema}</p>
+                                <br>
+                                <h2>Detalhes da ONG</h2>
+                                <p><b>Nome:</b> ${nome}</p>
+                                <p><b>Descrição:</b> ${sobre}</p>
+                                <p><b>Endereço:</b> ${cidade}</p>
+                                <br>
+                                <p>Contato:</p>
+                                <p><b>Telefone:</b> ${telefone}</p>
+                                <p><b>E-mail:</b> ${email}</p>
+                                <p><b>Site:</b> ${url}</p>
 
-                        <br>
-                        <h2>Detalhes da ONG</h2>
-                        <p><b>Nome:</b> ${nome}</p>
-                        <p><b>Descrição:</b> ${sobre}</p>
-                        <p><b>Endereço:</b> ${cidade}</p>
-                        <br>
-                        <p>Contato:</p>
-                        <p><b>Telefone:</b> ${telefone}</p>
-                        <p><b>E-mail:</b> ${email}</p>
-                        <p><b>Site:</b> ${url}</p>
-                    
-                    <div class="button-detalhe">
-                        <button onclick="fecharDetalhes()">Fechar</button>
-                    </div>
-                </div>
-            `;
+                            <div class="button-detalhe">
+                                <button onclick="fecharDetalhes()">Fechar</button>
+                            </div>
+                        </div>
+                    `;
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -387,6 +674,239 @@
             function redirecionarParaInicialONG() {
                 window.location.href = "../HTML/telaInicialONG.html";
             }
+
+            document.addEventListener("DOMContentLoaded", function () {
+                const cardProjetoContainer = document.getElementById(
+                    "card-projeto-container"
+                );
+                const storedCards =
+                    JSON.parse(localStorage.getItem("replicatedCards")) || [];
+
+                storedCards.forEach((cardInfo) => {
+                    const novoCardProjeto = document.createElement("div");
+                    novoCardProjeto.classList.add("card-replicado");
+
+                    novoCardProjeto.innerHTML = `
+                        <div>
+                            <div class="titulo-card">
+                                <h4>${cardInfo.titulo}</h4>
+                            </div>
+                            <p><b>Equipe:</b> ${cardInfo.nomeEquipe}</p>
+                        </div>
+                        <button class="btn-aceite"></button>
+                        <button class="btn-rejeite"></button>
+                    `;
+
+                    const btnAceitar =
+                        novoCardProjeto.querySelector(".btn-aceite");
+                    const btnRejeitar =
+                        novoCardProjeto.querySelector(".btn-rejeite");
+
+                    btnAceitar.addEventListener("click", function () {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Deseja aceitar proposta?",
+                            text: "Ao clicar em Sim você estará aceitando a proposta de projeto da equipe. Gostaria de fazer isso?",
+                            showCancelButton: true,
+                            confirmButtonText: "Sim",
+                            cancelButtonText: "Cancelar ação",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Sucesso!",
+                                    text: "Aceite realizado com sucesso, aguarde o início do desenvolvimento!",
+                                });
+                                const cardReplicado =
+                                    document.querySelector(".card-replicado");
+                                const projetosEmAndamento =
+                                    document.querySelector(
+                                        ".projetos-andamento"
+                                    );
+                                if (cardReplicado && projetosEmAndamento) {
+                                    projetosEmAndamento.appendChild(
+                                        cardReplicado
+                                    );
+
+                                    btnAceitar.remove();
+
+                                    btnRejeitar.remove();
+
+                                    const novoBotao =
+                                        document.createElement("button");
+                                    novoBotao.classList.add("btn-novo");
+                                    novoBotao.textContent =
+                                        "Notificar o aceite";
+                                    novoBotao.style.marginLef = "80px";
+
+                                    novoBotao.addEventListener(
+                                        "click",
+                                        function () {
+                                            Swal.fire({
+                                                icon: "success",
+                                                title: "Notificação enviada para a equipe!",
+                                            }).then(() => {
+                                                localStorage.setItem(
+                                                    "notificacaoEnviada",
+                                                    "true"
+                                                );
+                                            });
+                                        }
+                                    );
+                                    cardReplicado.appendChild(novoBotao);
+                                }
+                            }
+                        });
+                    });
+
+                    btnRejeitar.addEventListener("click", function () {
+                        Swal.fire({
+                            icon: "warning",
+                            title: "Deseja recusar proposta?",
+                            text: "Ao clicar em Sim você estará recusando a proposta de projeto da equipe. Gostaria de fazer isso?",
+                            showCancelButton: true,
+                            confirmButtonText: "Sim",
+                            cancelButtonText: "Cancelar ação",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Sucesso!",
+                                    text: "Recusa realizada com sucesso e a equipe foi notificada, aguarde outra equipe manifestar interesse!",
+                                }).then(() => {
+                                    const card = btnRejeitar.parentElement;
+                                    card.remove();
+                                });
+                            }
+                        });
+                    });
+
+                    const btnChat = document.createElement("button");
+                    btnChat.textContent = "Chat";
+                    btnChat.classList.add("btn-chat");
+                    btnChat.addEventListener("click", function () {
+                        let overlay = document.querySelector(".overlay");
+                        if (!overlay) {
+                            overlay = document.createElement("div");
+                            overlay.classList.add("overlay");
+                            document.body.appendChild(overlay);
+                        }
+                        overlay.style.display = "block";
+                        const offcanvasDiv = document.createElement("div");
+                        offcanvasDiv.classList.add(
+                            "offcanvas",
+                            "offcanvas-bottom"
+                        );
+                        offcanvasDiv.tabIndex = "-1";
+                        offcanvasDiv.id = "offcanvasBottom";
+
+                        offcanvasDiv.style.width = "400px";
+                        offcanvasDiv.style.height = "70%";
+                        offcanvasDiv.style.color = "white";
+                        offcanvasDiv.style.position = "fixed";
+                        offcanvasDiv.style.bottom = "10px";
+                        offcanvasDiv.style.right = "10px";
+                        offcanvasDiv.style.backgroundColor = "white";
+                        offcanvasDiv.style.borderRadius = "12px";
+                        offcanvasDiv.style.border = "solid 1px black";
+
+                        const offcanvasHeader = document.createElement("div");
+                        offcanvasHeader.classList.add("offcanvas-header");
+
+                        const headerTitle = document.createElement("span");
+                        headerTitle.classList.add("header-title");
+                        headerTitle.textContent = "Chat";
+
+                        const offcanvasTitle = document.createElement("h5");
+                        offcanvasTitle.classList.add("offcanvas-title");
+                        offcanvasTitle.textContent = "Chat";
+
+                        const closeButton = document.createElement("button");
+                        closeButton.type = "button";
+                        closeButton.classList.add("btn-close");
+                        closeButton.dataset.bsDismiss = "offcanvas";
+                        closeButton.setAttribute("aria-label", "Close");
+
+                        offcanvasHeader.appendChild(offcanvasTitle);
+                        offcanvasHeader.appendChild(closeButton);
+
+                        const offcanvasBody = document.createElement("div");
+                        offcanvasBody.classList.add("offcanvas-body", "small");
+                        const inputContainer = document.createElement("div");
+                        inputContainer.classList.add("input-container");
+                        offcanvasBody.appendChild(inputContainer);
+
+                        const offcanvasInput = document.createElement("input");
+                        offcanvasInput.type = "text";
+                        offcanvasInput.classList.add("offcanvas-input");
+                        offcanvasInput.placeholder = "Digite uma mensagem";
+
+                        const sendButton = document.createElement("button");
+                        sendButton.classList.add("send-button");
+
+                        const sendIcon = document.createElement("i");
+                        sendIcon.classList.add(
+                            "bi",
+                            "bi-send-fill",
+                            "send-icon"
+                        );
+                        sendIcon.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+                                <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                            </svg>`;
+                        sendButton.appendChild(sendIcon);
+
+                        sendButton.addEventListener("mouseover", function () {
+                            sendIcon.style.color = "#004080";
+                        });
+
+                        sendButton.addEventListener("mouseout", function () {
+                            sendIcon.style.color = "#1166ca";
+                        });
+
+                        const closeIcon = document.createElementNS(
+                            "http://www.w3.org/2000/svg",
+                            "svg"
+                        );
+                        closeIcon.setAttribute(
+                            "xmlns",
+                            "http://www.w3.org/2000/svg"
+                        );
+                        closeIcon.setAttribute("width", "16");
+                        closeIcon.setAttribute("height", "16");
+                        closeIcon.setAttribute("fill", "currentColor");
+                        closeIcon.setAttribute("class", "bi bi-x close-icon");
+                        closeIcon.setAttribute("viewBox", "0 0 16 16");
+                        closeIcon.innerHTML = `<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708"/>`;
+                        closeIcon.addEventListener("click", function () {
+                            offcanvasDiv.remove();
+                            overlay.style.display = "none";
+                        });
+
+                        offcanvasHeader.appendChild(closeIcon);
+                        offcanvasHeader.appendChild(headerTitle);
+                        offcanvasDiv.appendChild(offcanvasHeader);
+                        offcanvasBody.appendChild(offcanvasInput);
+                        offcanvasBody.appendChild(sendButton);
+                        const offcanvasFooter =
+                            document.createElement("footer");
+                        offcanvasBody.classList.add("offcanvas-footer");
+
+                        offcanvasDiv.appendChild(offcanvasHeader);
+                        offcanvasDiv.appendChild(offcanvasBody);
+
+                        document.body.appendChild(offcanvasDiv);
+                    });
+
+                    novoCardProjeto.appendChild(btnChat);
+
+                    cardProjetoContainer.appendChild(novoCardProjeto);
+
+                    const btnEnviarAceite =
+                        novoCardProjeto.querySelector(".btn-pedir-aceite");
+                    btnEnviarAceite.addEventListener("click", function () {});
+                });
+            });
         </script>
     </body>
 </html>
