@@ -809,6 +809,7 @@ textarea {
 /* sweetAlert */
 #body-problema,
 #body-cadastro,
+#body-equipe,
 .swal2-height-auto {
     height: 100vh !important;
 }
