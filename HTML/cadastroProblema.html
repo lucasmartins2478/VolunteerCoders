@@ -207,13 +207,6 @@
             const responsavel = document.querySelector('#responsavel').value;
             const descricao = document.querySelector('#descricao').value;
 
-            const problema = {
-                titulo: titulo,
-                causa: causa,
-                telefone: telefone,
-                responsavel: responsavel,
-                descricao: descricao
-            };
             if (!titulo || !causa || !telefone || !responsavel || !descricao) {
                 Swal.fire({
                         icon: 'error',
@@ -222,6 +215,14 @@
                     })
                 return;
             }
+
+            const problema = {
+                titulo: titulo,
+                causa: causa,
+                telefone: telefone,
+                responsavel: responsavel,
+                descricao: descricao
+            };
 
             const url = 'https://664d0a0cede9a2b556527d60.mockapi.io/api/v1/problema';
 
