@@ -156,7 +156,7 @@
                         ></textarea>
                     </div>
                     <div class="botao">
-                        <button class="btn-cadastrar-problema">
+                        <button class="btn-cadastrar-problema" id="btn-cadastrar">
                             Cadastrar
                         </button>
                     </div>
@@ -187,9 +187,7 @@
                     reader.readAsDataURL(file);
                 });
 
-            document
-                .querySelector(".btn-trocar-imagem")
-                .addEventListener("click", function () {
+            document.querySelector(".btn-trocar-imagem").addEventListener("click", function () {
                     document.getElementById("imagem").style.display = "block";
 
                     const imagemPreview =
@@ -200,6 +198,43 @@
 
                     localStorage.removeItem("imagemBase64");
                 });
+
+            document.getElementById('btn-cadastrar').addEventListener('click', function (event) {
+            event.preventDefault(); // Impede o envio do formulário pelo método padrão
+            const titulo = document.querySelector('#titulo').value;
+            const causa = document.querySelector('#causas-da-ong').value;
+            const telefone = document.querySelector('#telefone').value;
+            const responsavel = document.querySelector('#responsavel').value;
+            const descricao = document.querySelector('#descricao').value;
+
+            const problema = {
+                titulo: titulo,
+                causa: causa,
+                telefone: telefone,
+                responsavel: responsavel,
+                descricao: descricao
+            };
+
+
+            const url = 'https://664d0a0cede9a2b556527d60.mockapi.io/api/v1/problema';
+
+            // Envia os dados para a API usando fetch
+            fetch(url, {
+                method: 'POST', // Define o método como POST
+                headers: {
+                    'Content-Type': 'application/json' // Define o cabeçalho como JSON
+                },
+                body: JSON.stringify(problema) // Converte o objeto problema para uma string JSON
+            }).then(response => response.json()).then(data => {
+                    console.log('Success:', data);
+                    // Aqui você pode adicionar código para exibir uma mensagem de sucesso ao usuário
+                    
+                }).catch((error) => {
+                    console.error('Error:', error);
+                    // Aqui você pode adicionar código para exibir uma mensagem de erro ao usuário
+                    
+                });
+        })
         </script>
     </body>
 </html>
