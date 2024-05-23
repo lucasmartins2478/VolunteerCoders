@@ -507,7 +507,7 @@
                         <h3 class="title-problema">
                             Veja os problemas disponíveis:
                         </h3>
-                        <div class="scrollable">
+                        <div class="card-container">
                             <div class="card-problema" id="card-problema"></div>
                         </div>
                     </div>
@@ -539,6 +539,52 @@
         <div id="detalhes-container" class="detalhes-container"></div>
 
         <script>
+            let problemas = []
+            function carregaDados() {
+                const url = 'https://664d0a0cede9a2b556527d60.mockapi.io/api/v1/problema';
+                fetch(url).then(resposta => resposta.json())
+                    .then(dados => {
+                        problema = dados;
+                        montaTela(problema)
+                    });
+            };
+            function montaTela(problema) {
+                let cardContainer = document.querySelector(".card-container")
+                cardContainer.textContent = '';
+                problema.forEach(element => {
+                    //let tr = document.createElement('tr');
+                    //let thId = document.createElement('th');
+                    //let tdNome = document.createElement('td');
+                    //let tdEmail = document.createElement('td');
+                    //thId.textContent = element.id;
+                    //tdNome.textContent = element.nome;
+                    //tdEmail.textContent = element.email;
+                    //tr.appendChild(thId);
+                    //tr.appendChild(tdNome);
+                    //tr.appendChild(tdEmail);
+                    //tbody.appendChild(tr);
+
+                    const newCard = document.createElement("div");
+                    newCard.classList.add("card");
+                    newCard.innerHTML = `
+                            <div>
+                                <div class="titulo-card">
+                                    <h4>${element.titulo}</h4>
+                                    <button onclick='excluirCard(event, "${element.titulo}")'>
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                                <p><b>Segmento:</b> ${element.causa}</p>
+                                <p><b>Descrição</b>:</p>
+                                <p>${element.descricao}</p>
+                            </div>
+                            <button class="btn-detalhes"onclick='mostrarDetalhes("${element.titulo}", "${element.segmento}", "${element.descricao}")'>
+                                Detalhes
+                            </button>
+                        `;
+                    cardContainer.appendChild(newCard);
+
+                });
             document
                 .getElementById("btn-open-side-bar")
                 .addEventListener("click", function () {
