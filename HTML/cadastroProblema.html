@@ -214,7 +214,14 @@
                 responsavel: responsavel,
                 descricao: descricao
             };
-
+            if (!titulo || !causa || !telefone || !responsavel || !descricao) {
+                Swal.fire({
+                        icon: 'error',
+                        title: 'Erro',
+                        text: 'Preencha todos os campos.'
+                    })
+                return;
+            }
 
             const url = 'https://664d0a0cede9a2b556527d60.mockapi.io/api/v1/problema';
 
