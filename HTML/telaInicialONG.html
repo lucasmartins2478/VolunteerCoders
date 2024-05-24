@@ -415,6 +415,50 @@
                 margin-left: 50px;
             }
         </style>
+        <script>
+
+        let problema = [];
+
+        function carregaDados() {
+            const url = 'https://664d0a0cede9a2b556527d60.mockapi.io/api/v1/problema';
+            fetch(url)
+                .then(resposta => resposta.json())
+                .then(dados => {
+                    problema = dados;
+                    montaTela(problema);
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar dados:', error);
+                });
+        }
+
+        function montaTela(problema) {
+            let cardContainer = document.querySelector(".card-container");
+            cardContainer.textContent = ''; // Limpa o container antes de adicionar os novos cards
+            problema.forEach(element => {
+                const newCard = document.createElement("div");
+                newCard.classList.add("card");
+                newCard.innerHTML = `
+                    <div>
+                        <div class="titulo-card">
+                            <h4>${element.titulo}</h4>
+                            <button onclick='excluirCard(event, "${element.titulo}")'>
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                        <p><b>Causa:</b> ${element.causa}</p>
+                        <p><b>Descrição:</b> ${element.descricao}</p>
+                    </div>
+                    <button class="btn-detalhes" onclick='mostrarDetalhes("${element.titulo}", "${element.causa}", "${element.descricao}")'>
+                        Detalhes
+                    </button>
+                `;
+                cardContainer.appendChild(newCard);
+            });
+        }
+
+        window.onload = carregaDados;
+        </script>
     </head>
     <body>
         <div class="container-tela-ong">
@@ -511,49 +555,6 @@
         <div class="overlay"></div>
         <div id="detalhes-container" class="detalhes-container"></div>
         <script>
-            
-            let problema = [];
-
-        function carregaDados() {
-            const url = 'https://664d0a0cede9a2b556527d60.mockapi.io/api/v1/problema';
-            fetch(url)
-                .then(resposta => resposta.json())
-                .then(dados => {
-                    problema = dados;
-                    montaTela(problema);
-                })
-                .catch(error => {
-                    console.error('Erro ao carregar dados:', error);
-                });
-        }
-
-        function montaTela(problema) {
-            let cardContainer = document.querySelector(".card-container");
-            cardContainer.textContent = ''; // Limpa o container antes de adicionar os novos cards
-            problema.forEach(element => {
-                const newCard = document.createElement("div");
-                newCard.classList.add("card");
-                newCard.innerHTML = `
-                    <div>
-                        <div class="titulo-card">
-                            <h4>${element.titulo}</h4>
-                            <button onclick='excluirCard(event, "${element.titulo}")'>
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                        <p><b>Causa:</b> ${element.causa}</p>
-                        <p><b>Descrição:</b> ${element.descricao}</p>
-                    </div>
-                    <button class="btn-detalhes" onclick='mostrarDetalhes("${element.titulo}", "${element.causa}", "${element.descricao}")'>
-                        Detalhes
-                    </button>
-                `;
-                cardContainer.appendChild(newCard);
-            });
-        }
-
-        window.onload = carregaDados;
-
         function excluirCard(event, titulo) {
             // Função para excluir o card, se necessário
             console.log('Excluir card:', titulo);
