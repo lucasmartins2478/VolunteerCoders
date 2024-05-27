@@ -67,6 +67,34 @@
             top: 590px;
         }
 
+        .btn-finalizar{
+            color: #fff;
+            font-size: 17px;
+            position: static;
+            top: 700px;
+            background-color: #1166ca;
+            width: 210px;
+            height: 40px;
+            border-radius: 12px;
+            border: solid 0px;
+            font-size: 18px;
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        .btn-iniciar {
+            color: #fff;
+            font-size: 17px;
+            position: relative;
+            background-color: #1166ca;
+            width: 350px;
+            height: 40px;
+            border-radius: 12px;
+            border: none;
+            margin-top: 75px;
+            cursor: pointer;
+        }
+
         .detalhes .button-detalhe {
             display: flex;
             align-items: end;
@@ -127,10 +155,9 @@
             text-overflow: ellipsis;
         }
 
-        
-
-
-
+        .problemas-cadastrados{
+            width: 1380px;
+        }
 
         #user-aluno {
             margin-bottom: 10px;
@@ -246,7 +273,7 @@
             gap: 20px;
             margin-bottom: s;
             overflow-x: scroll;
-            max-width: 77rem;
+            width: 86rem;
             height: 16.5rem;
         }
 
@@ -266,7 +293,7 @@
             gap: 20px;
             margin-bottom: s;
             overflow-x: scroll;
-            max-width: 38.5rem;
+            max-width: 43rem;
             height: 16.5rem;
         }
 
@@ -282,8 +309,16 @@
         }
 
         #btn-selecionar {
-            width: 10rem;
-            margin-left: 1rem;
+            width: 9rem;
+            margin-left: 0.5rem;
+            margin-right: 20px;
+
+        }
+
+        #btn-selecionar.btn-chat {
+            width: 7rem;
+            margin-left: 0.5rem;
+            margin-right: 20px;
 
         }
 
@@ -340,6 +375,21 @@
             height: 14rem;
         }
 
+        .card2 {
+            word-wrap: break-word;
+            flex: 0 0 auto;
+            height: 14rem;
+            width: 400px;
+        }
+
+        .card2 .btn-detalhes{
+            color: #fff;
+            font-size: 17px;
+            position: static;
+            margin-top: 80px;
+        }
+
+
         .card-replicado .status-message {
             position: absolute;
             background-color: rgba(0, 0, 0, 0.7);
@@ -365,7 +415,7 @@
             color: #fff;
             font-size: 17px;
             position: static;
-            top: 600px;
+            top: 620px;
             height: 40px;
         }
 
@@ -380,17 +430,13 @@
         }
 
         .img-container {
-            text-align: right;
-            /* Alinha a imagem à direita do contêiner */
+            text-align: right; 
             margin-top: 10px;
-            /* Espaço entre o conteúdo e a imagem */
         }
 
         .circulo-img {
             width: 20px;
-            /* Ajuste o tamanho conforme necessário */
             height: 20px;
-            /* Ajuste o tamanho conforme necessário */
         }
 
 
@@ -597,7 +643,7 @@
                 cancelButtonText: "Não",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "../apresentacao.html";
+                    window.location.href = "../HTML/apresentacao.html";
                 }
             });
         }
@@ -612,7 +658,7 @@
                 .then(dados => {
                     console.log('Problemas carregados:', dados); // Log dos dados carregados
                     montaTela(dados);
-                    carregaProjetos(); // Chama a função para carregar projetos
+                    carregaProjetos(); 
                 })
                 .catch(error => console.error('Erro ao carregar dados:', error));
         }
@@ -625,12 +671,10 @@
             selecionadoConteiner.textContent = '';
 
             problemas.forEach(element => {
-
                 if (element.selecionado == true) {
-                    function selecionados() {
-                        const newCard = document.createElement("div");
-                        newCard.classList.add("card");
-                        newCard.innerHTML = `
+                    const newCard = document.createElement("div");
+                    newCard.classList.add("card");
+                    newCard.innerHTML = `
                         <div>
                             <div class="titulo-card">
                                 <h4>${element.titulo}</h4>
@@ -639,18 +683,17 @@
                             <p><b>Descrição:</b> ${element.descricao}</p>
                         </div>
                         <div class="select-buttons">
-                        <button class="btn-pedir-aceite" id="btn-selecionar" onclick="solicitarAceite(${element.id})">Solicitar aceite</button>
-                        <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
+                            <button class="btn-pedir-aceite" id="btn-selecionar" onclick="solicitarAceite(${element.id})">Solicitar aceite</button>
+                            <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
                         </div>
-                        `;
+                    `;
 
-                        selecionadoConteiner.appendChild(newCard);
-                    }
-
-                    selecionados()
+                    selecionadoConteiner.appendChild(newCard);
                 } else {
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
+                    newCard.setAttribute('data-id', element.id);
+                    newCard.setAttribute('data-ongid', element.ongId);
                     newCard.innerHTML = `
                         <div>
                             <div class="titulo-card">
@@ -665,8 +708,14 @@
                     `;
                     cardContainer.appendChild(newCard);
                 }
+                if (element.selecionado) {
+                    const selectButtons = document.createElement("div");
+                    newCard.classList.add("card2");
+                    newCard.appendChild(selectButtons);
+                }
             });
         }
+
 
         // Função para carregar dados dos projetos
         function carregaProjetos() {
@@ -698,7 +747,8 @@
                         </div>
                         <p><b>Causa:</b> ${element.causa}</p>
                         <p><b>Descrição:</b> ${element.descricao}</p>
-                        <button class="btn-detalhes" onclick="finalizarProjeto(${index}, ${element.id})">Finalizar Projeto</button>
+                        <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
+                        <button class="btn-finalizar" onclick="finalizarProjeto(${index}, ${element.id})">Finalizar Projeto</button>
                     </div>
                 `;
                     projectContainer.appendChild(newCard);
@@ -713,7 +763,7 @@
                         </div>
                         <p><b>Causa:</b> ${element.causa}</p>
                         <p><b>Descrição:</b> ${element.descricao}</p>
-                        <button class="btn-detalhes" onclick="iniciarProjeto(${index}, ${element.id})">Iniciar Desenvolvimento</button>
+                        <button class="btn-iniciar" onclick="iniciarProjeto(${index}, ${element.id})">Iniciar Desenvolvimento</button>
                     </div>
                 `;
                     projectContainer.appendChild(newCard);
@@ -722,97 +772,43 @@
             });
         }
 
-
-
-        // Função para mostrar os detalhes do problema e da ONG
-        // Função para mostrar os detalhes do problema e da ONG
         async function mostrarDetalhes(problemaId, ongId) {
             try {
                 const detalhesContainer = document.getElementById("detalhes-container");
 
-                // Fetch dados do problema e da ONG
                 const [problema, ong] = await Promise.all([
                     fetch(`${problemaApiUrl}/${problemaId}`).then(res => res.json()),
                     fetch(`${ongApiUrl}/${ongId}`).then(res => res.json())
                 ]);
-                if (problema.selecionado == true) {
-                    console.log('Detalhes do problema:', problema); // Log dos dados do problema
-                    console.log('Detalhes da ONG:', ong); // Log dos dados da ONG
 
-                    detalhesContainer.innerHTML = `
-                        <div class="detalhes">
-                            <br>
-                            <br>
-                            <br>
-                            <h2>Detalhes do Problema</h2>
-                            <p><b>Título:</b> ${problema.titulo}</p>
-                            <p><b>Causa:</b> ${problema.causa}</p>
-                            <p><b>Descrição:</b> ${problema.descricao}</p>
-                            <br>
-                            <h2>Detalhes da ONG</h2>
-                            <p><b>Nome:</b> ${ong.nome}</p>
-                            <p><b>Descrição:</b> ${ong.descricao}</p>
-                            <p><b>Endereço:</b> ${ong.endereco}</p>
-                            <br>
-                            <p>Contato:</p>
-                            <p><b>Telefone:</b> ${ong.telefone}</p>
-                            <p><b>E-mail:</b> ${ong.email}</p>
-                            <p><b>Site:</b> ${ong.site}</p>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <div class="button-detalhe">
-                                <button onclick="fecharDetalhes()">Fechar</button>
-                            </div>
-                            
+                console.log('Detalhes do problema:', problema); // Log dos dados do problema
+                console.log('Detalhes da ONG:', ong); // Log dos dados da ONG
+
+                detalhesContainer.innerHTML = `
+                    <div class="detalhes">
+                        <h2>Detalhes do Problema</h2>
+                        <p><b>Título:</b> ${problema.titulo}</p>
+                        <p><b>Causa:</b> ${problema.causa}</p>
+                        <p><b>Descrição:</b> ${problema.descricao}</p>
+                        <h2>Detalhes da ONG</h2>
+                        <p><b>Nome:</b> ${ong.nome}</p>
+                        <p><b>Descrição:</b> ${ong.descricao}</p>
+                        <p><b>Endereço:</b> ${ong.endereco}</p>
+                        <p><b>Contato:</b> ${ong.telefone}</p>
+                        <p><b>E-mail:</b> ${ong.email}</p>
+                        <p><b>Site:</b> ${ong.site}</p>
+                        <div class="button-detalhe">
+                            <button id="selecionar" onclick="selecionarProblema(${problemaId})">Selecionar</button>
+                            <button onclick="fecharDetalhes()">Fechar</button>
                         </div>
-            `;
+                    </div>
+                `;
 
-                    detalhesContainer.style.display = 'block';
-                } else {
-                    console.log('Detalhes do problema:', problema); // Log dos dados do problema
-                    console.log('Detalhes da ONG:', ong); // Log dos dados da ONG
-
-                    detalhesContainer.innerHTML = `
-                        <div class="detalhes">
-                            <br>
-                            <br>
-                            <br>
-                            <h2>Detalhes do Problema</h2>
-                            <p><b>Título:</b> ${problema.titulo}</p>
-                            <p><b>Causa:</b> ${problema.causa}</p>
-                            <p><b>Descrição:</b> ${problema.descricao}</p>
-                            <br>
-                            <h2>Detalhes da ONG</h2>
-                            <p><b>Nome:</b> ${ong.nome}</p>
-                            <p><b>Descrição:</b> ${ong.descricao}</p>
-                            <p><b>Endereço:</b> ${ong.endereco}</p>
-                            <br>
-                            <p>Contato:</p>
-                            <p><b>Telefone:</b> ${ong.telefone}</p>
-                            <p><b>E-mail:</b> ${ong.email}</p>
-                            <p><b>Site:</b> ${ong.site}</p>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <div class="button-detalhe">
-                                <button id="selecionar" onclick="selecionarProblema(${problemaId})">Selecionar</button>
-                                <button onclick="fecharDetalhes()">Fechar</button>
-                            </div>
-                            
-                        </div>
-            `;
-
-                    detalhesContainer.style.display = 'block';
-                }
-
+                detalhesContainer.style.display = 'block';
             } catch (error) {
                 console.error('Erro ao carregar detalhes:', error);
             }
         }
-
 
         // Função para fechar os detalhes
         function fecharDetalhes() {
@@ -821,7 +817,6 @@
             detalhesContainer.style.display = 'none';
         }
 
-        // Função para selecionar um problema
         // Função para selecionar um problema
         function selecionarProblema(problemaId) {
             // Busca o elemento do card do problema selecionado
@@ -837,7 +832,7 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Problema Selecionado!',
-                            text: 'Sua solicitação foi enviada para a ong, aguarde a resposta.'
+                            text: 'Envie uma solicitação para a ong e aguarde a resposta.'
                         }).then(() => {
                             window.location.href = 'homeAluno.html';
                         });
@@ -846,31 +841,58 @@
                     }
                 })
                 .catch(error => console.error('Erro:', error));
+        }
 
-        }
-        function solicitarAceite(problemaId) {
-            fetch(`${problemaApiUrl}/${problemaId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ solicitado: true })
-            })
-                .then(response => {
-                    if (response.ok) {
+        function solicitarAceite(problemaId) {  
+        const senhaCorreta = "s";  
+        Swal.fire({
+            title: "Insira a senha definida pela equipe:",
+            // text: "Essa senha será usada futuramente!",
+            input: "password",
+            inputAttributes: {
+                class: "swal2-input minha-classe-personalizada",
+            },
+            showCancelButton: true,
+            confirmButtonText: "Confirmar",
+            cancelButtonText: "Cancelar",
+        }).then(result => {
+            if (result.isConfirmed) {
+                const senhaInserida = result.value;
+
+                if (senhaInserida === senhaCorreta) {
+                    fetch(`${problemaApiUrl}/${problemaId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ solicitado: true })
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Problema Selecionado!',
+                                text: 'Sua solicitação foi enviada para a ong, aguarde a resposta.'
+                            }).then(() => {
+                                window.location.href = 'homeAluno.html';
+                            });
+                        } else {
+                            throw new Error('Erro ao selecionar problema.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
                         Swal.fire({
-                            icon: 'success',
-                            title: 'Problema Selecionado!',
-                            text: 'Sua solicitação foi enviada para a ong, aguarde a resposta.'
-                        }).then(() => {
-                            window.location.href = 'homeAluno.html';
+                            icon: 'error',
+                            title: 'Erro',
+                            text: 'Houve um problema ao enviar sua solicitação. Tente novamente mais tarde.'
                         });
-                    } else {
-                        throw new Error('Erro ao selecionar problema.');
-                    }
-                })
-                .catch(error => console.error('Erro:', error));
-        }
+                    });
+                }
+            }
+        });
+    }
+    
         function iniciarProjeto(index, id) {
             const imgContainer = document.getElementById(`img-container-${index}`);
             if (!imgContainer.querySelector('.circulo-img')) {  // Evita adicionar a imagem mais de uma vez
@@ -889,23 +911,45 @@
                 },
                 body: JSON.stringify({ iniciado: true })
             })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Erro HTTP! status: ${response.status}`);
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Projeto atualizado:', data);
+                const senhaCorreta = "s";  
+                Swal.fire({
+                    title: "Insira a senha definida para equipe:",
+                    input: "password",
+                    inputAttributes: {
+                        class: "swal2-input minha-classe-personalizada",
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: "Confirmar",
+                    cancelButtonText: "Cancelar",
+                }).then(result => { 
+                    if (result.isConfirmed) {
+                        const senhaInserida = result.value;
+
+                        if (senhaInserida === senhaCorreta) {   
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Desenvolvimento Iniciado!',
+                                text: 'O desenvolvimento foi iniciado com sucesso.'
+                            }).then(() => {
+                                window.location.href = 'homeAluno.html';
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Senha Incorreta',
+                                text: 'A senha inserida está incorreta. Tente novamente.'
+                            });
+                        }
                     }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Projeto atualizado:', data);
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Desenvolvimento Iniciado!',
-                        text: 'O desenvolvimento foi iniciado com sucesso.'
-                    }).then(() => {
-                        window.location.href = 'homeAluno.html';
-                    });
-                })
-                .catch(error => {
+                }).catch(error => {
                     console.error('Erro ao atualizar projeto:', error);
                     Swal.fire({
                         icon: 'error',
@@ -913,10 +957,17 @@
                         text: 'Ocorreu um erro ao iniciar o desenvolvimento. Tente novamente.'
                     });
                 });
+            })
+            .catch(error => {
+                console.error('Erro ao fazer requisição:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro',
+                    text: 'Ocorreu um erro ao fazer a requisição. Tente novamente.'
+                });
+            });
+
         }
-
-
-
 
         function abrirChat() {
             let overlay =
@@ -1059,8 +1110,6 @@
 
             document.body.appendChild(offcanvasDiv);
         };
-
-
 
     </script>
 </body>

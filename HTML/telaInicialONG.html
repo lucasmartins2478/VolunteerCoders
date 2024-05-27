@@ -160,7 +160,7 @@
             gap: 20px;
             margin-bottom: s;
             overflow-x: scroll;
-            max-width: 77rem;
+            width: 86rem;
             height: 16.5rem;
         }
 
@@ -171,16 +171,17 @@
             gap: 20px;
             margin-bottom: s;
             overflow-x: scroll;
-            max-width: 37rem;
+            width: 37rem;
             height: 16.5rem;
         }
+        
         .projeto-container{
             display: flex;
             flex-wrap: nowrap;
             gap: 20px;
             margin-bottom: s;
             overflow-x: scroll;
-            max-width: 38.5rem;
+            max-width: 43rem;
             height: 16.5rem;
         }
 
@@ -287,9 +288,8 @@
         }
         .img-container {
             text-align: right;
-            /* Alinha a imagem à direita do contêiner */
-            margin-top: 10px;
-            /* Espaço entre o conteúdo e a imagem */
+            width: 50px;
+            margin-left: 310px;
         }
 
         .circulo-img {
@@ -445,9 +445,12 @@
             justify-self: end;
             color: #fff;
             font-size: 17px;
-            position: static;
-            top: 600px;
+            position: fixed;
+            top: 580px;
             height: 40px;
+            width: 100px;
+            margin-left: 200px;
+            margin-bottom: -50px;
         }
 
         .btn-aceite {
@@ -456,8 +459,10 @@
             background-image: url("../CSS/imagens/verifica.png");
             background-repeat: no-repeat;
             background-size: contain;
+            background-color: #fff;
             border: none;
             cursor: pointer;
+            margin-bottom: -121px;
         }
 
         .btn-rejeite {
@@ -466,8 +471,11 @@
             background-image: url("../CSS/imagens/cancelar.png");
             background-repeat: no-repeat;
             background-size: contain;
+            background-color: #fff;
             border: none;
             cursor: pointer;
+            margin-left: 60px;
+            margin-bottom: -1px;
         }
 
         .btn-novo {
@@ -581,13 +589,10 @@
                 cancelButtonText: "Não",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "../apresentacao.html";
+                    window.location.href = "../HTML/apresentacao.html";
                 }
             });
         }
-
-
-
 
         const problemaApiUrl = 'https://664d0a0cede9a2b556527d60.mockapi.io/api/v1/problema';
         const ongApiUrl = 'https://664f28a4fafad45dfae29755.mockapi.io/api/v1/ong';
@@ -629,6 +634,7 @@
                         <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
                             Detalhes
                         </button>
+
                     `;
                 if (element.solicitado == true && element.selecionado == true) {
 
@@ -643,9 +649,11 @@
                             <p><b>Causa:</b> ${element.causa}</p>
                             <p><b>Descrição:</b> ${element.descricao}</p>
                         </div>
-                        <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
-                            Detalhes
+                        <button class="btn-chat" onclick='abrirChat()'>
+                           Chat
                         </button>
+                        <button class="btn-aceite" onclick="aceitarProjeto('${element.id}')"></button>
+                        <button class="btn-rejeite" onclick='btnRejeitar(this)'></button>
                     `;
 
                     selecionadoConteiner.appendChild(newCard);
@@ -675,6 +683,101 @@
                 }
             });
         }
+
+        function aceitarProjeto(problemaId) {
+            // Busca os dados do problema correspondente na API de problemas
+            fetch(`${problemaApiUrl}/${problemaId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao buscar os dados do problema.');
+                    }
+                    return response.json();
+                })
+                .then(problema => {
+                    // Cria um objeto 'projeto' e carrega os dados do problema nele
+                    const projeto = {
+                        titulo: problema.titulo,
+                        causa: problema.causa,
+                        descricao: problema.descricao,
+                        ongId: problema.ongId
+                        // Adicione mais campos conforme necessário
+                    };
+
+                    const url = 'https://664f32d7fafad45dfae2c56d.mockapi.io/api/v1/projeto';
+
+                    // Envia os dados para a API usando fetch
+                    fetch(url, {
+                        method: 'POST', // Define o método como POST
+                        headers: {
+                            'Content-Type': 'application/json' // Define o cabeçalho como JSON
+                        },
+                        body: JSON.stringify(projeto) // Converte o objeto problema para uma string JSON
+                    }).then(response => response.json()).then(data => {
+
+                        // Aqui você pode adicionar código para exibir uma mensagem de sucesso ao usuário
+
+
+                        removerProblema(problemaId)
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Problema cadastrado com sucesso!',
+                            text: 'Os dados sensíveis de ONG e estudante são privados.'
+                        }).then(() => {
+                            window.location.href = 'telaInicialONG.html';
+                        });
+                    }).catch((error) => {
+
+                        // Aqui você pode adicionar código para exibir uma mensagem de erro ao usuário
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Erro',
+                            text: 'Não foi possível realizar essa ação!.'
+                        })
+                        return
+                    });
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar os dados do problema:', error);
+                    alert('Erro ao buscar os dados do problema. Por favor, tente novamente mais tarde.');
+                });
+        }
+        
+        function btnRejeitar(btn) {
+            Swal.fire({
+                title: "Deseja recusar proposta?",
+                text: "Ao clicar em Sim você estará recusando a proposta de projeto da equipe. Gostaria de fazer isso?",
+                showCancelButton: true,
+                confirmButtonText: "Sim",
+                cancelButtonText: "Cancelar",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Sucesso!",
+                        text: "Recusa realizada com sucesso e a equipe foi notificada, aguarde outra equipe manifestar interesse!",
+                    }).then(() => {
+                        const card = btn.closest(".card");
+                        if (card) {
+                            card.remove();
+                            localStorage.setItem('problemaRemovido', 'true');
+                        }
+                        // window.onload = function() {
+                        //     const problemaRemovido = localStorage.getItem('problemaRemovido');
+                        //     if (problemaRemovido === 'true') {
+                        //         // Remove todos os cards de problemas disponíveis da tela
+                        //         const cards = document.querySelectorAll(".card");
+                        //         cards.forEach(card => {
+                        //             card.remove();
+                        //         });
+                        //     }
+                        // };
+                     });
+                }
+            });
+        }
+
+
         function mensagemSelecionado(){
             Swal.fire({
                 icon: 'error',
@@ -725,12 +828,13 @@
         // Função para buscar dados da ONG
         async function fetchOng(ongId) {
             try {
-                const response = await fetch(`${ongApiUrl}/${ongId}`);
+                const response = await fetch(`https://664f28a4fafad45dfae29755.mockapi.io/api/v1/ong/${ongId}`);
                 const data = await response.json();
                 console.log('ONG carregada:', data); // Log dos dados da ONG
                 return data;
             } catch (error) {
                 console.error('Erro ao carregar dados da ONG:', error);
+                throw error; 
             }
         }
 
@@ -744,6 +848,7 @@
                     fetch(`${problemaApiUrl}/${problemaId}`).then(res => res.json()),
                     fetchOng(ongId)
                 ]);
+
                 if (problema.selecionado == true) {
                     console.log('Detalhes do problema:', problema); // Log dos dados do problema
                     console.log('Detalhes da ONG:', ong); // Log dos dados da ONG
@@ -759,14 +864,14 @@
                             <p><b>Descrição:</b> ${problema.descricao}</p>
                             <br>
                             <h2>Detalhes da ONG</h2>
-                            <p><b>Nome:</b> ${ong.nome}</p>
-                            <p><b>Descrição:</b> ${ong.descricao}</p>
+                            <p><b>Nome:</b> ${ong.nomeONg}</p>
+                            <p><b>Descrição:</b> ${ong.sobre}</p>
                             <p><b>Endereço:</b> ${ong.endereco}</p>
                             <br>
                             <p>Contato:</p>
                             <p><b>Telefone:</b> ${ong.telefone}</p>
                             <p><b>E-mail:</b> ${ong.email}</p>
-                            <p><b>Site:</b> ${ong.site}</p>
+                            <p><b>Site:</b> ${ong.urlSite}</p>
                             <br>
                             <br>
                             <br>
@@ -796,14 +901,14 @@
                             <p><b>Descrição:</b> ${problema.descricao}</p>
                             <br>
                             <h2>Detalhes da ONG</h2>
-                            <p><b>Nome:</b> ${ong.nome}</p>
-                            <p><b>Descrição:</b> ${ong.descricao}</p>
+                            <p><b>Nome:</b> ${ong.nomeONg}</p>
+                            <p><b>Descrição:</b> ${ong.sobre}</p>
                             <p><b>Endereço:</b> ${ong.endereco}</p>
                             <br>
                             <p>Contato:</p>
                             <p><b>Telefone:</b> ${ong.telefone}</p>
                             <p><b>E-mail:</b> ${ong.email}</p>
-                            <p><b>Site:</b> ${ong.site}</p>
+                            <p><b>Site:</b> ${ong.urlSite}</p>
                             <br>
                             <br>
                             <br>
@@ -823,14 +928,11 @@
             }
         }
 
-        // Função para fechar os detalhes
         function fecharDetalhes() {
             const detalhesContainer = document.getElementById("detalhes-container");
             detalhesContainer.innerHTML = '';
             detalhesContainer.style.display = 'none';
         }
-
-        // Função para excluir um card
 
         function removerProblema(id) {
 
@@ -843,64 +945,6 @@
                 carregaDados();
 
             }).catch(error => console.error('Erro ao excluir problema:', error));
-        }
-
-
-        function aceitarProjeto(problemaId) {
-            // Busca os dados do problema correspondente na API de problemas
-            fetch(`${problemaApiUrl}/${problemaId}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao buscar os dados do problema.');
-                    }
-                    return response.json();
-                })
-                .then(problema => {
-                    // Cria um objeto 'projeto' e carrega os dados do problema nele
-                    const projeto = {
-                        titulo: problema.titulo,
-                        causa: problema.causa,
-                        descricao: problema.descricao,
-                        ongId: problema.ongId
-                        // Adicione mais campos conforme necessário
-                    };
-
-                    const url = 'https://664f32d7fafad45dfae2c56d.mockapi.io/api/v1/projeto';
-
-                    fetch(url, {
-                        method: 'POST', 
-                        headers: {
-                            'Content-Type': 'application/json' 
-                        },
-                        body: JSON.stringify(projeto)
-                    }).then(response => response.json()).then(data => {
-
-                        // Aqui você pode adicionar código para exibir uma mensagem de sucesso ao usuário
-
-                        removerProblema(problemaId)
-
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Problema cadastrado com sucesso!',
-                            text: 'Os dados sensíveis de ONG e estudante são privados.'
-                        }).then(() => {
-                            window.location.href = 'telaInicialONG.html';
-                        });
-                    }).catch((error) => {
-
-                        // Aqui você pode adicionar código para exibir uma mensagem de erro ao usuário
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Erro',
-                            text: 'Não foi possível realizar essa ação!.'
-                        })
-                        return
-                    });
-                })
-                .catch(error => {
-                    console.error('Erro ao buscar os dados do problema:', error);
-                    alert('Erro ao buscar os dados do problema. Por favor, tente novamente mais tarde.');
-                });
         }
 
         function excluirCard(id) {
