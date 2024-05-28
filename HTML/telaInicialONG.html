@@ -81,6 +81,18 @@
             margin-top: 50px;
         }
 
+        .btn-aguardando{
+            background-color: #7e8792;
+            width: 350px;
+            height: 40px;
+            border-radius: 12px;
+            border: solid 0px;
+            font-size: 18px;
+            color: #fff;
+            margin-top: 50px;
+            position: static;
+        }
+
         .card {
             word-wrap: break-word;
             flex: 0 0 auto;
@@ -174,7 +186,7 @@
             width: 37rem;
             height: 16.5rem;
         }
-        
+
         .projeto-container{
             display: flex;
             flex-wrap: nowrap;
@@ -292,11 +304,34 @@
             margin-left: 310px;
         }
 
-        .circulo-img {
-            width: 20px;
-            /* Ajuste o tamanho conforme necessário */
+        .em-desenvolvimento {
+            border: solid 1px #fff311;
+            background-color: #fff986;
+            color: #000000;
+            font-weight: 400;
+            width: 300px;
+            border-radius: 16px;
+            margin-bottom: 15px;
             height: 20px;
-            /* Ajuste o tamanho conforme necessário */
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            margin-left: -280px;
+        }
+
+        .aindaNao {
+            border: solid 1px #ff5959;
+            background-color: #ff8686;
+            color: #000000;
+            font-weight: 400;
+            width: 350px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            height: 20px;
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            margin-left: -305px;
         }
 
         .btn-chat {
@@ -495,6 +530,29 @@
 
         .btn-novo button {
             margin-left: 50px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000; 
+        }
+
+        .modal-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+            z-index: 1001; 
         }
     </style>
 </head>
@@ -806,10 +864,12 @@
             projetos.forEach(element => {
                 const newCard = document.createElement("div");
                 newCard.classList.add("card");
+                const emDesenvolvimentoDiv = element.iniciado ? `<div class="em-desenvolvimento">Em desenvolvimento pela equipe!</div>` : `<div class="aindaNao">A equipe ainda não iniciou o desenvolvimento!</div>`;;
+
                 newCard.innerHTML = `
                 <div>
                     <div class="img-container" id="img-container">
-                    <img src="../CSS/imagens/circulo.png" alt="" class="circulo-img">
+                        ${emDesenvolvimentoDiv}
                     </div>
                     <div class="titulo-card">
                         <h4>${element.titulo}</h4>
@@ -817,10 +877,11 @@
                     <p><b>Causa:</b> ${element.causa}</p>
                     <p><b>Descrição:</b> ${element.descricao}</p>
                 </div>
-                <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
-                    Detalhes
+                <button class="btn-aguardando">
+                    Aguarde a entrega!
                 </button>
-                    `;
+                `;
+                
                 projectContainer.appendChild(newCard);
             });
         }
@@ -841,7 +902,12 @@
         // Função para mostrar os detalhes do problema e da ONG
         async function mostrarDetalhes(problemaId, ongId) {
             try {
-                const detalhesContainer = document.getElementById("detalhes-container");
+                const overlay = document.createElement("div");
+                overlay.classList.add("modal-overlay");
+
+                // Criar o container do modal
+                const modalContainer = document.createElement("div");
+                modalContainer.classList.add("modal-container");
 
                 // Fetch dados do problema e da ONG
                 const [problema, ong] = await Promise.all([
@@ -885,12 +951,14 @@
                         </div>
                     `;
 
+                    document.body.appendChild(overlay);
+                    document.body.appendChild(modalContainer);
                     detalhesContainer.style.display = 'block';
                 } else {
                     console.log('Detalhes do problema:', problema); // Log dos dados do problema
                     console.log('Detalhes da ONG:', ong); // Log dos dados da ONG
 
-                    detalhesContainer.innerHTML = `
+                    modalContainer.innerHTML = `
                         <div class="detalhes">
                             <br>
                             <br>
@@ -920,6 +988,8 @@
                         </div>
                     `;
 
+                    document.body.appendChild(overlay);
+                    document.body.appendChild(modalContainer);
                     detalhesContainer.style.display = 'block';
                 }
 
@@ -929,7 +999,10 @@
         }
 
         function fecharDetalhes() {
-            const detalhesContainer = document.getElementById("detalhes-container");
+            const overlay = document.querySelector(".modal-overlay");
+            const modalContainer = document.querySelector(".modal-container");
+            overlay.remove();
+            modalContainer.remove();            
             detalhesContainer.innerHTML = '';
             detalhesContainer.style.display = 'none';
         }

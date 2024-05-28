@@ -18,6 +18,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
             z-index: 999;
             pointer-events: none;
             display: none;
@@ -26,6 +27,8 @@
         .detalhes-open .overlay {
             pointer-events: auto;
             display: block;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
         }
 
         .detalhes {
@@ -91,7 +94,7 @@
             height: 40px;
             border-radius: 12px;
             border: none;
-            margin-top: 75px;
+            margin-top: 50px;
             cursor: pointer;
         }
 
@@ -309,8 +312,8 @@
         }
 
         #btn-selecionar {
-            width: 9rem;
-            margin-left: 0.5rem;
+            width: 11rem;
+            margin-left: 1rem;
             margin-right: 20px;
 
         }
@@ -432,14 +435,14 @@
         .img-container {
             text-align: right; 
             margin-top: 10px;
+            display: none;
         }
 
         .circulo-img {
             width: 20px;
             height: 20px;
+            display: none;
         }
-
-
 
         .offcanvas-title {
             position: relative;
@@ -531,6 +534,124 @@
 
         .send-button:hover .send-icon {
             color: #004080;
+        }
+
+        .aceito{
+            border: solid 1px #1cff7f;
+            background-color: #5fff84;
+            color: #000000;
+            font-weight: 400;
+            width: 300px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            height: 20px;
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            margin-left: 30px;
+        }
+
+        .entrega{
+            border: solid 1px #fff311;
+            background-color: #fff986;
+            color: #000000;
+            font-weight: 400;
+            width: 300px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            height: 20px;
+            display: flex;
+            align-items: center; 
+            justify-content: center;
+            margin-left: 30px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            height: 600px;
+        }
+
+        .modal-container h3{
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-container label{
+            margin-bottom: 6px;
+            font-size: 1rem;
+            color: #444852;
+
+        }
+
+        .modal-container textarea{
+            margin-top: 10px;
+            width: 560px;
+            height: 200px;
+        }
+
+        .modal-container .insira{
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+            font-size: 1rem;
+            color: #444852;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            background-color: #1166ca;
+            color: white;
+            font-size: 16px;
+            margin-top: -15Px;
+            height: 40px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .buttons{
+            gap: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        #file-upload{
+            width: 560px;
+            height: 200px;
+            margin-bottom: 10px;
+            margin: 0.6rem 0;
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 1px 1px 6px #0000001c;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -676,6 +797,7 @@
                     newCard.classList.add("card");
                     newCard.innerHTML = `
                         <div>
+                            <div class="entrega">Envie uma solicitação para a ONG!</div>
                             <div class="titulo-card">
                                 <h4>${element.titulo}</h4>
                             </div>
@@ -734,47 +856,47 @@
             projectContainer.textContent = ''; // Limpa o container antes de adicionar os novos cards
 
             projetos.forEach((element, index) => {
-                if (element.iniciado == true) {
-                    const newCard = document.createElement("div");
-                    newCard.classList.add("card");
+                const newCard = document.createElement("div");
+                newCard.classList.add("card");
+
+                if (element.iniciado) {
                     newCard.innerHTML = `
-                    <div>
-                        <div class="img-container" id="img-container-${index}">
-                            <img src="../CSS/imagens/circulo.png" alt="" class="circulo-img">
+                        <div>
+                            <div class="entrega" id="img-container-${index}">A ONG está aguardando a entrega!</div>
+                            <div class="titulo-card">
+                                <h4 id="titulo-${index}">${element.titulo}</h4>
+                            </div>
+                            <p><b>Causa:</b> ${element.causa}</p>
+                            <p><b>Descrição:</b> ${element.descricao}</p>
+                            <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
+                            <button class="btn-finalizar" onclick="finalizarProjeto(${element.problemaId}, ${element.ongId})">Finalizar Projeto</button>
+
                         </div>
-                        <div class="titulo-card">
-                            <h4 id="titulo-${index}">${element.titulo}</h4>
-                        </div>
-                        <p><b>Causa:</b> ${element.causa}</p>
-                        <p><b>Descrição:</b> ${element.descricao}</p>
-                        <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
-                        <button class="btn-finalizar" onclick="finalizarProjeto(${index}, ${element.id})">Finalizar Projeto</button>
-                    </div>
-                `;
-                    projectContainer.appendChild(newCard);
+                    `;
                 } else {
-                    const newCard = document.createElement("div");
-                    newCard.classList.add("card");
                     newCard.innerHTML = `
-                    <div>
-                        <div class="img-container" id="img-container-${index}"></div>
-                        <div class="titulo-card">
-                            <h4 id="titulo-${index}">${element.titulo}</h4>
+                        <div>
+                            <div class="aceito" id="img-container-${index}">A ONG aceitou sua solicitação!</div>
+                            <div class="titulo-card">
+                                <h4 id="titulo-${index}">${element.titulo}</h4>
+                            </div>
+                            <p><b>Causa:</b> ${element.causa}</p>
+                            <p><b>Descrição:</b> ${element.descricao}</p>
+                            <button class="btn-iniciar" onclick="iniciarProjeto(${index}, ${element.id})">Iniciar Desenvolvimento</button>
                         </div>
-                        <p><b>Causa:</b> ${element.causa}</p>
-                        <p><b>Descrição:</b> ${element.descricao}</p>
-                        <button class="btn-iniciar" onclick="iniciarProjeto(${index}, ${element.id})">Iniciar Desenvolvimento</button>
-                    </div>
-                `;
-                    projectContainer.appendChild(newCard);
+                    `;
                 }
 
+                projectContainer.appendChild(newCard);
             });
         }
-
         async function mostrarDetalhes(problemaId, ongId) {
             try {
-                const detalhesContainer = document.getElementById("detalhes-container");
+                const overlay = document.createElement("div");
+                overlay.classList.add("modal-overlay");
+
+                const modalContainer = document.createElement("div");
+                modalContainer.classList.add("modal-container");
 
                 const [problema, ong] = await Promise.all([
                     fetch(`${problemaApiUrl}/${problemaId}`).then(res => res.json()),
@@ -784,7 +906,7 @@
                 console.log('Detalhes do problema:', problema); // Log dos dados do problema
                 console.log('Detalhes da ONG:', ong); // Log dos dados da ONG
 
-                detalhesContainer.innerHTML = `
+                modalContainer.innerHTML = `
                     <div class="detalhes">
                         <h2>Detalhes do Problema</h2>
                         <p><b>Título:</b> ${problema.titulo}</p>
@@ -804,6 +926,9 @@
                     </div>
                 `;
 
+                document.body.appendChild(overlay);
+                document.body.appendChild(modalContainer);
+
                 detalhesContainer.style.display = 'block';
             } catch (error) {
                 console.error('Erro ao carregar detalhes:', error);
@@ -812,14 +937,16 @@
 
         // Função para fechar os detalhes
         function fecharDetalhes() {
-            const detalhesContainer = document.getElementById("detalhes-container");
-            detalhesContainer.innerHTML = '';
+            const overlay = document.querySelector(".modal-overlay");
+            const modalContainer = document.querySelector(".modal-container");
+            overlay.remove();
+            modalContainer.remove();
+
             detalhesContainer.style.display = 'none';
         }
 
         // Função para selecionar um problema
         function selecionarProblema(problemaId) {
-            // Busca o elemento do card do problema selecionado
             fetch(`${problemaApiUrl}/${problemaId}`, {
                 method: 'PUT',
                 headers: {
@@ -834,7 +961,8 @@
                             title: 'Problema Selecionado!',
                             text: 'Envie uma solicitação para a ong e aguarde a resposta.'
                         }).then(() => {
-                            window.location.href = 'homeAluno.html';
+                            // window.location.href = 'homeAluno.html';
+                            carregaDados();
                         });
                     } else {
                         throw new Error('Erro ao selecionar problema.');
@@ -893,81 +1021,113 @@
         });
     }
     
-        function iniciarProjeto(index, id) {
-            const imgContainer = document.getElementById(`img-container-${index}`);
-            if (!imgContainer.querySelector('.circulo-img')) {  // Evita adicionar a imagem mais de uma vez
-                const img = document.createElement('img');
-                img.src = '../CSS/Imagens/circulo.png';
-                img.alt = 'Ícone de Círculo';
-                img.classList.add('circulo-img');
-                imgContainer.appendChild(img);
-            }
-
-            // Atualiza o atributo desenvolvimento na API
-            fetch(`https://664f32d7fafad45dfae2c56d.mockapi.io/api/v1/projeto/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ iniciado: true })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Erro HTTP! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Projeto atualizado:', data);
-                const senhaCorreta = "s";  
-                Swal.fire({
-                    title: "Insira a senha definida para equipe:",
-                    input: "password",
-                    inputAttributes: {
-                        class: "swal2-input minha-classe-personalizada",
-                    },
-                    showCancelButton: true,
-                    confirmButtonText: "Confirmar",
-                    cancelButtonText: "Cancelar",
-                }).then(result => { 
-                    if (result.isConfirmed) {
-                        const senhaInserida = result.value;
-
-                        if (senhaInserida === senhaCorreta) {   
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Desenvolvimento Iniciado!',
-                                text: 'O desenvolvimento foi iniciado com sucesso.'
-                            }).then(() => {
-                                window.location.href = 'homeAluno.html';
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Senha Incorreta',
-                                text: 'A senha inserida está incorreta. Tente novamente.'
-                            });
-                        }
-                    }
-                }).catch(error => {
-                    console.error('Erro ao atualizar projeto:', error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Erro',
-                        text: 'Ocorreu um erro ao iniciar o desenvolvimento. Tente novamente.'
-                    });
-                });
-            })
-            .catch(error => {
-                console.error('Erro ao fazer requisição:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Erro',
-                    text: 'Ocorreu um erro ao fazer a requisição. Tente novamente.'
-                });
-            });
-
+    function iniciarProjeto(index, id) {
+        const imgContainer = document.getElementById(`img-container-${index}`);
+        if (!imgContainer.querySelector('.circulo-img')) {  // Evita adicionar a imagem mais de uma vez
+            const img = document.createElement('img');
+            img.src = '../CSS/Imagens/circulo.png';
+            img.alt = 'Ícone de Círculo';
+            img.classList.add('circulo-img');
+            imgContainer.appendChild(img);
         }
+
+        // Atualiza o atributo desenvolvimento na API
+        fetch(`https://664f32d7fafad45dfae2c56d.mockapi.io/api/v1/projeto/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ iniciado: true })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro HTTP! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Projeto atualizado:', data);
+            const senhaCorreta = "s";  
+            Swal.fire({
+                title: "Insira a senha definida para equipe:",
+                input: "password",
+                inputAttributes: {
+                    class: "swal2-input minha-classe-personalizada",
+                },
+                showCancelButton: true,
+                confirmButtonText: "Confirmar",
+                cancelButtonText: "Cancelar",
+            }).then(result => {
+                if (result.isConfirmed) {
+                    const senhaInserida = result.value;
+
+                    if (senhaInserida === senhaCorreta) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Desenvolvimento Iniciado!',
+                            text: 'O desenvolvimento foi iniciado com sucesso.'
+                        }).then(() => {
+                            window.location.href = 'homeAluno.html';
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Senha Incorreta',
+                            text: 'A senha inserida está incorreta. Tente novamente.'
+                        });
+                    }
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao atualizar projeto:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: 'Ocorreu um erro ao iniciar o desenvolvimento. Tente novamente.'
+            });
+        });
+    }
+
+    async function finalizarProjeto(problemaId, ongId) {
+        try {
+            const overlay = document.createElement("div");
+            overlay.classList.add("modal-overlay");
+
+            const modalContainer = document.createElement("div");
+            modalContainer.classList.add("modal-container");
+
+            modalContainer.innerHTML = `
+                <h3>Entregar Projeto</h3>
+                
+                <div class="insira">Insira todos os arquivos do projeto, de preferência em .zip</div>
+                <input type="file" id="file-upload" accept=".png, .jpg, .jpeg, .pdf" multiple>
+                <label for="ajuda">Faça um passo a passo para ONG utilizar seu projeto:</label>
+                <textarea name="ajuda" id="ajuda"></textarea>
+                <div class="buttons">
+                    <button class="btn-entregar" onclick="entregarArquivos(${problemaId})">Entregar</button>
+                    <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
+                </div>
+            `;
+
+            document.body.appendChild(overlay);
+            document.body.appendChild(modalContainer);
+        } catch (error) {
+            console.error('Erro ao carregar detalhes:', error);
+        }
+    }
+
+    function fecharModal() {
+        const overlay = document.querySelector(".modal-overlay");
+        const modalContainer = document.querySelector(".modal-container");
+        if (overlay) overlay.remove();
+        if (modalContainer) modalContainer.remove();
+    }
+
+    async function entregarArquivos(problemaId) {
+        console.log(`Entregando arquivos para o problema ID: ${problemaId}`);
+        fecharModal();
+    }
 
         function abrirChat() {
             let overlay =
