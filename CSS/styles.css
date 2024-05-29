@@ -294,11 +294,11 @@ textarea:focus-visible {
     
     .container{
         width: 100vw;
-        height: 100%;
+        height: 100vh;
     }
     .form{
         width: 100vw;
-        height: 107%;
+        height: 100%;
         border-radius: 0;
     }
     .input-group{
