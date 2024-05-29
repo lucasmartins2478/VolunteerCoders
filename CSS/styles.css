@@ -311,6 +311,9 @@ textarea:focus-visible {
         padding-left: 1rem;
         padding-right: 1rem;
     }
+    .title{
+        margin-top: 1rem;
+    }
 }
 @media screen and (max-width: 800px) {
     .container {
