@@ -294,11 +294,11 @@ textarea:focus-visible {
     
     .container{
         width: 100vw;
-        height: 98vh;
+        height: 100vh;
     }
     .form{
         width: 100vw;
-        height: 98vh;
+        height: 115vh;
         border-radius: 0;
     }
     .input-group{
@@ -310,9 +310,6 @@ textarea:focus-visible {
     .continue-button{
         padding-left: 1rem;
         padding-right: 1rem;
-    }
-    .title{
-        margin-top: 1rem;
     }
 }
 @media screen and (max-width: 800px) {
