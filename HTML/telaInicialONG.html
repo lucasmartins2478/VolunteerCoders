@@ -696,7 +696,7 @@
                            Chat
                         </button>
                         <button class="btn-aceite" onclick="aceitarProjeto('${element.id}')"></button>
-                        <button class="btn-rejeite" onclick='btnRejeitar(this)'></button>
+                        <button class="btn-rejeite" onclick="rejeitarProjeto('${element.id}')"></button>
                     `;
 
                     selecionadoConteiner.appendChild(newCard);
@@ -741,7 +741,7 @@
                     `;
                     cardContainer.appendChild(newCard);
                 }else{
-                    
+
                 }
             });
         }
@@ -818,7 +818,7 @@
                 });
         }
         
-        function btnRejeitar(btn) {
+        function rejeitarProjeto(problemaId) {
             Swal.fire({
                 title: "Deseja recusar proposta?",
                 text: "Ao clicar em Sim você estará recusando a proposta de projeto da equipe. Gostaria de fazer isso?",
@@ -832,21 +832,22 @@
                         title: "Sucesso!",
                         text: "Recusa realizada com sucesso e a equipe foi notificada, aguarde outra equipe manifestar interesse!",
                     }).then(() => {
-                        const card = btn.closest(".card");
-                        if (card) {
-                            card.remove();
-                            localStorage.setItem('problemaRemovido', 'true');
-                        }
-                        // window.onload = function() {
-                        //     const problemaRemovido = localStorage.getItem('problemaRemovido');
-                        //     if (problemaRemovido === 'true') {
-                        //         // Remove todos os cards de problemas disponíveis da tela
-                        //         const cards = document.querySelectorAll(".card");
-                        //         cards.forEach(card => {
-                        //             card.remove();
-                        //         });
-                        //     }
-                        // };
+                        fetch(`${problemaApiUrl}/${problemaId}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ selecionado: false,
+                            solicitado:false })
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    
+                                } else {
+                                    throw new Error('Erro ao selecionar problema.');
+                                }
+                            })
+                            .catch(error => console.error('Erro:', error));
                      });
                 }
             });
