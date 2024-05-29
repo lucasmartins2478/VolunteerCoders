@@ -1156,6 +1156,78 @@
             fecharModal();
         }
 
+        async function entregarArquivos(projetosId) {
+            const fileList = document.getElementById('file-list');
+            if (fileList.children.length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Nenhum arquivo encontrado',
+                    text: 'Por favor, adicione arquivos antes de entregar o projeto.'
+                });
+                return;
+            }
+        
+            const senhaCorreta = "s";  
+            Swal.fire({
+                title: "Insira a senha definida pela equipe:",
+                input: "password",
+                inputAttributes: {
+                    class: "swal2-input minha-classe-personalizada",
+                },
+                showCancelButton: true,
+                confirmButtonText: "Confirmar",
+                cancelButtonText: "Cancelar",
+            }).then(result => {
+                if (result.isConfirmed) {
+                    const senhaInserida = result.value;
+        
+                    if (senhaInserida === senhaCorreta) {
+                        console.log(`Senha correta inserida, projetoId: ${projetosId}`);
+        
+                        fetch(`https://664f32d7fafad45dfae2c56d.mockapi.io/api/v1/projeto/${projetosId}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ entregue: true })
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json();
+                            } else {
+                                console.error('Erro ao atualizar o projeto, status:', response.status);
+                                throw new Error('Erro ao atualizar o projeto.');
+                            }
+                        })
+                        .then(data => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Projeto entregue!',
+                                text: 'Seu projeto foi entregue e enviado para a ONG, parabéns!!.'
+                            }).then(() => {
+                                window.location.href = 'homeAluno.html';
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Erro ao enviar solicitação:', error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Erro',
+                                text: 'Houve um problema ao enviar seu projeto. Tente novamente mais tarde.'
+                            });
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Senha incorreta',
+                            text: 'A senha inserida está incorreta. Tente novamente.'
+                        });
+                    }
+                }
+            });
+            fecharModal();
+        }
+
         function abrirChat() {
             let overlay =
                 document.querySelector(".overlay");
