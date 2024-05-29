@@ -291,72 +291,54 @@ textarea:focus-visible {
 }
 
 @media screen and (max-width: 1064px) {
-    body {
-        width: 100%;
-        height: 100%;
-        padding: 0 0 0 0;
-        margin: 0%;
-    }
-    .title h2 {
-        font-size: 4rem;
-    }
-    .container {
-        width: 100%;
+    
+    .container{
+        width: 100vw;
         height: 100vh;
-        padding: 1rem 1rem;
-        border-radius: 0px;
+    }
+    .form{
+        width: 100vw;
+        height: 126vh;
+        border-radius: 0;
+    }
+    .input-group{
+        padding: 1rem;
+    }
+    .form-header{
+        padding: 1rem;
+    }
+    .continue-button{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+@media screen and (max-width: 800px) {
+    .container {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0%;
+        margin: 0;
+        padding: 0%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
     }
     .form {
-        width: 100%;
-        border-radius: 0px;
-        font-size: 1rem;
+        margin: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 0%;
     }
-
-    .input-group {
-        width: 100%;
-        height: 100%;
-        flex-direction: column;
-        z-index: 5;
-        padding-right: 5rem;
-        padding-left: 1rem;
-        max-height: 30rem;
-        overflow-y: scroll;
-        flex-wrap: nowrap;
+    .title h2 {
+        font-size: 2.6rem;
+    }
+    .select-user select {
+        height: 3rem;
     }
     .input-box input {
-        width: 20rem;
-    }
-    .input-box input::placeholder {
-        font-size: 1.3rem;
-    }
-    @media screen and (max-width: 800px) {
-        .container {
-            width: 100vw;
-            height: 100vh;
-            border-radius: 0%;
-            margin: 0;
-            padding: 0%;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-        }
-        .form {
-            margin: none;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            padding: 0%;
-        }
-        .title h2 {
-            font-size: 2.6rem;
-        }
-        .select-user select {
-            height: 3rem;
-        }
-        .input-box input {
-            margin: 0.1 0;
-            width: 16rem;
-        }
+        margin: 0.1 0;
+        width: 16rem;
     }
 }
 

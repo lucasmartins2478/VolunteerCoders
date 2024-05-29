@@ -675,11 +675,9 @@
             cardContainer.textContent = ''; // Limpa o container antes de adicionar os novos cards
             let selecionadoConteiner = document.querySelector('.select-container');
             selecionadoConteiner.textContent = '';
-
+ 
             problemas.forEach(element => {
-                if(element.aceito == true){
-
-                }
+                
                 if (element.solicitado == true && element.selecionado == true && element.aceito == false) {
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
