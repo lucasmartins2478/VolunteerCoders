@@ -298,7 +298,7 @@ textarea:focus-visible {
     }
     .form{
         width: 100vw;
-        height: 126vh;
+        height: 100vh;
         border-radius: 0;
     }
     .input-group{
