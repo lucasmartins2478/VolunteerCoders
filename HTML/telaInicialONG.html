@@ -677,26 +677,10 @@
             selecionadoConteiner.textContent = '';
 
             problemas.forEach(element => {
-                const newCard = document.createElement("div");
-                newCard.classList.add("card");
-                newCard.innerHTML = `
-                        <div>
-                            <div class="titulo-card">
-                                <h4>${element.titulo}</h4>
-                                <button onclick="excluirCard(${element.id})">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </div>
-                            <p><b>Causa:</b> ${element.causa}</p>
-                            <p><b>Descrição:</b> ${element.descricao}</p>
-                        </div>
-                        <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
-                            Detalhes
-                        </button>
+                if(element.aceito == true){
 
-                    `;
-                if (element.solicitado == true && element.selecionado == true) {
-
+                }
+                if (element.solicitado == true && element.selecionado == true && element.aceito == false) {
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
                     newCard.innerHTML = `
@@ -716,7 +700,7 @@
                     `;
 
                     selecionadoConteiner.appendChild(newCard);
-                } else if (element.selecionado) {
+                } else if (element.selecionado && element.aceito == false) {
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
                     newCard.innerHTML = `
@@ -737,14 +721,49 @@
 
 
                     cardContainer.appendChild(newCard);
-                } else {
+                } else if(element.selecionado == false && element.solicitado == false && element.aceito == false){
+                    const newCard = document.createElement("div");
+                    newCard.classList.add("card");
+                    newCard.innerHTML = `
+                        <div>
+                            <div class="titulo-card">
+                                <h4>${element.titulo}</h4>
+                                <button onclick='mensagemSelecionado()'>
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                            <p><b>Causa:</b> ${element.causa}</p>
+                            <p><b>Descrição:</b> ${element.descricao}</p>
+                        </div>
+                        <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
+                            Detalhes
+                        </button>
+                    `;
                     cardContainer.appendChild(newCard);
+                }else{
+                    
                 }
             });
         }
 
         function aceitarProjeto(problemaId) {
             // Busca os dados do problema correspondente na API de problemas
+            fetch(`${problemaApiUrl}/${problemaId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ aceito: true })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        
+                    } else {
+                        throw new Error('Erro ao selecionar problema.');
+                    }
+                })
+                .catch(error => console.error('Erro:', error));
+
             fetch(`${problemaApiUrl}/${problemaId}`)
                 .then(response => {
                     if (!response.ok) {
@@ -774,9 +793,6 @@
                     }).then(response => response.json()).then(data => {
 
                         // Aqui você pode adicionar código para exibir uma mensagem de sucesso ao usuário
-
-
-                        removerProblema(problemaId)
 
                         Swal.fire({
                             icon: 'success',
