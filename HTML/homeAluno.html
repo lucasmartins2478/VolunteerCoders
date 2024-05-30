@@ -661,6 +661,72 @@
             box-shadow: 1px 1px 6px #0000001c;
             font-size: 1rem;
         }
+
+        .btn-finalizar-selecao {
+            display: inline-flex;
+            align-items: center;
+            background-color: #fff;
+            box-shadow: 1px 1px 6px #0000001c;
+            color: #1166ca;
+            margin-left: 10px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .btn-finalizar-selecao:hover{
+            background-color: #eaf4ff;
+        }
+
+        .btn-finalizar-selecao img.add {
+            margin-left: 8px; /* Espaço entre o texto e a imagem */
+            width: 20px;
+            height: 20px;
+        }
+
+        #file-upload {
+            max-height: 200px; /* Altura máxima da div */
+            overflow-y: auto; /* Ativa a rolagem vertical */
+            /* border: 1px solid #ccc; Borda opcional para visualização */
+            padding: 10px; /* Espaçamento interno */
+            box-shadow: 1px 1px 6px #ccc;
+        }
+
+        #file-list a:hover {
+            text-decoration: underline; /* Adiciona sublinhado ao passar o mouse sobre o link */
+        }
+
+        .btn-excluir {
+            margin-left: 10px; /* Espaço entre o botão e o link */
+            cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
+        }
+
+        #file-list div {
+            display: flex; /* Alinha os itens em linha */
+            align-items: center; /* Centraliza verticalmente */
+            margin-bottom: 5px; /* Espaçamento entre os itens */
+        }
+
+        #file-list a {
+            color: #1166ca; /* Cor do texto do link (azul) */
+            text-decoration: none; /* Remove o sublinhado do link */
+            margin-top: 10px;
+            flex-grow: 1; /* Faz o link ocupar o espaço disponível */
+            display: inline-flex;
+        }
+
+        .btn-excluir-link {
+            background: none; /* Remove o background padrão */
+            border: none; /* Remove a borda padrão */
+           display: contents;
+            cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
+        }
+
+        .fa-trash{
+            color: #000000;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 5px;
+        }
     </style>
 </head>
 
@@ -1116,7 +1182,7 @@
                 });
         }
 
-        async function finalizarProjeto(problemaId, ongId) {
+        async function finalizarProjeto(projetosId, ongId) {
             try {
                 const overlay = document.createElement("div");
                 overlay.classList.add("modal-overlay");
@@ -1128,11 +1194,15 @@
                 <h3>Entregar Projeto</h3>
                 
                 <div class="insira">Insira todos os arquivos do projeto, de preferência em .zip</div>
-                <input type="file" id="file-upload" accept=".png, .jpg, .jpeg, .pdf" multiple>
+                <div id="file-upload">
+                    <button class="btn-finalizar-selecao" onclick="document.getElementById('file-input').click();"> Adicione um arquivo <img class="add" src="../CSS/imagens/botao-adicionar.png" alt=""></button>
+                    <input type="file" id="file-input" multiple style="display: none;" onchange="listarArquivos(event)">
+                    <div id="file-list"></div> 
+                </div>               
                 <label for="ajuda">Faça um passo a passo para ONG utilizar seu projeto:</label>
-                <textarea name="ajuda" id="ajuda"></textarea>
+                <textarea name="ajuda" id="ajuda" placeholder="Explique para a ONG como executar ou utilizar esses arquivos que estão sendo submetidos pela equipe."></textarea>
                 <div class="buttons">
-                    <button class="btn-entregar" onclick="entregarArquivos(${problemaId})">Entregar</button>
+                    <button class="btn-entregar" onclick="entregarArquivos(problemaId)">Entregar</button>
                     <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
                 </div>
             `;
@@ -1151,8 +1221,8 @@
             if (modalContainer) modalContainer.remove();
         }
 
-        async function entregarArquivos(problemaId) {
-            console.log(`Entregando arquivos para o problema ID: ${problemaId}`);
+        async function entregarArquivos(projetosId) {
+            console.log(`Entregando arquivos para o problema ID: ${projetosId}`);
             fecharModal();
         }
 
@@ -1226,6 +1296,32 @@
                 }
             });
             fecharModal();
+        }
+
+        function listarArquivos(event) {
+            const fileList = document.getElementById('file-list');
+            const files = event.target.files;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const listItem = document.createElement('div');
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteButton.classList.add('btn-excluir-link');
+                deleteButton.onclick = function() {
+                    fileList.removeChild(listItem);
+                };
+
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(file);
+                link.textContent = file.name;
+                link.target = '_blank';
+
+                listItem.appendChild(deleteButton);
+                listItem.appendChild(link);
+                fileList.appendChild(listItem);
+            }
         }
 
         function abrirChat() {
