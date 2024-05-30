@@ -661,6 +661,72 @@
             box-shadow: 1px 1px 6px #0000001c;
             font-size: 1rem;
         }
+
+        .btn-finalizar-selecao {
+            display: inline-flex;
+            align-items: center;
+            background-color: #fff;
+            box-shadow: 1px 1px 6px #0000001c;
+            color: #1166ca;
+            margin-left: 10px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .btn-finalizar-selecao:hover{
+            background-color: #eaf4ff;
+        }
+
+        .btn-finalizar-selecao img.add {
+            margin-left: 8px; /* Espaço entre o texto e a imagem */
+            width: 20px;
+            height: 20px;
+        }
+
+        #file-upload {
+            max-height: 200px; /* Altura máxima da div */
+            overflow-y: auto; /* Ativa a rolagem vertical */
+            /* border: 1px solid #ccc; Borda opcional para visualização */
+            padding: 10px; /* Espaçamento interno */
+            box-shadow: 1px 1px 6px #ccc;
+        }
+
+        #file-list a:hover {
+            text-decoration: underline; /* Adiciona sublinhado ao passar o mouse sobre o link */
+        }
+
+        .btn-excluir {
+            margin-left: 10px; /* Espaço entre o botão e o link */
+            cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
+        }
+
+        #file-list div {
+            display: flex; /* Alinha os itens em linha */
+            align-items: center; /* Centraliza verticalmente */
+            margin-bottom: 5px; /* Espaçamento entre os itens */
+        }
+
+        #file-list a {
+            color: #1166ca; /* Cor do texto do link (azul) */
+            text-decoration: none; /* Remove o sublinhado do link */
+            margin-top: 10px;
+            flex-grow: 1; /* Faz o link ocupar o espaço disponível */
+            display: inline-flex;
+        }
+
+        .btn-excluir-link {
+            background: none; /* Remove o background padrão */
+            border: none; /* Remove a borda padrão */
+           display: contents;
+            cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
+        }
+
+        .fa-trash{
+            color: #000000;
+            margin-top: 10px;
+            margin-left: 10px;
+            margin-right: 5px;
+        }
     </style>
 </head>
 
@@ -867,56 +933,10 @@
 
 
         // Função para carregar dados dos projetos
-        function carregaProjetos() {
-            fetch(projetoApiUrl)
-                .then(response => response.json())
-                .then(dados => {
-                    console.log('Projetos carregados:', dados); // Log dos dados carregados
-                    montaProjetos(dados);
-                })
-                .catch(error => console.error('Erro ao carregar dados:', error));
-        }
+
 
         // Função para montar os cards de projetos na tela
-        function montaProjetos(projetos) {
-            let projectContainer = document.querySelector(".projeto-container");
-            projectContainer.textContent = ''; // Limpa o container antes de adicionar os novos cards
-
-            projetos.forEach((element, index) => {
-                const newCard = document.createElement("div");
-                newCard.classList.add("card");
-
-                if (element.iniciado) {
-                    newCard.innerHTML = `
-                        <div>
-                            <div class="entrega" id="img-container-${index}">A ONG está aguardando a entrega!</div>
-                            <div class="titulo-card">
-                                <h4 id="titulo-${index}">${element.titulo}</h4>
-                            </div>
-                            <p><b>Causa:</b> ${element.causa}</p>
-                            <p><b>Descrição:</b> ${element.descricao}</p>
-                            <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
-                            <button class="btn-finalizar" onclick="finalizarProjeto(${element.problemaId}, ${element.ongId})">Finalizar Projeto</button>
-
-                        </div>
-                    `;
-                } else {
-                    newCard.innerHTML = `
-                        <div>
-                            <div class="aceito" id="img-container-${index}">A ONG aceitou sua solicitação!</div>
-                            <div class="titulo-card">
-                                <h4 id="titulo-${index}">${element.titulo}</h4>
-                            </div>
-                            <p><b>Causa:</b> ${element.causa}</p>
-                            <p><b>Descrição:</b> ${element.descricao}</p>
-                            <button class="btn-iniciar" onclick="iniciarProjeto(${index}, ${element.id})">Iniciar Desenvolvimento</button>
-                        </div>
-                    `;
-                }
-
-                projectContainer.appendChild(newCard);
-            });
-        }
+    
         async function mostrarDetalhes(problemaId, ongId) {
             try {
                 const overlay = document.createElement("div");
@@ -1116,117 +1136,13 @@
                 });
         }
 
-        async function finalizarProjeto(problemaId, ongId) {
-            try {
-                const overlay = document.createElement("div");
-                overlay.classList.add("modal-overlay");
-
-                const modalContainer = document.createElement("div");
-                modalContainer.classList.add("modal-container");
-
-                modalContainer.innerHTML = `
-                <h3>Entregar Projeto</h3>
-                
-                <div class="insira">Insira todos os arquivos do projeto, de preferência em .zip</div>
-                <input type="file" id="file-upload" accept=".png, .jpg, .jpeg, .pdf" multiple>
-                <label for="ajuda">Faça um passo a passo para ONG utilizar seu projeto:</label>
-                <textarea name="ajuda" id="ajuda"></textarea>
-                <div class="buttons">
-                    <button class="btn-entregar" onclick="entregarArquivos(${problemaId})">Entregar</button>
-                    <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
-                </div>
-            `;
-
-                document.body.appendChild(overlay);
-                document.body.appendChild(modalContainer);
-            } catch (error) {
-                console.error('Erro ao carregar detalhes:', error);
-            }
-        }
-
-        function fecharModal() {
-            const overlay = document.querySelector(".modal-overlay");
-            const modalContainer = document.querySelector(".modal-container");
-            if (overlay) overlay.remove();
-            if (modalContainer) modalContainer.remove();
-        }
-
-        async function entregarArquivos(problemaId) {
-            console.log(`Entregando arquivos para o problema ID: ${problemaId}`);
-            fecharModal();
-        }
-
-        async function entregarArquivos(projetosId) {
-            const fileList = document.getElementById('file-list');
-            if (fileList.children.length === 0) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Nenhum arquivo encontrado',
-                    text: 'Por favor, adicione arquivos antes de entregar o projeto.'
-                });
-                return;
-            }
         
-            const senhaCorreta = "s";  
-            Swal.fire({
-                title: "Insira a senha definida pela equipe:",
-                input: "password",
-                inputAttributes: {
-                    class: "swal2-input minha-classe-personalizada",
-                },
-                showCancelButton: true,
-                confirmButtonText: "Confirmar",
-                cancelButtonText: "Cancelar",
-            }).then(result => {
-                if (result.isConfirmed) {
-                    const senhaInserida = result.value;
+
+
         
-                    if (senhaInserida === senhaCorreta) {
-                        console.log(`Senha correta inserida, projetoId: ${projetosId}`);
+
+
         
-                        fetch(`https://664f32d7fafad45dfae2c56d.mockapi.io/api/v1/projeto/${projetosId}`, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({ entregue: true })
-                        })
-                        .then(response => {
-                            if (response.ok) {
-                                return response.json();
-                            } else {
-                                console.error('Erro ao atualizar o projeto, status:', response.status);
-                                throw new Error('Erro ao atualizar o projeto.');
-                            }
-                        })
-                        .then(data => {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Projeto entregue!',
-                                text: 'Seu projeto foi entregue e enviado para a ONG, parabéns!!.'
-                            }).then(() => {
-                                window.location.href = 'homeAluno.html';
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Erro ao enviar solicitação:', error);
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Erro',
-                                text: 'Houve um problema ao enviar seu projeto. Tente novamente mais tarde.'
-                            });
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Senha incorreta',
-                            text: 'A senha inserida está incorreta. Tente novamente.'
-                        });
-                    }
-                }
-            });
-            fecharModal();
-        }
 
         function abrirChat() {
             let overlay =
@@ -1369,6 +1285,132 @@
 
             document.body.appendChild(offcanvasDiv);
         };
+
+
+        function entregarProjeto(projetoId) {
+            fetch(`${projetoApiUrl}/${projetoId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ entregue: true })
+            })
+            .then(response => {
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Projeto Entregue!',
+                        text: 'O projeto foi atualizado para entregue.'
+                    }).then(() => {
+                        window.location.href = 'homeAluno.html'; // Ajuste o redirecionamento conforme necessário
+                    });
+                } else {
+                    throw new Error('Erro ao atualizar projeto.');
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        }
+
+        function listarArquivos(event) {
+            const fileList = event.target.files;
+            const fileDisplay = document.getElementById('file-list');
+            fileDisplay.innerHTML = '';
+            for (let i = 0; i < fileList.length; i++) {
+                const file = fileList[i];
+                const listItem = document.createElement('div');
+                listItem.textContent = file.name;
+                fileDisplay.appendChild(listItem);
+            }
+        }
+
+        function abrirModal(projetoId) {
+            const overlay = document.createElement("div");
+            overlay.classList.add("modal-overlay");
+
+            const modalContainer = document.createElement("div");
+            modalContainer.classList.add("modal-container");
+
+            modalContainer.innerHTML = `
+                <h3>Entregar Projeto</h3>
+                <div class="insira">Insira todos os arquivos do projeto, de preferência em .zip</div>
+                <div id="file-upload">
+                    <button class="btn-finalizar-selecao" onclick="document.getElementById('file-input').click();"> Adicione um arquivo <img class="add" src="../CSS/imagens/botao-adicionar.png" alt=""></button>
+                    <input type="file" id="file-input" multiple style="display: none;" onchange="listarArquivos(event)">
+                    <div id="file-list"></div>
+                </div>
+                <label for="ajuda">Faça um passo a passo para ONG utilizar seu projeto:</label>
+                <textarea name="ajuda" id="ajuda" placeholder="Explique para a ONG como executar ou utilizar esses arquivos que estão sendo submetidos pela equipe."></textarea>
+                <div class="buttons">
+                    <button class="btn-entregar" onclick="entregarProjeto(${projetoId})">Entregar</button>
+                    <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
+                </div>
+            `;
+
+            document.body.appendChild(overlay);
+            document.body.appendChild(modalContainer);
+
+            overlay.addEventListener('click', fecharModal);
+        }
+
+        function fecharModal() {
+            const overlay = document.querySelector('.modal-overlay');
+            const modalContainer = document.querySelector('.modal-container');
+            if (overlay) overlay.remove();
+            if (modalContainer) modalContainer.remove();
+        }
+
+        function montaProjetos(projetos) {
+            let projectContainer = document.querySelector(".projeto-container");
+            projectContainer.textContent = ''; // Limpa o container antes de adicionar os novos cards
+
+            projetos.forEach((element, index) => {
+                const newCard = document.createElement("div");
+                newCard.classList.add("card");
+
+                if (element.iniciado) {
+                    newCard.innerHTML = `
+                        <div>
+                            <div class="entrega" id="img-container-${index}">A ONG está aguardando a entrega!</div>
+                            <div class="titulo-card">
+                                <h4 id="titulo-${index}">${element.titulo}</h4>
+                            </div>
+                            <p><b>Causa:</b> ${element.causa}</p>
+                            <p><b>Descrição:</b> ${element.descricao}</p>
+                            <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
+                            <button class="btn-finalizar" onclick="abrirModal(${element.id})">Finalizar Projeto</button>
+                        </div>
+                    `;
+                } else {
+                    newCard.innerHTML = `
+                        <div>
+                            <div class="aceito" id="img-container-${index}">A ONG aceitou sua solicitação!</div>
+                            <div class="titulo-card">
+                                <h4 id="titulo-${index}">${element.titulo}</h4>
+                            </div>
+                            <p><b>Causa:</b> ${element.causa}</p>
+                            <p><b>Descrição:</b> ${element.descricao}</p>
+                            <button class="btn-iniciar" onclick="iniciarProjeto(${index}, ${element.id})">Iniciar Desenvolvimento</button>
+                        </div>
+                    `;
+                }
+
+                projectContainer.appendChild(newCard);
+            });
+        }
+
+        function carregarProjetos() {
+            fetch(projetoApiUrl)
+                .then(response => response.json())
+                .then(projetos => {
+                    montaProjetos(projetos);
+                })
+                .catch(error => console.error('Erro ao carregar projetos:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarProjetos);
+
+
+
 
     </script>
 </body>

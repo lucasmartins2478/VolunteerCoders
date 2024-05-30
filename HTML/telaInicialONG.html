@@ -82,7 +82,7 @@
             margin-top: 50px;
         }
 
-        .btn-aguardando{
+        .btn-aguardando {
             background-color: #7e8792;
             width: 350px;
             height: 40px;
@@ -167,6 +167,7 @@
         .problemas-cadastrados {
             height: 18rem;
         }
+
         .card-container {
             display: flex;
             flex-wrap: nowrap;
@@ -188,7 +189,7 @@
             height: 16.5rem;
         }
 
-        .projeto-container{
+        .projeto-container {
             display: flex;
             flex-wrap: nowrap;
             gap: 20px;
@@ -299,6 +300,7 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
+
         .img-container {
             text-align: right;
             width: 50px;
@@ -315,7 +317,7 @@
             margin-bottom: 15px;
             height: 20px;
             display: flex;
-            align-items: center; 
+            align-items: center;
             justify-content: center;
             margin-left: -280px;
         }
@@ -330,7 +332,7 @@
             margin-bottom: 15px;
             height: 20px;
             display: flex;
-            align-items: center; 
+            align-items: center;
             justify-content: center;
             margin-left: -305px;
         }
@@ -421,7 +423,8 @@
             background-repeat: no-repeat;
             background-position: right 10px center;
         }
-        .card{
+
+        .card {
             height: 14rem;
         }
 
@@ -541,7 +544,7 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(5px);
-            z-index: 1000; 
+            z-index: 1000;
         }
 
         .modal-container {
@@ -553,7 +556,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
-            z-index: 1001; 
+            z-index: 1001;
         }
     </style>
 </head>
@@ -675,9 +678,9 @@
             cardContainer.textContent = ''; // Limpa o container antes de adicionar os novos cards
             let selecionadoConteiner = document.querySelector('.select-container');
             selecionadoConteiner.textContent = '';
- 
+
             problemas.forEach(element => {
-                
+
                 if (element.solicitado == true && element.selecionado == true && element.aceito == false) {
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
@@ -719,7 +722,7 @@
 
 
                     cardContainer.appendChild(newCard);
-                } else if(element.selecionado == false && element.solicitado == false && element.aceito == false){
+                } else if (element.selecionado == false && element.solicitado == false && element.aceito == false) {
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
                     newCard.innerHTML = `
@@ -738,7 +741,7 @@
                         </button>
                     `;
                     cardContainer.appendChild(newCard);
-                }else{
+                } else {
 
                 }
             });
@@ -755,7 +758,7 @@
             })
                 .then(response => {
                     if (response.ok) {
-                        
+
                     } else {
                         throw new Error('Erro ao selecionar problema.');
                     }
@@ -815,7 +818,7 @@
                     alert('Erro ao buscar os dados do problema. Por favor, tente novamente mais tarde.');
                 });
         }
-        
+
         function rejeitarProjeto(problemaId) {
             Swal.fire({
                 title: "Deseja recusar proposta?",
@@ -835,24 +838,26 @@
                             headers: {
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({ selecionado: false,
-                            solicitado:false })
+                            body: JSON.stringify({
+                                selecionado: false,
+                                solicitado: false
+                            })
                         })
                             .then(response => {
                                 if (response.ok) {
-                                    
+
                                 } else {
                                     throw new Error('Erro ao selecionar problema.');
                                 }
                             })
                             .catch(error => console.error('Erro:', error));
-                     });
+                    });
                 }
             });
         }
 
 
-        function mensagemSelecionado(){
+        function mensagemSelecionado() {
             Swal.fire({
                 icon: 'error',
                 title: 'Erro',
@@ -878,27 +883,52 @@
             projectContainer.textContent = ''; // Limpa o container antes de adicionar os novos cards
 
             projetos.forEach(element => {
-                const newCard = document.createElement("div");
-                newCard.classList.add("card");
-                const emDesenvolvimentoDiv = element.iniciado ? `<div class="em-desenvolvimento">Em desenvolvimento pela equipe!</div>` : `<div class="aindaNao">A equipe ainda não iniciou o desenvolvimento!</div>`;;
+                if (element.entregue == true) {
+                    const newCard = document.createElement("div");
+                    newCard.classList.add("card");
+                    const emDesenvolvimentoDiv = element.iniciado ? `<div class="em-desenvolvimento">A equipe finalizou o projeto!</div>` : `<div class="aindaNao">A equipe ainda não iniciou o desenvolvimento!</div>`;;
 
-                newCard.innerHTML = `
-                <div>
-                    <div class="img-container" id="img-container">
-                        ${emDesenvolvimentoDiv}
-                    </div>
-                    <div class="titulo-card">
-                        <h4>${element.titulo}</h4>
-                    </div>
-                    <p><b>Causa:</b> ${element.causa}</p>
-                    <p><b>Descrição:</b> ${element.descricao}</p>
-                </div>
-                <button class="btn-aguardando">
-                    Aguarde a entrega!
-                </button>
+                    newCard.innerHTML = `
+                            <div>
+                                <div class="img-container" id="img-container">
+                                    ${emDesenvolvimentoDiv}
+                                </div>
+                                <div class="titulo-card">
+                                    <h4>${element.titulo}</h4>
+                                </div>
+                                <p><b>Causa:</b> ${element.causa}</p>
+                                <p><b>Descrição:</b> ${element.descricao}</p>
+                            </div>
+                            <button class="btn-detalhes">
+                                Receber Arquivos
+                            </button>
                 `;
-                
-                projectContainer.appendChild(newCard);
+
+                    projectContainer.appendChild(newCard);
+                } else {
+                    const newCard = document.createElement("div");
+                    newCard.classList.add("card");
+                    const emDesenvolvimentoDiv = element.iniciado ? `<div class="em-desenvolvimento">Em desenvolvimento pela equipe!</div>` : `<div class="aindaNao">A equipe ainda não iniciou o desenvolvimento!</div>`;;
+
+                    newCard.innerHTML = `
+                            <div>
+                                <div class="img-container" id="img-container">
+                                    ${emDesenvolvimentoDiv}
+                                </div>
+                                <div class="titulo-card">
+                                    <h4>${element.titulo}</h4>
+                                </div>
+                                <p><b>Causa:</b> ${element.causa}</p>
+                                <p><b>Descrição:</b> ${element.descricao}</p>
+                            </div>
+                            <button class="btn-aguardando">
+                                Aguarde a entrega!
+                            </button>
+                `;
+
+                    projectContainer.appendChild(newCard);
+                }
+
             });
         }
 
@@ -911,7 +941,7 @@
                 return data;
             } catch (error) {
                 console.error('Erro ao carregar dados da ONG:', error);
-                throw error; 
+                throw error;
             }
         }
 
@@ -1018,7 +1048,7 @@
             const overlay = document.querySelector(".modal-overlay");
             const modalContainer = document.querySelector(".modal-container");
             overlay.remove();
-            modalContainer.remove();            
+            modalContainer.remove();
             detalhesContainer.innerHTML = '';
             detalhesContainer.style.display = 'none';
         }
