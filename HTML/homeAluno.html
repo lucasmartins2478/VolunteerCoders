@@ -1144,6 +1144,32 @@
 
         
 
+        function listarArquivos(event) {
+            const fileList = document.getElementById('file-list');
+            const files = event.target.files;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const listItem = document.createElement('div');
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteButton.classList.add('btn-excluir-link');
+                deleteButton.onclick = function() {
+                    fileList.removeChild(listItem);
+                };
+
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(file);
+                link.textContent = file.name;
+                link.target = '_blank';
+
+                listItem.appendChild(deleteButton);
+                listItem.appendChild(link);
+                fileList.appendChild(listItem);
+            }
+        }
+
         function abrirChat() {
             let overlay =
                 document.querySelector(".overlay");
