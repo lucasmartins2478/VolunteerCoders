@@ -558,6 +558,16 @@
             box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
             z-index: 1001;
         }
+
+        .receber .em-desenvolvimento{
+            border: solid 1px #1cff7f;
+            background-color: #5fff84;
+        }
+
+        .receber .aindaNao{
+            border: solid 1px #fff311;
+            background-color: #fff986;
+        }
     </style>
 </head>
 
@@ -791,18 +801,28 @@
                             'Content-Type': 'application/json' // Define o cabeçalho como JSON
                         },
                         body: JSON.stringify(projeto) // Converte o objeto problema para uma string JSON
-                    }).then(response => response.json()).then(data => {
-
-                        // Aqui você pode adicionar código para exibir uma mensagem de sucesso ao usuário
-
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Problema cadastrado com sucesso!',
-                            text: 'Os dados sensíveis de ONG e estudante são privados.'
-                        }).then(() => {
-                            window.location.href = 'telaInicialONG.html';
-                        });
-                    }).catch((error) => {
+                    })  .then(response => response.json())
+                        .then(data => {
+                            Swal.fire({
+                                icon: 'warning',
+                                title: "Deseja aceitar a proposta?",
+                                text: "Ao clicar em Sim você estará aceitando a proposta de projeto da equipe. Gostaria de fazer isso?",
+                                showCancelButton: true,
+                                confirmButtonText: "Sim",
+                                cancelButtonText: "Cancelar",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Solicitação aceita com sucesso!',
+                                        text: 'A equipe foi notificada da sua ação.'
+                                    }).then(() => {
+                                        window.location.href = 'telaInicialONG.html';
+                                    });
+                                }
+                            });
+                        })
+                    .catch((error) => {
 
                         // Aqui você pode adicionar código para exibir uma mensagem de erro ao usuário
                         Swal.fire({
@@ -886,10 +906,10 @@
                 if (element.entregue == true) {
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
-                    const emDesenvolvimentoDiv = element.iniciado ? `<div class="em-desenvolvimento">A equipe finalizou o projeto!</div>` : `<div class="aindaNao">A equipe ainda não iniciou o desenvolvimento!</div>`;;
+                    const emDesenvolvimentoDiv = element.iniciado ? `<div class="em-desenvolvimento">A equipe finalizou o projeto!</div>` : `<div class="aindaNao">A equipe ainda não iniciou o desenvolvimento!</div>`;
 
                     newCard.innerHTML = `
-                            <div>
+                            <div class="receber">
                                 <div class="img-container" id="img-container">
                                     ${emDesenvolvimentoDiv}
                                 </div>

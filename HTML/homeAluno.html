@@ -448,7 +448,7 @@
         }
 
         #selecionado {
-            background-color: gray;
+            background-color: #808080;
         }
 
         .offcanvas-title {
@@ -678,47 +678,46 @@
         }
 
         .btn-finalizar-selecao img.add {
-            margin-left: 8px; /* Espaço entre o texto e a imagem */
+            margin-left: 8px; 
             width: 20px;
             height: 20px;
         }
 
         #file-upload {
-            max-height: 200px; /* Altura máxima da div */
-            overflow-y: auto; /* Ativa a rolagem vertical */
-            /* border: 1px solid #ccc; Borda opcional para visualização */
-            padding: 10px; /* Espaçamento interno */
+            max-height: 200px; 
+            overflow-y: auto;
+            padding: 10px; 
             box-shadow: 1px 1px 6px #ccc;
         }
 
         #file-list a:hover {
-            text-decoration: underline; /* Adiciona sublinhado ao passar o mouse sobre o link */
+            text-decoration: underline;
         }
 
         .btn-excluir {
-            margin-left: 10px; /* Espaço entre o botão e o link */
-            cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
+            margin-left: 10px;
+            cursor: pointer;
         }
 
         #file-list div {
-            display: flex; /* Alinha os itens em linha */
-            align-items: center; /* Centraliza verticalmente */
-            margin-bottom: 5px; /* Espaçamento entre os itens */
+            display: flex; 
+            align-items: center; 
+            margin-bottom: 5px;
         }
 
         #file-list a {
-            color: #1166ca; /* Cor do texto do link (azul) */
-            text-decoration: none; /* Remove o sublinhado do link */
+            color: #1166ca; 
+            text-decoration: none; 
             margin-top: 10px;
-            flex-grow: 1; /* Faz o link ocupar o espaço disponível */
+            flex-grow: 1; 
             display: inline-flex;
         }
 
         .btn-excluir-link {
-            background: none; /* Remove o background padrão */
-            border: none; /* Remove a borda padrão */
+            background: none; 
+            border: none; 
            display: contents;
-            cursor: pointer; /* Altera o cursor para indicar que o botão é clicável */
+            cursor: pointer; 
         }
 
         .fa-trash{
@@ -726,6 +725,10 @@
             margin-top: 10px;
             margin-left: 10px;
             margin-right: 5px;
+        }
+
+        .btn-finalizar .btn-disabled{
+            background-color: #444852 ;
         }
     </style>
 </head>
@@ -885,11 +888,14 @@
                     `;
                     cardContainer.appendChild(newCard);
                 } else if (element.selecionado == true) {
+                    const mensagem = element.selecionado ?'Envie uma solicitação para a ONG!':'Solicitação enviada com sucesso!';
+                    const desabilitarBotao = !element.selecionado;
+
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
                     newCard.innerHTML = `
                         <div>
-                            <div class="entrega">Envie uma solicitação para a ONG!</div>
+                            <div class="entrega" id="envieSolicitacao">${mensagem}</div>
                             <div class="titulo-card">
                                 <h4>${element.titulo}</h4>
                             </div>
@@ -897,13 +903,17 @@
                             <p><b>Descrição:</b> ${element.descricao}</p>
                         </div>
                         <div class="select-buttons">
-                            <button class="btn-pedir-aceite" id="btn-selecionar" onclick="solicitarAceite(${element.id})">Solicitar aceite</button>
+                            <button class="btn-pedir-aceite" id="btn-selecionar" onclick="solicitarAceite(${element.id}, this)">Solicitar aceite</button>
                             <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
                         </div>
                     `;
 
                     selecionadoConteiner.appendChild(newCard);
 
+                    if (desabilitarBotao) {
+                        const botaoSolicitarAceite = newCard.querySelector('.btn-pedir-aceite');
+                        botaoSolicitarAceite.style.backgroundColor = '#808080'; // Defina a cor de fundo para cinza
+                    }
                 } else {
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
@@ -931,11 +941,12 @@
             });
         }
 
-
-        // Função para carregar dados dos projetos
-
-
-        // Função para montar os cards de projetos na tela
+        function atualizarTextoDiv() {
+            const divEnvieSolicitacao = document.getElementById('envieSolicitacao');
+            if (divEnvieSolicitacao) {
+                divEnvieSolicitacao.textContent = 'Solicitação enviada com sucesso!';
+            }
+        }
     
         async function mostrarDetalhes(problemaId, ongId) {
             try {
@@ -1049,6 +1060,9 @@
                                         title: 'Problema Selecionado!',
                                         text: 'Sua solicitação foi enviada para a ong, aguarde a resposta.'
                                     }).then(() => {
+                                        button.disabled = true; // Desabilita o botão
+                                        button.textContent = 'Solicitação enviada';
+                                        atualizarTextoDiv();
                                         window.location.href = 'homeAluno.html';
                                     });
                                 } else {
@@ -1135,14 +1149,6 @@
                     });
                 });
         }
-
-        
-
-
-        
-
-
-        
 
         function listarArquivos(event) {
             const fileList = document.getElementById('file-list');
@@ -1312,40 +1318,99 @@
             document.body.appendChild(offcanvasDiv);
         };
 
+        function fecharModal() {
+            const overlay = document.querySelector('.modal-overlay');
+            const modalContainer = document.querySelector('.modal-container');
+            if (overlay) overlay.remove();
+            if (modalContainer) modalContainer.remove();
+        }         
 
         function entregarProjeto(projetoId) {
-            fetch(`${projetoApiUrl}/${projetoId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ entregue: true })
-            })
-            .then(response => {
-                if (response.ok) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Projeto Entregue!',
-                        text: 'O projeto foi atualizado para entregue.'
-                    }).then(() => {
-                        window.location.href = 'homeAluno.html'; // Ajuste o redirecionamento conforme necessário
-                    });
-                } else {
-                    throw new Error('Erro ao atualizar projeto.');
+            const fileInput = document.getElementById('file-input');
+            if (fileInput.files.length === 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Nenhum arquivo selecionado!',
+                    text: 'Por favor, selecione pelo menos um arquivo antes de entregar o projeto.'
+                });
+                return;
+            }
+            Swal.fire({
+                title: 'Digite a senha da equipe:',
+                input: 'password',
+                showCancelButton: true,
+                confirmButtonText: 'Confirmar',
+                cancelButtonText: 'Cancelar',
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Você precisa digitar a senha!';
+                    }
                 }
-            })
-            .catch(error => console.error('Erro:', error));
-        }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const senha = result.value;
+                    if (senha === 's') {
+                        fetch(`${projetoApiUrl}/${projetoId}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ entregue: true })
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                return response.json(); 
+                            } else {
+                                throw new Error('Erro ao atualizar projeto.');
+                            }
+                        })
+                        .then(data => {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Projeto Entregue!',
+                                text: 'O projeto foi atualizado para entregue.',
+                                confirmButtonText: 'OK',
+                            }).then(() => {
+                                atualizarMock(projetoId);
+                                fecharModal(); // Aqui é onde o modal é fechado MENTIRA PQ NAO FECHA NADAAAAAAAAAAAA
+                                window.location.href = 'homeAluno.html';
+                            });
+                        })
+                            .catch(error => {
+                                console.error('Erro:', error);
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Erro ao atualizar projeto!',
+                                    text: 'Ocorreu um erro ao tentar atualizar o projeto.'
+                                });
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Senha incorreta!',
+                                text: 'Por favor, digite a senha correta.'
+                            });
+                    }
+                }
+            });
+        }      
 
-        function listarArquivos(event) {
-            const fileList = event.target.files;
-            const fileDisplay = document.getElementById('file-list');
-            fileDisplay.innerHTML = '';
-            for (let i = 0; i < fileList.length; i++) {
-                const file = fileList[i];
-                const listItem = document.createElement('div');
-                listItem.textContent = file.name;
-                fileDisplay.appendChild(listItem);
+        function atualizarCardProjeto(projetoId) {
+            const card = document.querySelector(`[data-projeto-id="${projetoId}"]`);
+            if (card) {
+                const entregaDiv = card.querySelector('.entrega');
+                const btnFinalizar = card.querySelector('.btn-finalizar');
+                
+                entregaDiv.textContent = 'Projeto entregue!';
+                entregaDiv.style.backgroundColor = "#5fff84";
+                entregaDiv.style.border = "solid 1px #1cff7f";
+                entregaDiv.style.width = "150px"; 
+                entregaDiv.style.margin = "0 auto";
+                btnFinalizar.textContent = 'Entregue';
+                btnFinalizar.disabled = true;
+                btnFinalizar.classList.add('btn-disabled'); 
+                btnFinalizar.style.backgroundColor = "#808080";
+
             }
         }
 
@@ -1378,13 +1443,6 @@
             overlay.addEventListener('click', fecharModal);
         }
 
-        function fecharModal() {
-            const overlay = document.querySelector('.modal-overlay');
-            const modalContainer = document.querySelector('.modal-container');
-            if (overlay) overlay.remove();
-            if (modalContainer) modalContainer.remove();
-        }
-
         function montaProjetos(projetos) {
             let projectContainer = document.querySelector(".projeto-container");
             projectContainer.textContent = ''; // Limpa o container antes de adicionar os novos cards
@@ -1392,19 +1450,21 @@
             projetos.forEach((element, index) => {
                 const newCard = document.createElement("div");
                 newCard.classList.add("card");
+                newCard.setAttribute('data-projeto-id', element.id);
 
                 if (element.iniciado) {
+                    const entregue = element.entregue;
                     newCard.innerHTML = `
-                        <div>
-                            <div class="entrega" id="img-container-${index}">A ONG está aguardando a entrega!</div>
+                    <div>
+                        <div class="entrega" id="img-container-${index}" style="width: auto; margin: 0 auto; margin-bottom: 15px; background-color: ${entregue ? '#5fff84' : ''}; border: ${entregue ? 'solid 1px #1cff7f' : ''};">${entregue ? 'Seu projeto foi entregue para a ONG!' : 'A ONG está aguardando a entrega!'}</div>
                             <div class="titulo-card">
                                 <h4 id="titulo-${index}">${element.titulo}</h4>
                             </div>
-                            <p><b>Causa:</b> ${element.causa}</p>
-                            <p><b>Descrição:</b> ${element.descricao}</p>
-                            <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
-                            <button class="btn-finalizar" onclick="abrirModal(${element.id})">Finalizar Projeto</button>
-                        </div>
+                        <p><b>Causa:</b> ${element.causa}</p>
+                        <p><b>Descrição:</b> ${element.descricao}</p>
+                        <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
+                        <button class="btn-finalizar ${entregue ? 'btn-disabled' : ''}" ${entregue ? 'disabled' : ''} style="background-color: ${entregue ? '#808080' : ''};" onclick="abrirModal(${element.id})">${entregue ? 'Entregue' : 'Finalizar Projeto'}</button>
+                    </div>
                     `;
                 } else {
                     newCard.innerHTML = `
