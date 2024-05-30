@@ -629,7 +629,7 @@ input[type="number"] {
     padding: 0.6rem 1rem;
     border: 1px solid #e8e8f1;
     box-shadow: 1px 1px 10px #0200001c;
-    margin-top: 15px;
+    margin-top: 20px;
     margin-bottom: 3px;
     font-size: 1rem;
     color: #ffffff;
@@ -672,6 +672,7 @@ input[type="number"] {
 
 h2 {
     color: #1166ca;
+    font-weight:600 ;
 }
 
 .container-problema__conteudo {
@@ -794,11 +795,15 @@ textarea {
     border: none;
     width: 270px;
     height: 40px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     border-radius: 15px;
     color: #fff;
     background-color: #1166ca;
     margin-top: 15px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-cadastrar-problema:hover {
