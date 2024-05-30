@@ -1350,40 +1350,7 @@
                 if (result.isConfirmed) {
                     const senha = result.value;
                     if (senha === 's') {
-                        fetch(`${projetoApiUrl}/${projetoId}`, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ entregue: true })
-                        })
-                        .then(response => {
-                            if (response.ok) {
-                                return response.json(); 
-                            } else {
-                                throw new Error('Erro ao atualizar projeto.');
-                            }
-                        })
-                        .then(data => {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Projeto Entregue!',
-                                text: 'O projeto foi atualizado para entregue.',
-                                confirmButtonText: 'OK',
-                            }).then(() => {
-                                atualizarMock(projetoId);
-                                fecharModal(); // Aqui é onde o modal é fechado MENTIRA PQ NAO FECHA NADAAAAAAAAAAAA
-                                window.location.href = 'homeAluno.html';
-                            });
-                        })
-                            .catch(error => {
-                                console.error('Erro:', error);
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Erro ao atualizar projeto!',
-                                    text: 'Ocorreu um erro ao tentar atualizar o projeto.'
-                                });
-                            });
+                        entregarArquivos(projetoId);
                         } else {
                             Swal.fire({
                                 icon: 'error',
@@ -1393,7 +1360,30 @@
                     }
                 }
             });
-        }      
+        }     
+        function entregarArquivos(projetoId) {
+            fetch(`${projetoApiUrl}/${projetoId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ entregue: true })
+            })
+            .then(response => {
+                if (response.ok) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Projeto Entregue!',
+                        text: 'O projeto foi atualizado para entregue.'
+                    }).then(() => {
+                        window.location.href = 'homeAluno.html'; // Ajuste o redirecionamento conforme necessário
+                    });
+                } else {
+                    throw new Error('Erro ao atualizar projeto.');
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        } 
 
         function atualizarCardProjeto(projetoId) {
             const card = document.querySelector(`[data-projeto-id="${projetoId}"]`);
