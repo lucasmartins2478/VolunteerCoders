@@ -262,7 +262,7 @@
             top: 590px;
         }
 
-        .btn-pedir-aceite {
+        #select-buttons .btn-pedir-aceite {
             width: 100%;
             border: none;
             background-color: #1166ca;
@@ -481,6 +481,10 @@
             margin-bottom: 3px;
         }
 
+        .btn-close{
+            display: none;
+        }
+
         .offcanvas-input {
             background-color: #eaf4ff;
             margin-top: 370px;
@@ -534,9 +538,9 @@
         .bi-send-fill {
             color: #1166ca;
             transition: color 0.3s ease;
-            margin-left: 165px;
+            margin-left: 160px;
             margin-bottom: 150px;
-            margin-top: -27px;
+            margin-top: -23px;
         }
 
         .send-button:hover .send-icon {
@@ -564,14 +568,14 @@
             background-color: #fff986;
             color: #000000;
             font-weight: 400;
-            width: 300px;
+            width: 340px;
             border-radius: 16px;
             margin-bottom: 15px;
             height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: 30px;
+            margin-left: 8px;
         }
 
         .modal-overlay {
@@ -730,6 +734,24 @@
         .btn-finalizar .btn-disabled{
             background-color: #444852 ;
         }
+
+        .em-desenvolvimento{
+            width: 355px;
+            height: 20px;
+            text-align: center;
+            border-radius: 12px;
+            background-color: #5fff84;
+            border-color: solid 2px #1cff7f;
+        }
+
+        .recusado{
+            width: 355px;
+            height: 20px;
+            text-align: center;
+            border-radius: 12px;
+            border: solid 1px #ff5959;
+            background-color: #ff8686;
+        }
     </style>
 </head>
 
@@ -887,40 +909,63 @@
                         </button>
                     `;
                     cardContainer.appendChild(newCard);
-                } else if (element.selecionado == true) {
-                    const mensagem = element.selecionado ?'Envie uma solicitação para a ONG!':'Solicitação enviada com sucesso!';
-                    const desabilitarBotao = !element.selecionado;
+                } else if (element.selecionado === true) {
+                    // Remova todos os cards existentes no contêiner
+                    while (selecionadoConteiner.firstChild) {
+                        selecionadoConteiner.removeChild(selecionadoConteiner.firstChild);
+                    }
 
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
-                    newCard.innerHTML = `
-                        <div>
-                            <div class="entrega" id="envieSolicitacao">${mensagem}</div>
-                            <div class="titulo-card">
-                                <h4>${element.titulo}</h4>
+
+                    if (element.solicitado === true) {
+                        newCard.innerHTML = `
+                            <div>
+                                <div class="entrega" id="img-container">
+                                    <div class="em-desenvolvimento">Solicitação realizada com sucesso!</div>
+                                </div>
+                                <div class="titulo-card">
+                                    <h4>${element.titulo}</h4>
+                                </div>
+                                <p><b>Causa:</b> ${element.causa}</p>
+                                <p><b>Descrição:</b> ${element.descricao}</p>
                             </div>
-                            <p><b>Causa:</b> ${element.causa}</p>
-                            <p><b>Descrição:</b> ${element.descricao}</p>
-                        </div>
-                        <div class="select-buttons">
-                            <button class="btn-pedir-aceite" id="btn-selecionar" onclick="solicitarAceite(${element.id}, this)">Solicitar aceite</button>
-                            <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
-                        </div>
-                    `;
+                            <div class="select-buttons">
+                                <button class="btn-pedir-aceite" id="btn-selecionar" style="background-color: #808080;" disabled>Solicitar aceite</button>
+                                <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
+                            </div>
+                        `;
+                    } else {
+                        newCard.innerHTML = `
+                            <div>
+                                <div class="entrega" id="img-container">
+                                    <div class="aindaNao">Realize a solicitação de aceite para a ONG!</div>
+                                </div>
+                                <div class="titulo-card">
+                                    <h4>${element.titulo}</h4>
+                                </div>
+                                <p><b>Causa:</b> ${element.causa}</p>
+                                <p><b>Descrição:</b> ${element.descricao}</p>
+                            </div>
+                            <div class="select-buttons">
+                                <button class="btn-pedir-aceite" id="btn-selecionar" onclick="solicitarAceite(${element.id}, this)">Solicitar aceite</button>
+                                <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
+                            </div>
+                        `;
+                    }
 
                     selecionadoConteiner.appendChild(newCard);
 
-                    if (desabilitarBotao) {
-                        const botaoSolicitarAceite = newCard.querySelector('.btn-pedir-aceite');
-                        botaoSolicitarAceite.style.backgroundColor = '#808080'; // Defina a cor de fundo para cinza
-                    }
                 } else {
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
-                    newCard.setAttribute('data-id', element.id);
+                     newCard.setAttribute('data-id', element.id);
                     newCard.setAttribute('data-ongid', element.ongId);
                     newCard.innerHTML = `
                         <div>
+                            <div class="entrega" id="img-container">
+                                <div class="recusado">Sua solicitação foi recusada pela ONG!</div>
+                            </div>
                             <div class="titulo-card">
                                 <h4>${element.titulo}</h4>
                             </div>
@@ -928,10 +973,10 @@
                             <p><b>Descrição:</b> ${element.descricao}</p>
                         </div>
                         <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
-                            Detalhes
+                                Detalhes
                         </button>
                     `;
-                    cardContainer.appendChild(newCard);
+                    cardContainer.appendChild(newCard); 
                 }
                 //if (element.selecionado) {
                 //    const selectButtons = document.createElement("div");
@@ -939,13 +984,6 @@
                 //    newCard.appendChild(selectButtons);
                 //}
             });
-        }
-
-        function atualizarTextoDiv() {
-            const divEnvieSolicitacao = document.getElementById('envieSolicitacao');
-            if (divEnvieSolicitacao) {
-                divEnvieSolicitacao.textContent = 'Solicitação enviada com sucesso!';
-            }
         }
     
         async function mostrarDetalhes(problemaId, ongId) {
@@ -1060,9 +1098,6 @@
                                         title: 'Problema Selecionado!',
                                         text: 'Sua solicitação foi enviada para a ong, aguarde a resposta.'
                                     }).then(() => {
-                                        button.disabled = true; // Desabilita o botão
-                                        button.textContent = 'Solicitação enviada';
-                                        atualizarTextoDiv();
                                         window.location.href = 'homeAluno.html';
                                     });
                                 } else {
