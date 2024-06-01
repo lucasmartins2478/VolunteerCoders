@@ -261,6 +261,7 @@
         align-items: center;
         flex-direction: row;
         gap: 20px;
+        width: 20%;
     }
 
     .btn-cancelar {
@@ -282,7 +283,11 @@
         /* background-color: #eaeaea; */
     }  
 
-
+    @media (max-width: 770px) {
+        .btn-criar-equipe, .btn-cancelar {
+            width: 200px;
+        }
+    }
 
     @media screen and (max-width: 880px) {
         .container-equipe {
@@ -300,28 +305,38 @@
 
         .container-equipe {
             width: 80%;
-            height: 80vh;
+            height: 70vh;
             padding: 1rem 1rem;
         }
 
         .input-email {
             width: 60%;
         }
-    }
 
-    @media screen and (max-width: 514px) {
-        .container-equipe {
-            width: 90%;
-            height: 80vh;
-            padding: 1rem 1rem;
-            transition: .2s;
+        .btn-criar-equipe, .btn-cancelar {
+            width: 100px;
         }
-
     }
 
     @media screen and (max-width: 460px) {
         #equipe::placeholder {
             color: white;
+        }
+
+        .btn-criar-equipe {
+            width: 100px;
+        }
+
+        .btn-cancelar {
+            width: 100px;
+        }
+
+        .container-equipe {
+            height: 70vh;
+        }
+
+        #adicionar-equipe {
+            width: 80px;
         }
     }
 </style>
