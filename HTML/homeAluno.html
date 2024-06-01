@@ -934,8 +934,8 @@
                                 <button class="btn-pedir-aceite" id="btn-selecionar" style="background-color: #808080;" disabled>Solicitar aceite</button>
                                 <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
                             </div>
-                        `;
-                    } else {
+                        `; 
+                    }  else {
                         newCard.innerHTML = `
                             <div>
                                 <div class="entrega" id="img-container">
@@ -955,34 +955,55 @@
                     }
 
                     selecionadoConteiner.appendChild(newCard);
-
-                } else {
-                    const newCard = document.createElement("div");
-                    newCard.classList.add("card");
-                     newCard.setAttribute('data-id', element.id);
-                    newCard.setAttribute('data-ongid', element.ongId);
-                    newCard.innerHTML = `
-                        <div>
-                            <div class="entrega" id="img-container">
-                                <div class="recusado">Sua solicitação foi recusada pela ONG!</div>
+                }else if (element.recusado === true){
+                //     Swal.fire({
+                //     icon: 'error',
+                //     title: 'Sua solicitação foi recusada pela ONG!',
+                //     text: 'O problema voltou a ser disponível.',
+                //     confirmButtonText: 'OK',
+                // }).then((result) => {
+                //     if (result.isConfirmed) {
+                        const newCard = document.createElement("div");
+                        newCard.classList.add("card");
+                        newCard.setAttribute('data-id', element.id);
+                        newCard.setAttribute('data-ongid', element.ongId);
+                        newCard.innerHTML = `
+                            <div>
+                                <div class="entrega" id="img-container">
+                                    <div class="recusado">A ONG recusou a sua solicitação!</div>
+                                </div>
+                                <div class="titulo-card">
+                                    <h4>${element.titulo}</h4>
+                                </div>
+                                <p><b>Causa:</b> ${element.causa}</p>
+                                <p><b>Descrição:</b> ${element.descricao}</p>
                             </div>
-                            <div class="titulo-card">
-                                <h4>${element.titulo}</h4>
-                            </div>
-                            <p><b>Causa:</b> ${element.causa}</p>
-                            <p><b>Descrição:</b> ${element.descricao}</p>
+                            <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
+                                    Detalhes
+                            </button>
+                        `;
+                        cardContainer.appendChild(newCard);
+                    // }
+                // })
+            } else {
+                const newCard = document.createElement("div");
+                newCard.classList.add("card");
+                    newCard.setAttribute('data-id', element.id);
+                newCard.setAttribute('data-ongid', element.ongId);
+                newCard.innerHTML = `
+                    <div>
+                        <div class="titulo-card">
+                            <h4>${element.titulo}</h4>
                         </div>
-                        <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
-                                Detalhes
-                        </button>
-                    `;
-                    cardContainer.appendChild(newCard); 
+                        <p><b>Causa:</b> ${element.causa}</p>
+                        <p><b>Descrição:</b> ${element.descricao}</p>
+                    </div>
+                     <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
+                            Detalhes
+                    </button>
+                `;
+                cardContainer.appendChild(newCard); 
                 }
-                //if (element.selecionado) {
-                //    const selectButtons = document.createElement("div");
-                //    newCard.classList.add("card2");
-                //    newCard.appendChild(selectButtons);
-                //}
             });
         }
     

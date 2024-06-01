@@ -484,24 +484,27 @@
             justify-self: end;
             color: #fff;
             font-size: 17px;
-            position: fixed;
+            /* position: fixed; */
             top: 580px;
             height: 40px;
             width: 140px;
             margin-left: 190px;
-            margin-bottom: -50px;
+            margin-bottom: -240px;
         }
 
         .btn-aceite {
             width: 50px;
             height: 50px;
-            background-image: url("../CSS/imagens/verifica.png");
+            background-image: url(../CSS/imagens/verifica.png);
             background-repeat: no-repeat;
             background-size: contain;
             background-color: #fff;
             border: none;
             cursor: pointer;
-            margin-bottom: -121px;
+            position: relative;
+            margin-top: 100px;
+            top: 17px;
+            margin-bottom: -111px;
             margin-left: 20px;
             margin-right: 75px;
         }
@@ -863,7 +866,8 @@
                             },
                             body: JSON.stringify({
                                 selecionado: false,
-                                solicitado: false
+                                solicitado: false,
+                                recusado: true
                             })
                         })
                             .then(response => {
