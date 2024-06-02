@@ -484,24 +484,29 @@
             justify-self: end;
             color: #fff;
             font-size: 17px;
-            position: fixed;
+            /* position: fixed; */
             top: 580px;
             height: 40px;
-            width: 100px;
-            margin-left: 200px;
-            margin-bottom: -50px;
+            width: 140px;
+            margin-left: 190px;
+            margin-bottom: -240px;
         }
 
         .btn-aceite {
             width: 50px;
             height: 50px;
-            background-image: url("../CSS/imagens/verifica.png");
+            background-image: url(../CSS/imagens/verifica.png);
             background-repeat: no-repeat;
             background-size: contain;
             background-color: #fff;
             border: none;
             cursor: pointer;
-            margin-bottom: -121px;
+            position: relative;
+            margin-top: 100px;
+            top: 17px;
+            margin-bottom: -111px;
+            margin-left: 20px;
+            margin-right: 75px;
         }
 
         .btn-rejeite {
@@ -513,7 +518,7 @@
             background-color: #fff;
             border: none;
             cursor: pointer;
-            margin-left: 60px;
+            margin-left: 90px;
             margin-bottom: -1px;
         }
 
@@ -841,6 +846,7 @@
 
         function rejeitarProjeto(problemaId) {
             Swal.fire({
+                icon: "warning",
                 title: "Deseja recusar proposta?",
                 text: "Ao clicar em Sim você estará recusando a proposta de projeto da equipe. Gostaria de fazer isso?",
                 showCancelButton: true,
@@ -860,7 +866,8 @@
                             },
                             body: JSON.stringify({
                                 selecionado: false,
-                                solicitado: false
+                                solicitado: false,
+                                recusado: true
                             })
                         })
                             .then(response => {
@@ -1126,18 +1133,23 @@
         }
 
         function abrirChat() {
-            let overlay = document.querySelector(".overlay");
+            let overlay =
+                document.querySelector(".overlay");
             if (!overlay) {
                 overlay = document.createElement("div");
                 overlay.classList.add("overlay");
                 document.body.appendChild(overlay);
             }
             overlay.style.display = "block";
-
-            const offcanvasDiv = document.createElement("div");
-            offcanvasDiv.classList.add("offcanvas", "offcanvas-bottom");
+            const offcanvasDiv =
+                document.createElement("div");
+            offcanvasDiv.classList.add(
+                "offcanvas",
+                "offcanvas-bottom"
+            );
             offcanvasDiv.tabIndex = "-1";
             offcanvasDiv.id = "offcanvasBottom";
+
             offcanvasDiv.style.width = "400px";
             offcanvasDiv.style.height = "70%";
             offcanvasDiv.style.color = "white";
@@ -1148,68 +1160,120 @@
             offcanvasDiv.style.borderRadius = "12px";
             offcanvasDiv.style.border = "solid 1px black";
 
-            const offcanvasHeader = document.createElement("div");
-            offcanvasHeader.classList.add("offcanvas-header");
+            const offcanvasHeader =
+                document.createElement("div");
+            offcanvasHeader.classList.add(
+                "offcanvas-header"
+            );
 
-            const headerTitle = document.createElement("span");
+            const headerTitle =
+                document.createElement("span");
             headerTitle.classList.add("header-title");
             headerTitle.textContent = "Chat";
 
-            const offcanvasTitle = document.createElement("h5");
+            const offcanvasTitle =
+                document.createElement("h5");
             offcanvasTitle.classList.add("offcanvas-title");
             offcanvasTitle.textContent = "Chat";
 
-            const closeButton = document.createElement("button");
+            const closeButton =
+                document.createElement("button");
             closeButton.type = "button";
             closeButton.classList.add("btn-close");
             closeButton.dataset.bsDismiss = "offcanvas";
             closeButton.setAttribute("aria-label", "Close");
 
-            closeButton.addEventListener("click", function () {
-                offcanvasDiv.remove();
-                overlay.style.display = "none";
-            });
-
             offcanvasHeader.appendChild(offcanvasTitle);
             offcanvasHeader.appendChild(closeButton);
 
-            const offcanvasBody = document.createElement("div");
-            offcanvasBody.classList.add("offcanvas-body", "small");
-            const inputContainer = document.createElement("div");
+            const offcanvasBody =
+                document.createElement("div");
+            offcanvasBody.classList.add(
+                "offcanvas-body",
+                "small"
+            );
+            const inputContainer =
+                document.createElement("div");
             inputContainer.classList.add("input-container");
             offcanvasBody.appendChild(inputContainer);
 
-            const offcanvasInput = document.createElement("input");
+            const offcanvasInput =
+                document.createElement("input");
             offcanvasInput.type = "text";
             offcanvasInput.classList.add("offcanvas-input");
-            offcanvasInput.placeholder = "Digite uma mensagem";
+            offcanvasInput.placeholder =
+                "Digite uma mensagem";
 
-            const sendButton = document.createElement("button");
+            const sendButton =
+                document.createElement("button");
             sendButton.classList.add("send-button");
 
             const sendIcon = document.createElement("i");
-            sendIcon.classList.add("bi", "bi-send-fill", "send-icon");
+            sendIcon.classList.add(
+                "bi",
+                "bi-send-fill",
+                "send-icon"
+            );
             sendIcon.innerHTML = `
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
                     <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
                 </svg>`;
             sendButton.appendChild(sendIcon);
 
-            sendButton.addEventListener("mouseover", function () {
-                sendIcon.style.color = "#004080";
-            });
+            sendButton.addEventListener(
+                "mouseover",
+                function () {
+                    sendIcon.style.color = "#004080";
+                }
+            );
 
-            sendButton.addEventListener("mouseout", function () {
-                sendIcon.style.color = "#1166ca";
-            });
+            sendButton.addEventListener(
+                "mouseout",
+                function () {
+                    sendIcon.style.color = "#1166ca";
+                }
+            );
 
-            inputContainer.appendChild(offcanvasInput);
-            inputContainer.appendChild(sendButton);
+            const closeIcon = document.createElementNS(
+                "http://www.w3.org/2000/svg",
+                "svg"
+            );
+            closeIcon.setAttribute(
+                "xmlns",
+                "http://www.w3.org/2000/svg"
+            );
+            closeIcon.setAttribute("width", "16");
+            closeIcon.setAttribute("height", "16");
+            closeIcon.setAttribute("fill", "currentColor");
+            closeIcon.setAttribute(
+                "class",
+                "bi bi-x close-icon"
+            );
+            closeIcon.setAttribute("viewBox", "0 0 16 16");
+            closeIcon.innerHTML = `<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>`;
+            closeIcon.addEventListener(
+                "click",
+                function () {
+                    offcanvasDiv.remove();
+                    overlay.style.display = "none";
+                }
+            );
+
+            offcanvasHeader.appendChild(closeIcon);
+            offcanvasHeader.appendChild(headerTitle);
+            offcanvasDiv.appendChild(offcanvasHeader);
+            offcanvasBody.appendChild(offcanvasInput);
+            offcanvasBody.appendChild(sendButton);
+            const offcanvasFooter =
+                document.createElement("footer");
+            offcanvasBody.classList.add("offcanvas-footer");
+
             offcanvasDiv.appendChild(offcanvasHeader);
             offcanvasDiv.appendChild(offcanvasBody);
 
             document.body.appendChild(offcanvasDiv);
-        }
+        };
+
 
     </script>
 </body>
