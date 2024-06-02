@@ -535,6 +535,10 @@
             cursor: pointer;
         }
 
+        .send-button:hover{
+            background-color: transparent;
+        }
+
         .bi-send-fill {
             color: #1166ca;
             transition: color 0.3s ease;
@@ -1384,6 +1388,7 @@
 
         function entregarProjeto(projetoId) {
             const fileInput = document.getElementById('file-input');
+            const ajuda = document.getElementById('ajuda');
             if (fileInput.files.length === 0) {
                 Swal.fire({
                     icon: 'error',
@@ -1391,7 +1396,14 @@
                     text: 'Por favor, selecione pelo menos um arquivo antes de entregar o projeto.'
                 });
                 return;
-            }
+            } else if (ajuda.value.trim() === ''){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Campo para a explicação está vazio!',
+                    text: 'Por favor, preencha o campo antes de entregar o projeto.'
+                });
+                return;
+            }                
             Swal.fire({
                 title: 'Digite a senha da equipe:',
                 input: 'password',
@@ -1424,7 +1436,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ entregue: true })
+                body: JSON.stringify({ entregue: true, mensagem: mensagem })
             })
             .then(response => {
                 if (response.ok) {
