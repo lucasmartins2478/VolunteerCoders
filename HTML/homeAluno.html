@@ -1431,12 +1431,14 @@
             });
         }     
         function entregarArquivos(projetoId) {
+            let mensagem = document.querySelector('#ajuda').value
             fetch(`${projetoApiUrl}/${projetoId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ entregue: true, mensagem: mensagem })
+                body: JSON.stringify({ entregue: true, 
+                    mensagem: mensagem })
             })
             .then(response => {
                 if (response.ok) {
