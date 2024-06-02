@@ -744,7 +744,7 @@
                         <div>
                             <div class="titulo-card">
                                 <h4>${element.titulo}</h4>
-                                <button onclick='mensagemSelecionado()'>
+                                <button onclick='excluirCard(${element.id})'>
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </div>
@@ -756,7 +756,8 @@
                         </button>
                     `;
                     cardContainer.appendChild(newCard);
-                } else {
+                } 
+                else{
 
                 }
             });
@@ -1094,6 +1095,7 @@
         }
 
         function excluirCard(id) {
+            
             Swal.fire({
                 icon: "warning",
                 title: "Atenção!",
