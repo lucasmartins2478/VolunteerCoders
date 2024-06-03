@@ -101,41 +101,46 @@
 
         .detalhes .button-detalhe {
             display: flex;
-            align-items: end;
+            align-items: center;
             justify-content: center;
             position: absolute;
             bottom: 20px;
             left: 40%;
             transform: translateX(-50%);
+            text-align: center;
         }
 
-        .detalhes .button-fechar {
+        .button-fechar {
             display: flex;
-            align-items: end;
+            align-items: center;
             justify-content: center;
             position: absolute;
             bottom: 20px;
-            left: 40%;
+            left: 72%;
             transform: translateX(-50%);
+            background-color: #1166ca;
+            height: 40px;
+            border-radius: 12px;
         }
 
-        .detalhes .button-fechar button {
+        .detalhes #selecionar{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 20px;
+            left: 48%;
+            transform: translateX(-50%);
             background-color: #1166ca;
-            width: 100px;
-            height: 30px;
-            border-radius: 16px;
-            border: solid 0px;
-            font-size: 18px;
-            color: #fff;
-            margin-top: -150px;
-            margin-left: 300px;
+            height: 40px;
+            border-radius: 12px;
         }
 
         .detalhes .button-detalhe button {
             background-color: #1166ca;
             width: 100px;
-            height: 30px;
-            border-radius: 16px;
+            height: 40px;
+            border-radius: 12px;
             border: solid 0px;
             font-size: 18px;
             color: #fff;
@@ -346,15 +351,14 @@
 
         .detalhes .button-detalhe button {
             background-color: #1166ca;
-            width: 100px;
-            height: 30px;
-            border-radius: 8px;
+            width: 150px;
+            /* height: 30px; */
+            border-radius: 13px;
             border: solid 0px;
             font-size: 18px;
             color: #fff;
             margin-top: 50px;
             cursor: pointer;
-
         }
 
         .aguardando-resposta,
@@ -1036,10 +1040,13 @@
 
                 modalContainer.innerHTML = `
                     <div class="detalhes">
+                        <br>
+                        <br>
                         <h2>Detalhes do Problema</h2>
                         <p><b>Título:</b> ${problema.titulo}</p>
                         <p><b>Causa:</b> ${problema.causa}</p>
                         <p><b>Descrição:</b> ${problema.descricao}</p>
+                        <br>
                         <h2>Detalhes da ONG</h2>
                         <p><b>Nome:</b> ${ong.nomeONg}</p>
                         <p><b>Descrição:</b> ${ong.sobre}</p>
@@ -1049,7 +1056,7 @@
                         <p><b>Site:</b> ${ong.urlSite}</p>
                         <div class="button-detalhe">
                             <button id="selecionar" onclick="selecionarProblema(${problemaId})">Selecionar</button>
-                            <button onclick="fecharDetalhes()">Fechar</button>
+                            <button class="button-fechar" onclick="fecharDetalhes()">Fechar</button>
                         </div>
                     </div>
                 `;
