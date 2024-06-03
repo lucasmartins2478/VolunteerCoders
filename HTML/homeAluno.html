@@ -980,7 +980,8 @@
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
                     newCard.setAttribute('data-id', element.id);
-                    newCard.setAttribute('data-ongid', element.ongId);
+                    // ongId
+                    newCard.setAttribute('data-ongid', element.id);
                     newCard.innerHTML = `
                             <div>
                                 <div class="entrega" id="img-container">
@@ -992,7 +993,7 @@
                                 <p><b>Causa:</b> ${element.causa}</p>
                                 <p><b>Descrição:</b> ${element.descricao}</p>
                             </div>
-                            <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
+                            <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.idd}")'>
                                     Detalhes
                             </button>
                         `;
@@ -1003,7 +1004,7 @@
                     const newCard = document.createElement("div");
                     newCard.classList.add("card");
                     newCard.setAttribute('data-id', element.id);
-                    newCard.setAttribute('data-ongid', element.ongId);
+                    newCard.setAttribute('data-ongid', element.id);
                     newCard.innerHTML = `
                     <div>
                         <div class="titulo-card">
@@ -1012,7 +1013,7 @@
                         <p><b>Causa:</b> ${element.causa}</p>
                         <p><b>Descrição:</b> ${element.descricao}</p>
                     </div>
-                     <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
+                     <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.id}")'>
                             Detalhes
                     </button>
                 `;
@@ -1047,12 +1048,12 @@
                         <p><b>Descrição:</b> ${problema.descricao}</p>
                         <br>
                         <h2>Detalhes da ONG</h2>
-                        <p><b>Nome:</b> ${ong.nome}</p>
-                        <p><b>Descrição:</b> ${ong.descricao}</p>
+                        <p><b>Nome:</b> ${ong.nomeONg}</p>
+                        <p><b>Descrição:</b> ${ong.sobre}</p>
                         <p><b>Endereço:</b> ${ong.endereco}</p>
                         <p><b>Contato:</b> ${ong.telefone}</p>
                         <p><b>E-mail:</b> ${ong.email}</p>
-                        <p><b>Site:</b> ${ong.site}</p>
+                        <p><b>Site:</b> ${ong.urlSite}</p>
                         <div class="button-detalhe">
                             <button id="selecionar" onclick="selecionarProblema(${problemaId})">Selecionar</button>
                             <button class="button-fechar" onclick="fecharDetalhes()">Fechar</button>
@@ -1651,19 +1652,44 @@
             });
         }
         async function verificarProblemaSelecionado() {
+            // const alunoId = await getAlunoId();
+            // console.log('Aluno ID:', alunoId);
+
+            // try {
+            //     const response = await fetch(problemaSelecionadoUrl);
+            //     const dados = await response.json();
+            //     const problemasSelecionados = dados.filter(entry => entry.idAluno === alunoId && entry.selecionado === true);
+
+            //     return problemasSelecionados.length === 1;
+            // } catch (error) {
+            //     console.error('Erro ao carregar problemas selecionados:', error);
+            //     return false;
+            // }
+
             const alunoId = await getAlunoId();
+            console.log('Aluno ID:', alunoId); // Adicione log para verificar o aluno ID
 
             try {
                 const response = await fetch(problemaSelecionadoUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
                 const dados = await response.json();
-                const problemasSelecionados = dados.filter(entry => entry.idAluno === alunoId && entry.selecionado === true);
+                console.log('Dados carregados:', dados); // Adicione log para verificar os dados carregados
 
-                return problemasSelecionados.length === 1;
+                const problemasSelecionados = dados.filter(entry => entry.idAluno === alunoId && entry.selecionado === true);
+                console.log('Problemas selecionados:', problemasSelecionados); // Adicione log para verificar os problemas selecionados
+
+                const cont = problemasSelecionados.length; // Contagem dos problemas selecionados
+                console.log('Contagem de problemas selecionados:', cont); // Adicione log para verificar a contagem
+
+                return cont === 1; // Retorna true se exatamente um problema estiver selecionado, caso contrário false
             } catch (error) {
                 console.error('Erro ao carregar problemas selecionados:', error);
                 return false;
             }
         }
+
 
         async function alunoSelecionouProjeto() {
             try {
