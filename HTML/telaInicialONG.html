@@ -63,15 +63,16 @@
 
         .detalhes .button-detalhe {
             display: flex;
-            align-items: end;
+            align-items: center;
             justify-content: center;
             position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
+            text-align: center;
         }
 
-        .detalhes .button-detalhe button {
+        /* .detalhes .button-detalhe button {
             background-color: #1166ca;
             width: 100px;
             height: 30px;
@@ -80,7 +81,7 @@
             font-size: 18px;
             color: #fff;
             margin-top: 50px;
-        }
+        } */
 
         .btn-aguardando {
             background-color: #7e8792;
@@ -136,14 +137,18 @@
 
         .detalhes .button-detalhe button {
             background-color: #1166ca;
-            width: 100px;
-            height: 30px;
-            border-radius: 8px;
+            width: 150px;
+            height: 40px;
+            border-radius: 13px;
             border: solid 0px;
             font-size: 18px;
             color: #fff;
             margin-top: 50px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
         .user img {
@@ -409,6 +414,11 @@
             margin-bottom: 3px;
         }
 
+        .btn-close{
+            display: none;
+        }
+
+
         .offcanvas-input {
             background-color: #eaf4ff;
             margin-top: 370px;
@@ -452,6 +462,9 @@
             margin-left: 190px;
         }
 
+        .send-button:hover{
+            background-color: transparent;
+        }
         .offcanvas {
             position: fixed;
             z-index: 1000;
@@ -466,9 +479,9 @@
         .bi-send-fill {
             color: #1166ca;
             transition: color 0.3s ease;
-            margin-left: 165px;
+            margin-left: 160px;
             margin-bottom: 150px;
-            margin-top: -27px;
+            margin-top: -23px;
         }
 
         .send-button:hover .send-icon {
@@ -502,11 +515,19 @@
             border: none;
             cursor: pointer;
             position: relative;
-            margin-top: 100px;
+            margin-top: 80px;
             top: 17px;
             margin-bottom: -111px;
             margin-left: 20px;
             margin-right: 75px;
+        }
+
+        .btn-aceite:hover{
+            background-color: white;
+        }
+
+        .btn-rejeite:hover{
+            background-color: white;
         }
 
         .btn-rejeite {
@@ -572,6 +593,122 @@
         .receber .aindaNao{
             border: solid 1px #fff311;
             background-color: #fff986;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            /* height: 620px; */
+        }
+
+        .modal-container h3 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-container label {
+            margin-bottom: 6px;
+            font-size: 1rem;
+            color: #444852;
+
+        }
+
+        .modal-container textarea {
+            margin-top: 10px;
+            width: 560px;
+            height: 200px;
+        }
+
+        .modal-container .insira {
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+            font-size: 1rem;
+            color: #444852;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            background-color: #1166ca;
+            color: white;
+            font-size: 16px;
+            margin-top: -15Px;
+            height: 40px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .buttons {
+            gap: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        #file-upload {
+            width: 560px;
+            height: 200px;
+            margin-bottom: 10px;
+            margin: 0.6rem 0;
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 1px 1px 6px #0000001c;
+            font-size: 1rem;
+        }
+
+        #file-upload .baixar{
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .baixar-arquivos{
+            background-color: #dad9d5;
+            width: 250px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: bottom;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-left: 25%;
+            color: #000000;
+            box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .baixar-arquivos:hover{
+            background-color: #d6d4d0;
         }
     </style>
 </head>
@@ -744,7 +881,7 @@
                         <div>
                             <div class="titulo-card">
                                 <h4>${element.titulo}</h4>
-                                <button onclick='mensagemSelecionado()'>
+                                <button onclick='excluirCard(${element.id})'>
                                     <i class="fa-solid fa-trash"></i>
                                 </button>
                             </div>
@@ -756,7 +893,8 @@
                         </button>
                     `;
                     cardContainer.appendChild(newCard);
-                } else {
+                } 
+                else{
 
                 }
             });
@@ -926,7 +1064,7 @@
                                 <p><b>Causa:</b> ${element.causa}</p>
                                 <p><b>Descrição:</b> ${element.descricao}</p>
                             </div>
-                            <button class="btn-detalhes">
+                            <button class="btn-detalhes" onclick="receberArquivos(${element.id})">
                                 Receber Arquivos
                             </button>
                 `;
@@ -996,13 +1134,13 @@
                         <div class="detalhes">
                             <br>
                             <br>
-                            <br>
                             <h2>Detalhes do Problema</h2>
                             <p><b>Título:</b> ${problema.titulo}</p>
                             <p><b>Causa:</b> ${problema.causa}</p>
                             <p><b>Descrição:</b> ${problema.descricao}</p>
                             <br>
                             <h2>Detalhes da ONG</h2>
+                            <br>
                             <p><b>Nome:</b> ${ong.nomeONg}</p>
                             <p><b>Descrição:</b> ${ong.sobre}</p>
                             <p><b>Endereço:</b> ${ong.endereco}</p>
@@ -1014,10 +1152,8 @@
                             <br>
                             <br>
                             <br>
-                            <br>
-                            <br>
+                            
                             <div class="button-detalhe">
-                                <button onclick="aceitarProjeto(${problemaId})">Aceitar Projeto</button>
                                 <button onclick="fecharDetalhes()">Fechar</button>
                             </div>
                             
@@ -1035,13 +1171,13 @@
                         <div class="detalhes">
                             <br>
                             <br>
-                            <br>
                             <h2>Detalhes do Problema</h2>
                             <p><b>Título:</b> ${problema.titulo}</p>
                             <p><b>Causa:</b> ${problema.causa}</p>
                             <p><b>Descrição:</b> ${problema.descricao}</p>
                             <br>
                             <h2>Detalhes da ONG</h2>
+                            <br>
                             <p><b>Nome:</b> ${ong.nomeONg}</p>
                             <p><b>Descrição:</b> ${ong.sobre}</p>
                             <p><b>Endereço:</b> ${ong.endereco}</p>
@@ -1053,8 +1189,7 @@
                             <br>
                             <br>
                             <br>
-                            <br>
-                            <br>
+                            
                             <div class="button-detalhe">
                                 <button onclick="fecharDetalhes()">Fechar</button>
                             </div>
@@ -1094,6 +1229,7 @@
         }
 
         function excluirCard(id) {
+            
             Swal.fire({
                 icon: "warning",
                 title: "Atenção!",
@@ -1120,6 +1256,66 @@
 
             });
         }
+
+        function receberArquivos(projetoId){
+            fetch(`${projetoApiUrl}/${projetoId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao buscar dados do mock');
+                    }
+                    return response.json();
+                })
+                .then(projeto => {
+                    const overlay = document.createElement("div");
+                    overlay.classList.add("modal-overlay");
+
+                    const modalContainer = document.createElement("div");
+                    modalContainer.classList.add("modal-container");
+
+                    modalContainer.innerHTML = `
+                        <h3>A equipe entregou o projeto!</h3>
+                        <div class="insira">Aqui estão os arquivos que foram enviados:</div>
+                        <div id="file-upload">
+                            <button class="baixar-arquivos" onclick="baixarZip()">
+                                <img src="../CSS/imagens/para-download.png" alt="baixar" class="baixar" />
+                                Baixe os arquivos aqui
+                            </button>
+                        </div>
+                        <label for="ajuda">E aqui tem o passo a passo que a equipe deixou para vocês poderem utilizar e executar:</label>
+                        <textarea name="ajuda" id="ajuda" readonly>${projeto.mensagem} </textarea>
+                        <div class="buttons">
+                            <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
+                        </div>
+                    `;
+
+                    document.body.appendChild(overlay);
+                    document.body.appendChild(modalContainer);
+                    
+                    overlay.addEventListener('click', fecharModal);
+                })
+        }
+        
+
+        function fecharModal() {
+            const overlay = document.querySelector('.modal-overlay');
+            const modalContainer = document.querySelector('.modal-container');
+            if (overlay) overlay.remove();
+            if (modalContainer) modalContainer.remove();
+        }    
+
+        function baixarZip() {
+            zipUrl = 'path/to/your/file.zip';
+            const link = document.createElement('a');
+            link.href = zipUrl;
+            link.download = 'Arquivos_Projeto.zip'; 
+
+            document.body.appendChild(link);
+
+            link.click();
+
+            document.body.removeChild(link);
+        }
+
         // Carrega dados ao iniciar a página
         window.onload = carregaDados;
 
