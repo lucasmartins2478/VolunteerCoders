@@ -105,6 +105,82 @@
       /* background-color: #eaeaea; */
     }
 
+    @media screen and (max-width: 810px) {
+      .imagem-infos {
+        flex-direction: column;
+      }
+
+      #imagem {
+        height: 120px;
+      }
+
+      .imagem {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .infos {
+        width: 100%;
+      }
+
+      #causas-da-ong,
+      #telefone,
+      #responsavel,
+      label {
+        width: 250px;
+        margin-left: 10px;
+      }
+
+      .botao .btn-cancelar {
+        width: 150px;
+      }
+
+      .btn-cadastrar-problema {
+        width: 150px;
+      }
+
+      .btn-trocar-imagem {
+        margin-left: 170px;
+        margin-top: -26px;
+      }
+
+      #body-problema {
+        background-color: #ffffff;
+      }
+    }
+
+    @media screen and (min-width: 811px) and (max-width: 1276px) {
+      #causas-da-ong,
+      #telefone,
+      #responsavel,
+      label {
+        margin-left: 0;
+      }
+
+      .btn-cadastrar-problema {
+        width: 150px;
+        height: 30px;
+      }
+
+      .botao .btn-cancelar {
+        width: 150px;
+        height: 30px;
+      }
+
+      .descricao {
+        margin-bottom: 0;
+      }
+
+      .btn-trocar-imagem {
+        margin-left: 150px;
+        margin-top: -26px;
+      }
+
+      label {
+        margin-left: 150px;
+      }
+    }
   </style>
 
   <body id="body-problema">
