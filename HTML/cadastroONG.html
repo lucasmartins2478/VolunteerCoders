@@ -66,16 +66,16 @@
     .cidade {
         display: flex;
         flex-direction: row;
-        width: 260px;
+        width: 460px;
       }
 
       .sobre label {
         margin-left: 10px;
     }
 
-    .segmento-ong {
+    /* .segmento-ong {
         margin-left: 45px;
-    }
+    } */
 
     @media screen and (max-width: 1230px) {
       .imagem-ong {
@@ -215,7 +215,7 @@
                 <input type="text" id="cnpj" name="cnpj" />
               </div>
               <div class="segmento-ong">
-                <label for="segmento">Segmento*</label>
+                <label id="seg-label" for="segmento">Segmento*</label>
                 <select name="segmento" id="segmento">
                   <option value="sel" selected>Selecione</option>
                   <option value="fome">Fome</option>
@@ -294,7 +294,7 @@
           </div>
           <div class="imagem-ong">
             <label for="imagem-ong">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Imagem
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Imagem ilustrativa
             </label>
             <input
               type="file"
