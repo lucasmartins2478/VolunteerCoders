@@ -123,7 +123,7 @@
             border-radius: 12px;
         }
 
-        .detalhes #selecionar{
+        .detalhes #selecionar {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1082,6 +1082,77 @@
 
         // Função para selecionar um problema
         async function selecionarProblema(problemaId) {
+            //     try {
+            //         const alunoId = await getAlunoId();
+            //         console.log("ID do Aluno:", alunoId);
+
+            //         const problemaSelecionado = await verificarProblemaSelecionado();
+            //         console.log("Problema Selecionado:", problemaSelecionado);
+
+            //         if (!problemaSelecionado) {
+            //             console.log("Aluno não tem problema selecionado atualmente.");
+            //             const alunoEntregou = await alunoEntregouProjeto();
+            //             console.log("Aluno entregou projeto:", alunoEntregou);
+
+            //             if (alunoEntregou) {
+            //                 // Permitir que o aluno selecione um novo problema
+            //                 const response = await fetch(`${problemaApiUrl}/${problemaId}`, {
+            //                     method: 'PUT',
+            //                     headers: {
+            //                         'Content-Type': 'application/json'
+            //                     },
+            //                     body: JSON.stringify({ selecionado: true })
+            //                 });
+
+            //                 console.log("Response da seleção do problema:", response.ok);
+
+            //                 if (response.ok) {
+            //                     // Registra o problema selecionado para o aluno
+            //                     const postResponse = await fetch(problemaSelecionadoUrl, {
+            //                         method: 'POST',
+            //                         headers: {
+            //                             'Content-Type': 'application/json'
+            //                         },
+            //                         body: JSON.stringify({
+            //                             idAluno: alunoId,
+            //                             idProblema: problemaId,
+            //                             selecionado: true
+            //                         })
+            //                     });
+
+            //                     console.log("Post Response da seleção do problema:", postResponse.ok);
+
+            //                     Swal.fire({
+            //                         icon: 'success',
+            //                         title: 'Problema Selecionado!',
+            //                         text: 'Envie uma solicitação para a ONG e aguarde a resposta.'
+            //                     }).then(() => {
+            //                         window.location.href = 'homeAluno.html';
+            //                         carregaDados();
+            //                     });
+            //                 } else {
+            //                     console.error('Erro ao selecionar problema:', response.statusText);
+            //                     throw new Error('Erro ao selecionar problema.');
+            //                 }
+            //             } else {
+            //                 console.log('Aluno não entregou o projeto anterior.');
+            //                 Swal.fire({
+            //                     icon: 'warning',
+            //                     title: 'Aviso',
+            //                     text: 'Você só pode selecionar um novo projeto após entregar o projeto atual.',
+            //                 });
+            //             }
+            //         } else {
+            //             console.log('Aluno já tem um problema selecionado.');
+            //             Swal.fire({
+            //                 icon: 'warning',
+            //                 title: 'Aviso',
+            //                 text: 'Você já selecionou um problema. Para selecionar um novo, primeiro conclua ou cancele o problema atual.',
+            //             });
+            //         }
+            //     } catch (error) {
+            //         console.error('Erro:', error);
+            //     }
             try {
                 const alunoId = await getAlunoId();
                 const problemaSelecionado = await verificarProblemaSelecionado();
@@ -1089,8 +1160,7 @@
                 if (!problemaSelecionado) {
                     const alunoEntregou = await alunoEntregouProjeto();
 
-                    if (alunoEntregou) {
-                        // Permitir que o aluno selecione um novo problema
+                    if (alunoEntregou || !problemaSelecionado) { 
                         const response = await fetch(`${problemaApiUrl}/${problemaId}`, {
                             method: 'PUT',
                             headers: {
@@ -1141,6 +1211,7 @@
             } catch (error) {
                 console.error('Erro:', error);
             }
+
 
             // fetch(`${problemaApiUrl}/${problemaId}`, {
             //     method: 'PUT',
@@ -1519,6 +1590,7 @@
                 })
                     .then(response => {
                         if (response.ok) {
+
                             alunoEntregouProjeto();
 
                             Swal.fire({
@@ -1677,8 +1749,10 @@
                 const dados = await response.json();
                 console.log('Dados carregados:', dados); // Adicione log para verificar os dados carregados
 
-                const problemasSelecionados = dados.filter(entry => entry.idAluno === alunoId && entry.selecionado === true);
-                console.log('Problemas selecionados:', problemasSelecionados); // Adicione log para verificar os problemas selecionados
+                const problemasSelecionados = dados.filter(entry => {
+                    console.log(`Verificando problema: ID do Aluno: ${entry.idAluno}, Selecionado: ${entry.selecionado}`);
+                    return entry.idAluno === alunoId && entry.selecionado === true; selecionados
+                });
 
                 const cont = problemasSelecionados.length; // Contagem dos problemas selecionados
                 console.log('Contagem de problemas selecionados:', cont); // Adicione log para verificar a contagem
@@ -1704,19 +1778,54 @@
 
 
         async function alunoEntregouProjeto() {
+            // const alunoId = await getAlunoId();
+            // try {
+            //     const response = await fetch(problemaSelecionadoUrl);
+            //     const problemasSelecionados = await response.json();
+
+            //     // Encontra o problema selecionado para o aluno atual
+            //     const alunoProblemaSelecionado = problemasSelecionados.find(entry => entry.idAluno === alunoId);
+
+            //     if (alunoProblemaSelecionado) {
+            //         // Atualiza o estado do problema selecionado para false
+            //         alunoProblemaSelecionado.selecionado = false;
+            //         // alunoProblemaSelecionado.entregue = true;
+
+            //         await fetch(`${problemaSelecionadoUrl}/${alunoProblemaSelecionado.id}`, {
+            //             method: 'PUT',
+            //             headers: {
+            //                 'Content-Type': 'application/json'
+            //             },
+            //             body: JSON.stringify(alunoProblemaSelecionado)
+            //         });
+
+            //         return true; // Retorna true indicando que o projeto foi entregue
+            //         // console.log("true");
+            //     } else {
+            //         return false;
+            //     }
+            // } catch (error) {
+            //     console.error('Erro ao verificar se o aluno entregou um projeto:', error);
+            //     return false;
+            // }
             const alunoId = await getAlunoId();
             try {
                 const response = await fetch(problemaSelecionadoUrl);
                 const problemasSelecionados = await response.json();
 
+                console.log("Problemas selecionados:", problemasSelecionados);
+
                 // Encontra o problema selecionado para o aluno atual
                 const alunoProblemaSelecionado = problemasSelecionados.find(entry => entry.idAluno === alunoId && entry.selecionado === true);
 
                 if (alunoProblemaSelecionado) {
+                    console.log("Problema selecionado encontrado:", alunoProblemaSelecionado);
+
                     // Atualiza o estado do problema selecionado para false
                     alunoProblemaSelecionado.selecionado = false;
+                    alunoProblemaSelecionado.entregue = true;
 
-                    await fetch(`${problemaSelecionadoUrl}/${alunoProblemaSelecionado.id}`, {
+                    const updateResponse = await fetch(`${problemaSelecionadoUrl}/${alunoProblemaSelecionado.id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json'
@@ -1724,17 +1833,70 @@
                         body: JSON.stringify(alunoProblemaSelecionado)
                     });
 
-                    return true; // Retorna true indicando que o projeto foi entregue
-                    console.log("true");
+                    console.log("Update Response:", updateResponse.ok);
+
+                    return updateResponse.ok; // Retorna true se a atualização foi bem-sucedida
                 } else {
+                    console.log("Nenhum problema selecionado encontrado para o aluno.");
                     return false;
                 }
             } catch (error) {
                 console.error('Erro ao verificar se o aluno entregou um projeto:', error);
                 return false;
             }
+
+
         }
 
+        async function selecionarNovoProblema(problemaId) {
+            const alunoId = await getAlunoId();
+
+            try {
+                const response = await fetch(problemaSelecionadoUrl);
+                const dados = await response.json();
+
+                // Deseleciona todos os problemas do aluno
+                dados.forEach(entry => {
+                    if (entry.idAluno === alunoId) {
+                        entry.selecionado = false;
+                    }
+                });
+
+                const problemaSelecionado = dados.some(entry => entry.idAluno === alunoId && entry.selecionado === true);
+
+                if (!problemaSelecionado) {
+                    const novoProblema = dados.find(entry => entry.problemaSelecionado === problemaId);
+
+                    if (novoProblema) {
+                        novoProblema.idAluno = alunoId;
+                        novoProblema.selecionado = true;
+
+                        await fetch(`${problemaSelecionadoUrl}/${novoProblema.problemaSelecionado}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(novoProblema)
+                        });
+
+                        const response = await fetch(`${problemaApiUrl}/${problemaId}`, {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ selecionado: true })
+                        });
+
+                        console.log('Novo problema selecionado:', novoProblema);
+                    }
+                } else {
+                    console.log('O aluno já tem um problema selecionado.');
+                }
+
+            } catch (error) {
+                console.error('Erro ao selecionar o novo problema:', error);
+            }
+        }
 
     </script>
 </body>
