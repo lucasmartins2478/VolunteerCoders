@@ -486,6 +486,7 @@
         }
 
         .btn-chat {
+            margin-right: -500px;
             border: none;
             background-color: #1166ca;
             padding: 0.62rem;
@@ -494,12 +495,11 @@
             justify-self: end;
             color: #fff;
             font-size: 17px;
-            /* position: fixed; */
-            top: 580px;
+            position: relative;
+            top: 100px;
             height: 40px;
-            width: 140px;
-            margin-left: 190px;
-            margin-bottom: -240px;
+            width: 150px;
+            margin-left: 90px;
         }
 
         .btn-aceite {
@@ -746,6 +746,18 @@
             }
         }
 
+        .botoes {
+            display: flex;
+            /* align-items: baseline; */
+        }
+
+        .aceite-rejeite {
+            display: flex;
+            margin-top: 90px;
+            position: relative;
+            top: 0px;
+        }
+
     </style>
 </head>
 
@@ -896,8 +908,10 @@
                             <p><b>Descrição:</b> ${element.descricao}</p>
                         </div>
                         <div class="botoes">
+                        <div class="aceite-rejeite">
                             <button class="btn-aceite" onclick="aceitarProjeto('${element.id}')"></button>
                             <button class="btn-rejeite" onclick="rejeitarProjeto('${element.id}')"></button>
+                        </div>    
                             <button class="btn-chat" onclick='abrirChat()'>
                                 Chat
                              </button>
