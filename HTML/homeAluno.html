@@ -1761,7 +1761,6 @@
                     problemaAluno.selecionado = false;
                     problemaAluno.recusado = true;
 
-                    // Faz a atualização no servidor
                     const updateResponse = await fetch(`${problemaSelecionadoUrl}/${problemaAluno.id}`, {
                         method: 'PUT',
                         headers: {
