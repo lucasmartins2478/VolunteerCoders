@@ -54,13 +54,7 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .btn-detalhes {
-            color: #fff;
-            font-size: 17px;
-            position: static;
-            top: 590px;
-        }
-
+       
         .detalhes .button-detalhe {
             display: flex;
             align-items: center;
@@ -91,8 +85,7 @@
             border: solid 0px;
             font-size: 18px;
             color: #fff;
-            margin-top: 50px;
-            position: static;
+           
         }
 
         .card {
@@ -487,6 +480,10 @@
         .send-button:hover .send-icon {
             color: #004080;
         }
+        .conteudo-tela{
+            height: 100vh;
+            overflow: hidden;
+        }
 
         .btn-chat {
             border: none;
@@ -514,14 +511,35 @@
             background-color: #fff;
             border: none;
             cursor: pointer;
-            position: relative;
-            margin-top: 80px;
-            top: 17px;
-            margin-bottom: -111px;
-            margin-left: 20px;
-            margin-right: 75px;
+            
         }
-
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Estilo do spinner */
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        
+        /* Animação de rotação */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Estilo do conteúdo */
+        #content {
+            display: none;
+        }
         .btn-aceite:hover{
             background-color: white;
         }
@@ -539,7 +557,6 @@
             background-color: #fff;
             border: none;
             cursor: pointer;
-            margin-left: 90px;
             margin-bottom: -1px;
         }
 
@@ -722,6 +739,9 @@
                 </button>
             </div>
         </div>
+        <div id="loading">
+            <div class="spinner"></div>
+        </div>
         <div class="conteudo-tela">
             <div id="side-bar">
                 <div id="content-items">
@@ -755,7 +775,7 @@
                     </button>
                 </div>
             </div>
-            <div class="conteudo">
+            <div class="conteudo" id="conteudo">
                 <div class="problemas-cadastrados">
                     <h3 class="title-problema">Problemas Cadastrados</h3>
                     <div class="card-container">
@@ -782,6 +802,17 @@
     <div class="overlay"></div>
     <div id="detalhes-container" class="detalhes-container"></div>
     <script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mostra o carregamento por 2 segundos
+            document.getElementById("conteudo").style.display="none";
+            setTimeout(function() {
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("conteudo").style.display = "block";
+            }, 1000);
+        });
+
+
 
         document
             .getElementById("btn-open-side-bar")
@@ -845,11 +876,13 @@
                             <p><b>Causa:</b> ${element.causa}</p>
                             <p><b>Descrição:</b> ${element.descricao}</p>
                         </div>
-                        <button class="btn-chat" onclick='abrirChat()'>
-                           Chat
-                        </button>
-                        <button class="btn-aceite" onclick="aceitarProjeto('${element.id}')"></button>
-                        <button class="btn-rejeite" onclick="rejeitarProjeto('${element.id}')"></button>
+                        <div class="botoes">
+                            <button class="btn-aceite" onclick="aceitarProjeto('${element.id}')"></button>
+                            <button class="btn-rejeite" onclick="rejeitarProjeto('${element.id}')"></button>
+                            <button class="btn-chat" onclick='abrirChat()'>
+                                Chat
+                             </button>
+                        </div> 
                     `;
 
                     selecionadoConteiner.appendChild(newCard);
@@ -1086,9 +1119,12 @@
                                 <p><b>Causa:</b> ${element.causa}</p>
                                 <p><b>Descrição:</b> ${element.descricao}</p>
                             </div>
-                            <button class="btn-aguardando">
-                                Aguarde a entrega!
-                            </button>
+                            <div class="botoes">
+                                <button class="btn-aguardando">
+                                    Aguarde a entrega!
+                                </button>
+                            </div>
+                            
                 `;
 
                     projectContainer.appendChild(newCard);
