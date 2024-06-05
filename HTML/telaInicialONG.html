@@ -57,15 +57,16 @@
        
         .detalhes .button-detalhe {
             display: flex;
-            align-items: end;
+            align-items: center;
             justify-content: center;
             position: absolute;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
+            text-align: center;
         }
 
-        .detalhes .button-detalhe button {
+        /* .detalhes .button-detalhe button {
             background-color: #1166ca;
             width: 100px;
             height: 30px;
@@ -74,7 +75,7 @@
             font-size: 18px;
             color: #fff;
             margin-top: 50px;
-        }
+        } */
 
         .btn-aguardando {
             background-color: #7e8792;
@@ -129,14 +130,18 @@
 
         .detalhes .button-detalhe button {
             background-color: #1166ca;
-            width: 100px;
-            height: 30px;
-            border-radius: 8px;
+            width: 150px;
+            height: 40px;
+            border-radius: 13px;
             border: solid 0px;
             font-size: 18px;
             color: #fff;
             margin-top: 50px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
         .user img {
@@ -204,7 +209,7 @@
 
         .projetos-andamento {
             margin-top: 20px;
-            border-left: solid 2px #bab8b2;
+            /* border-left: solid 2px #bab8b2; */
             padding-left: 20px;
         }
 
@@ -630,7 +635,7 @@
             z-index: 1000;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 600px;
-            height: 620px;
+            /* height: 620px; */
         }
 
         .modal-container h3 {
@@ -895,7 +900,7 @@
                             <p><b>Causa:</b> ${element.causa}</p>
                             <p><b>Descrição:</b> ${element.descricao}</p>
                         </div>
-                        <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
+                        <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.id}")'>
                             Detalhes
                         </button>
                     `;
@@ -916,7 +921,7 @@
                             <p><b>Causa:</b> ${element.causa}</p>
                             <p><b>Descrição:</b> ${element.descricao}</p>
                         </div>
-                        <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.ongId}")'>
+                        <button class="btn-detalhes" onclick='mostrarDetalhes(${element.id}, "${element.id}")'>
                             Detalhes
                         </button>
                     `;
@@ -1165,13 +1170,13 @@
                         <div class="detalhes">
                             <br>
                             <br>
-                            <br>
                             <h2>Detalhes do Problema</h2>
                             <p><b>Título:</b> ${problema.titulo}</p>
                             <p><b>Causa:</b> ${problema.causa}</p>
                             <p><b>Descrição:</b> ${problema.descricao}</p>
                             <br>
                             <h2>Detalhes da ONG</h2>
+                            <br>
                             <p><b>Nome:</b> ${ong.nomeONg}</p>
                             <p><b>Descrição:</b> ${ong.sobre}</p>
                             <p><b>Endereço:</b> ${ong.endereco}</p>
@@ -1183,10 +1188,8 @@
                             <br>
                             <br>
                             <br>
-                            <br>
-                            <br>
+                            
                             <div class="button-detalhe">
-                                <button onclick="aceitarProjeto(${problemaId})">Aceitar Projeto</button>
                                 <button onclick="fecharDetalhes()">Fechar</button>
                             </div>
                             
@@ -1204,13 +1207,13 @@
                         <div class="detalhes">
                             <br>
                             <br>
-                            <br>
                             <h2>Detalhes do Problema</h2>
                             <p><b>Título:</b> ${problema.titulo}</p>
                             <p><b>Causa:</b> ${problema.causa}</p>
                             <p><b>Descrição:</b> ${problema.descricao}</p>
                             <br>
                             <h2>Detalhes da ONG</h2>
+                            <br>
                             <p><b>Nome:</b> ${ong.nomeONg}</p>
                             <p><b>Descrição:</b> ${ong.sobre}</p>
                             <p><b>Endereço:</b> ${ong.endereco}</p>
@@ -1222,8 +1225,7 @@
                             <br>
                             <br>
                             <br>
-                            <br>
-                            <br>
+                            
                             <div class="button-detalhe">
                                 <button onclick="fecharDetalhes()">Fechar</button>
                             </div>
@@ -1316,7 +1318,7 @@
                             </button>
                         </div>
                         <label for="ajuda">E aqui tem o passo a passo que a equipe deixou para vocês poderem utilizar e executar:</label>
-                        <textarea name="ajuda" id="ajuda">${projeto.mensagem} </textarea>
+                        <textarea name="ajuda" id="ajuda" readonly>${projeto.mensagem} </textarea>
                         <div class="buttons">
                             <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
                         </div>
