@@ -70,6 +70,10 @@
             position: static;
             top: 590px;
         }
+        .conteudo-tela{
+            height: 100vh;
+            overflow: hidden;
+        }
 
         .btn-finalizar {
             color: #fff;
@@ -130,6 +134,7 @@
             margin-top: -150px;
             margin-left: 300px;
         }
+        
 
         .detalhes .button-detalhe button {
             background-color: #1166ca;
@@ -669,6 +674,33 @@
             box-shadow: 1px 1px 6px #0000001c;
             font-size: 1rem;
         }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Estilo do spinner */
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        
+        /* Animação de rotação */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Estilo do conteúdo */
+        #content {
+            display: none;
+        }
 
         .btn-finalizar-selecao {
             display: inline-flex;
@@ -763,6 +795,9 @@
 <body onload="carregaDados()">
     <div class="container-tela-ong">
         <div class="nav-bar"></div>
+        <div id="loading">
+            <div class="spinner"></div>
+        </div>
         <div class="conteudo-tela">
             <div id="side-bar">
                 <div id="content-items">
@@ -813,7 +848,7 @@
                     </button>
                 </div>
             </div>
-            <div class="conteudo">
+            <div class="conteudo" id="conteudo">
                 <div class="problemas-cadastrados">
                     <h3 class="title-problema">
                         Veja os problemas disponíveis:
@@ -848,6 +883,16 @@
     <div id="detalhes-container" class="detalhes-container"></div>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mostra o carregamento por 2 segundos
+            document.getElementById("conteudo").style.display="none";
+            setTimeout(function() {
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("conteudo").style.display = "block";
+            }, 1000);
+        });
+
+        
         document
             .getElementById("btn-open-side-bar")
             .addEventListener("click", function () {

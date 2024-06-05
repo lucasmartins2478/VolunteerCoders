@@ -936,6 +936,7 @@ body {
 
 #logout-btn {
     border: none;
+    color: #0a0a0a;
     padding: 12px;
     font-size: 14px;
     display: flex;
@@ -949,13 +950,12 @@ body {
 
 #btn-open-side-bar {
     position: absolute;
-    top: 30px;
-    right: -10px;
+    top: 25px;
+    right: -20px;
     background-color: #1166ca;
     color: #e3e9f7;
-    border-radius: 100%;
-    width: 20px;
-    height: 20px;
+    width: 1px;
+    height: 35px;
     border: none;
     cursor: pointer;
 }
