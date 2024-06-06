@@ -99,7 +99,6 @@
             height: 40px;
             border-radius: 12px;
             border: none;
-            margin-top: 50px;
             cursor: pointer;
         }
 
@@ -716,6 +715,7 @@
             font-weight: 700;
             margin-top: 10px;
         }
+        
 
         .btn-finalizar-selecao:hover {
             background-color: #eaf4ff;
@@ -757,7 +757,7 @@
             flex-grow: 1;
             display: inline-flex;
         }
-
+        
         .btn-excluir-link {
             background: none;
             border: none;
@@ -1641,8 +1641,11 @@
                             </div>
                         <p><b>Causa:</b> ${element.causa}</p>
                         <p><b>Descrição:</b> ${element.descricao}</p>
-                        <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
+                        <div class="botao">
+                            <button class="btn-chat" id="btn-selecionar" onclick="abrirChat()">Chat</button>
                         <button class="btn-finalizar ${entregue ? 'btn-disabled' : ''}" ${entregue ? 'disabled' : ''} style="background-color: ${entregue ? '#808080' : ''};" onclick="abrirModal(${element.id})">${entregue ? 'Entregue' : 'Finalizar Projeto'}</button>
+                        </div>
+                        
                     </div>
                     `;
                 } else {
@@ -1654,7 +1657,10 @@
                             </div>
                             <p><b>Causa:</b> ${element.causa}</p>
                             <p><b>Descrição:</b> ${element.descricao}</p>
-                            <button class="btn-iniciar" onclick="iniciarProjeto(${index}, ${element.id})">Iniciar Desenvolvimento</button>
+                            <div class="botao">
+                                <button class="btn-iniciar" onclick="iniciarProjeto(${index}, ${element.id})">Iniciar Desenvolvimento</button>
+                            </div>
+                            
                         </div>
                     `;
                 }
