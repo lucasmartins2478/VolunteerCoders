@@ -733,8 +733,9 @@ h2 {
 }
 
 .botao {
-    display: flex;
-    justify-content: center;
+    display: contents; 
+    margin-top: 20px;
+    margin-left: 25px;
 }
 
 .causas,
