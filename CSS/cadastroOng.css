@@ -1,0 +1,172 @@
+label {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  font-size: 1rem;
+  color: #444852;
+}
+
+input {
+  margin-top: 10px;
+  margin-bottom: 2px;
+  font-size: 1rem;
+  color: #444852;
+}
+
+input,
+textarea {
+  font-size: 1rem;
+  color: #444852;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #e8e8f1;
+  box-shadow: 1px 1px 10px #0200001c;
+  width: 100%;
+}
+
+.botao-cadastro .btn-cancelar {
+  border: none;
+  width: 200px;
+  height: 40px;
+  font-size: 1.2rem;
+  border: 1px solid #1166ca;
+  border-radius: 15px;
+  background-color: #ffffff;
+  margin-top: 20px;
+  cursor: pointer;
+  margin-right: 20px;
+  color: #1166ca !important;
+  font-size: 1rem;
+}
+
+.btn-cadastrar-problema {
+  width: 200px;
+}
+
+.btn-cancelar:hover {
+  border: solid 2px #1255a1;
+  /* background-color: #eaeaea; */
+}
+
+.cidade {
+  display: flex;
+  flex-direction: row;
+  width: 460px;
+}
+
+.sobre label {
+  margin-left: 10px;
+}
+
+/* .segmento-ong {
+    margin-left: 45px;
+} */
+
+@media screen and (max-width: 1230px) {
+  .imagem-ong {
+    height: 75px;
+    margin-left: 80px;
+  }
+
+  #imagem-ong {
+    width: 180px;
+  }
+
+  .segmento-ong {
+    margin-left: 45px;
+  }
+
+  #cnpj {
+    width: 75px;
+    height: 50px;
+    padding: 5px 8px;
+    margin-top: 18px;
+    align-items: center;
+  }
+
+  .endereco-ong {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+  }
+
+  .sobre label {
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 528px) {
+  .btn-cadastrar-problema,
+  .botao-cadastro .btn-cancelar {
+    width: 100px;
+  }
+
+  .container-cad-conteudo {
+    font-size: 5px;
+  }
+
+  .imagem-ong {
+    height: 75px;
+    margin-left: 80px;
+  }
+
+  #imagem-ong {
+    width: 180px;
+  }
+
+  .sobre label {
+    margin-left: 10px;
+  }
+
+  .segmento-ong {
+    margin-left: 45px;
+  }
+
+  #cnpj {
+    width: 75px;
+    height: 50px;
+    padding: 5px 8px;
+    margin-top: 18px;
+    align-items: center;
+  }
+
+  .endereco-ong {
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 529px) and (max-width: 795px) {
+  #cnpj {
+    width: 105px;
+  }
+
+  .segmento-ong #segmento {
+    width: 150px;
+  }
+
+  .endereco-ong #cep-ong {
+    margin-right: 20px;
+  }
+
+  #url-ong {
+    margin-left: 30px;
+  }
+
+  .sobre label {
+    margin-left: 10px;
+  }
+
+  #email-ong textarea {
+    width: 500px;
+  }
+
+  #telefone-ong {
+    margin-right: 70px;
+  }
+
+  #endereco {
+    margin-right: 40px;
+  }
+}

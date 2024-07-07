@@ -1,0 +1,270 @@
+body {
+  padding-top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #444852;
+  font-size: 1rem;
+}
+
+.container {
+  border-radius: 15px;
+  width: 950px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 2%;
+  margin-bottom: 50px;
+}
+
+h2 {
+  font-weight: 600;
+  color: #1166ca;
+  font-size: 30px;
+}
+
+.container-problema__conteudo {
+  width: 90%;
+  max-height: 85vh;
+  padding: 0.4rem;
+  justify-content: space-between;
+  margin-top: 0px;
+}
+
+label {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  font-size: 1rem;
+  color: #444852;
+}
+
+input {
+  margin: 0.6rem 0 2px;
+  padding: 0.8rem 1.2rem;
+  border: 1px solid #e8e8f1;
+  border-radius: 10px;
+  box-shadow: 1px 1px 6px #0000001c;
+  width: 100%;
+  font-size: 1rem;
+  color: #444852;
+}
+
+/* ------------------------------- */
+.nome-aluno {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nome-aluno input {
+  margin-left: 18px;
+  width: 750px;
+  height: 40px;
+  background-color: rgb(239, 239, 239);
+}
+
+.cidade {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cidade input {
+  margin-left: 10px;
+  width: 735px;
+  height: 40px;
+}
+
+/* ------------------------------- */
+.data-nasc {
+  display: flex;
+}
+
+.data-nasc input {
+  margin-left: 10px;
+  height: 40px;
+  width: 13rem;
+}
+
+.cpf {
+  display: flex;
+}
+
+.cpf input {
+  margin-left: 10px;
+  width: 325px;
+  height: 40px;
+}
+
+/* ----------------------------------*/
+
+.email-aluno {
+  display: flex;
+  justify-content: space-between;
+}
+
+.email-aluno input {
+  margin-left: 10px;
+  width: 19rem;
+  height: 40px;
+  background-color: rgb(239, 239, 239);
+}
+
+.telefone-aluno {
+  display: flex;
+  justify-content: space-between;
+}
+
+.telefone-aluno input {
+  margin-left: 10px;
+  width: 300px;
+  height: 40px;
+}
+
+/* --------------------------------- */
+.instituicao {
+  display: flex;
+}
+
+.instituicao #instituicao {
+  margin-left: 10px;
+  width: 100%;
+  height: 40px;
+}
+
+/* --------------------------------- */
+.email-institucional {
+  display: flex;
+  flex-direction: row;
+}
+
+#email {
+  margin-left: 10px;
+  height: 40px;
+  width: 470px;
+}
+
+/* --------------------------------- */
+.botao {
+  display: flex;
+  justify-content: center;
+}
+
+.botao button {
+  border-radius: 13px;
+  height: 40px;
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid #e8e8f1;
+  box-shadow: 1px 1px 10px #0200001c;
+  margin-top: 13px;
+  margin-bottom: 3px;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+/* ----------------------------------- */
+.email-institucional button {
+  border-radius: 13px;
+  height: 40px;
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid #e8e8f1;
+  box-shadow: 1px 1px 10px #0200001c;
+  margin-top: 8px;
+  margin-bottom: 3px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #4e81b4;
+  margin-left: 15px;
+  width: 100px;
+}
+
+.email-institucional button:hover {
+  background-color: #3a628e;
+}
+
+.email-institucional input {
+  width: 20em;
+}
+
+/* ----------------------------------- */
+@media screen and (max-width: 1064px) {
+  .container {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+  }
+
+  .container-problema__conteudo {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+  }
+
+  input[type="date"] {
+    width: auto;
+  }
+  .cpf {
+    justify-content: space-between;
+  }
+
+  .data-nasc {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .email-aluno input {
+    width: 18rem;
+  }
+
+  .validacao {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.validacao #email.icone-visivel {
+  width: 450px;
+}
+
+#icone-incorreto,
+#icone-correto {
+  margin-left: 5px;
+  margin-top: 5px;
+  width: 25px;
+  height: 25px;
+}
+
+/* 
+  .swal2-container {
+      z-index: 10000;
+      position: fixed; 
+  } */
+
+.btn-cancelar {
+  border: none;
+  width: 200px;
+  height: 40px;
+  font-size: 1.2rem;
+  border: 1px solid #1166ca !important;
+  border-radius: 15px;
+  background-color: #ffffff;
+  margin-top: 10px;
+  cursor: pointer;
+  margin-right: 20px;
+  font-weight: 500;
+  color: #1166ca !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-cancelar:hover {
+  border: 2px solid #1255a1 !important;
+  /* background-color: #eaeaea; */
+}
