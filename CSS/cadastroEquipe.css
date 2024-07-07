@@ -1,0 +1,330 @@
+#body-equipe {
+  padding-top: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #444852;
+  font-size: 1rem;
+}
+
+.container-equipe {
+  border-radius: 15px;
+  width: 65%;
+  height: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+  padding: 2%;
+}
+
+h2 {
+  color: #1166ca;
+  margin-bottom: 10px;
+}
+
+.container-equipe__conteudo {
+  width: 90%;
+  /* height: auto; */
+  max-height: 120vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.container-equipe__conteudo label {
+  margin-right: 10px;
+}
+
+.container-equipe__conteudo input {
+  flex: 2;
+}
+
+label {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  font-size: 1rem;
+  color: #444852;
+}
+
+input {
+  margin-top: 10px;
+  margin-bottom: 2px;
+  font-size: 1rem;
+  color: #444852;
+  margin-left: 1px;
+}
+
+input,
+textarea {
+  font-size: 1rem;
+  color: #444852;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #e8e8f1;
+  width: 99%;
+}
+
+input[type="number"] {
+  width: calc(50% - 5px);
+}
+
+.nome {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.equipe {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  color: #444852;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #e8e8f1;
+  /* box-shadow: 1px 1px 10px #0200001c; */
+  width: 99%;
+  margin-top: 8px;
+  max-height: 170px;
+  scrollbar-width: none;
+}
+
+#info-equipe {
+  display: flex;
+  font-size: 13px;
+}
+
+ul {
+  list-style-type: none;
+  color: #222224;
+}
+
+ul li {
+  font-size: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+}
+
+.inserir-equipe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  flex-direction: row;
+}
+
+#adicionar-equipe {
+  border: none;
+  width: 120px;
+  height: 30px;
+  font-size: 1rem;
+  border-radius: 15px;
+  color: #1166ca;
+  margin-left: 5px;
+  align-self: flex-end;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.botao-equipe {
+  align-self: flex-end;
+}
+
+.lista {
+  margin-top: 7px;
+  margin-left: 7px;
+}
+
+.caixa-equipe label {
+  margin-top: 10px;
+}
+
+.btn-criar-equipe {
+  border: none;
+  width: 270px;
+  height: 40px;
+  font-size: 1rem;
+  border-radius: 11px;
+  color: #fff;
+  background-color: #1166ca;
+  margin-top: 10px;
+}
+
+.btn-criar-equipe:hover {
+  cursor: pointer;
+  background-color: #1255a1;
+}
+
+.lider {
+  margin-top: 15px;
+}
+
+.lider input {
+  background-color: rgb(239, 239, 239);
+  /* margin-left: 2px; */
+}
+
+#equipe {
+  border: none;
+  box-shadow: 0;
+}
+
+.input-email {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #444852;
+  border-radius: 10px;
+  border: 1px solid #e8e8f1;
+  box-shadow: 1px 1px 10px #0200001c;
+  width: 80%;
+  height: 35px;
+}
+
+.input-email input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 33px;
+  margin-bottom: 10px;
+  margin-right: 2px;
+}
+
+/* .input-email input::before {
+  border: 0;
+  outline: 0;
+  background-color: white;
+} */
+
+.btn-apagar {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  /* margin-right: 10px ; */
+  border: none;
+  background-color: transparent;
+}
+
+.btn-apagar i {
+  font-size: 12px;
+  margin-right: 6px;
+  margin-top: 3px;
+  text-align: center;
+  align-self: center;
+}
+
+.btn-apagar i:hover {
+  font-size: 14px;
+}
+
+#equipe:hover + .input-email {
+  border: 1px solid #1166ca;
+}
+
+li .btn-apagar-pessoa {
+  display: flex;
+  flex-direction: row;
+  width: 15px;
+  height: 15px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.botoes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  width: 20%;
+}
+
+.btn-cancelar {
+  border: none;
+  width: 200px;
+  height: 40px;
+  font-size: 1rem;
+  border: 1px solid #1166ca;
+  border-radius: 12px;
+  background-color: #ffffff;
+  margin-top: 10px;
+  cursor: pointer;
+  margin-right: 15px;
+  color: #1166ca !important;
+}
+
+.btn-cancelar:hover {
+  border: solid 2px #1255a1;
+  /* background-color: #eaeaea; */
+}
+
+@media (max-width: 770px) {
+  .btn-criar-equipe,
+  .btn-cancelar {
+    width: 200px;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .container-equipe {
+    width: 80%;
+    /* height: 80vh; */
+    padding: 1rem 1rem;
+    transition: 0.2s;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .container-equipe__conteudo {
+    gap: 15px;
+  }
+
+  .container-equipe {
+    width: 80%;
+    height: 70vh;
+    padding: 1rem 1rem;
+  }
+
+  .input-email {
+    width: 60%;
+  }
+
+  .btn-criar-equipe,
+  .btn-cancelar {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  #equipe::placeholder {
+    color: white;
+  }
+
+  .btn-criar-equipe {
+    width: 100px;
+  }
+
+  .btn-cancelar {
+    width: 100px;
+  }
+
+  .container-equipe {
+    height: 70vh;
+  }
+
+  #adicionar-equipe {
+    width: 80px;
+  }
+}
