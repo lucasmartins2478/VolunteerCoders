@@ -3,7 +3,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
-  
 }
 
 body {
@@ -13,7 +12,7 @@ body {
   background-color: #dce4ec;
   overflow-x: hidden;
 }
-#body{
+#body {
   background-color: #dce4ec;
 }
 header {
@@ -374,7 +373,7 @@ input[type="number"] {
 .form-btn:hover {
   background-color: #0a4b8e;
 }
-#nav-links a{
+#nav-links a {
   text-decoration: none;
 }
 .btn {
@@ -387,7 +386,6 @@ input[type="number"] {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
-
 
 a {
   color: #1166ca;
